@@ -17,8 +17,20 @@ class $AssetsImagesGen {
 class $AssetsImagesSvgGen {
   const $AssetsImagesSvgGen();
 
+  /// File path: assets/images/svg/Arrow left.svg
+  String get arrowLeft => 'assets/images/svg/Arrow left.svg';
+
+  /// File path: assets/images/svg/Arrow right.svg
+  String get arrowRight => 'assets/images/svg/Arrow right.svg';
+
+  /// File path: assets/images/svg/Edit 8.svg
+  String get edit8 => 'assets/images/svg/Edit 8.svg';
+
   /// File path: assets/images/svg/User.svg
   String get user => 'assets/images/svg/User.svg';
+
+  /// File path: assets/images/svg/alert-circle.svg
+  String get alertCircle => 'assets/images/svg/alert-circle.svg';
 
   /// File path: assets/images/svg/home.svg
   String get home => 'assets/images/svg/home.svg';
@@ -27,7 +39,8 @@ class $AssetsImagesSvgGen {
   String get shoppingBag => 'assets/images/svg/shopping-bag.svg';
 
   /// List of all assets
-  List<String> get values => [user, home, shoppingBag];
+  List<String> get values =>
+      [arrowLeft, arrowRight, edit8, user, alertCircle, home, shoppingBag];
 }
 
 class Assets {

@@ -6,15 +6,21 @@ class LabeledTextField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final bool isBorderNeed;
+  final Color? borderColor;
+  final Color? fillColor;
 
-  const LabeledTextField({
-    super.key,
-    required this.label,
-    required this.hintText,
-    this.obscureText = false,
-    this.controller,
-    this.keyboardType,
-  });
+  const LabeledTextField(
+      {super.key,
+      required this.label,
+      required this.hintText,
+      this.obscureText = false,
+      this.controller,
+      this.keyboardType,
+      this.isBorderNeed = false,
+      this.borderColor,
+      this.fillColor
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +44,38 @@ class LabeledTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               filled: true,
-              fillColor: const Color(0xFFF5F5F5),
+              fillColor: fillColor ?? const Color(0xFFF5F5F5),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 14,
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
+              
+              border: isBorderNeed
+                  ? OutlineInputBorder(
+                      borderSide: BorderSide(color: borderColor ?? const Color(0xFFD9D9D9)),
+                      borderRadius: BorderRadius.circular(12),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
               hintStyle: const TextStyle(color: Colors.grey),
+              enabledBorder: isBorderNeed ?  OutlineInputBorder(
+                      borderSide: BorderSide(color: borderColor ?? const Color(0xFFD9D9D9)),
+                      borderRadius: BorderRadius.circular(12),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: isBorderNeed ?  OutlineInputBorder(
+                      borderSide: BorderSide(color: borderColor ?? const Color.fromARGB(255, 102, 93, 93)),
+                      borderRadius: BorderRadius.circular(12),
+                    )
+                  : OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
             ),
           ),
         ],
