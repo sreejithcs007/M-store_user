@@ -1,6 +1,7 @@
+import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/unauthorised/authentication/forgot_pass.dart';
 import 'package:ecommerce/module/unauthorised/authentication/signup.dart';
-import 'package:ecommerce/module/authorised/dashboard/dashboard_view.dart';
+import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  DashboardScreen()),
+                      MaterialPageRoute(builder: (context) =>  NavScreen()),
                     );
                   },
                   child: const Row(
