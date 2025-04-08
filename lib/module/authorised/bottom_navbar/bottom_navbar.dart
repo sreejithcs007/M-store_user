@@ -52,8 +52,9 @@
 //   }
 // }
 
-
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
+import 'package:ecommerce/module/authorised/profile_section/profile/view.dart';
 import 'package:ecommerce/module/authorised/view_all/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -79,6 +80,7 @@ class _NavScreenState extends State<NavScreen> {
         },
       ),
       const ViewAllScreen(),
+      const ProfileMainScreen()
     ];
 
     return Scaffold(
@@ -94,9 +96,9 @@ class _NavScreenState extends State<NavScreen> {
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
-        items:  [
+        items: [
           BottomNavigationBarItem(
-            icon:  SvgPicture.asset(Assets.images.svg.home),
+            icon: SvgPicture.asset(Assets.images.svg.home),
             // activeIcon: Icon(Icons.home),
             label: "",
             backgroundColor: Colors.white,
