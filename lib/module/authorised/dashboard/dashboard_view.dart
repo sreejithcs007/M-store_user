@@ -4,7 +4,7 @@ import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:ecommerce/widget/grid_view_dashboard/view.dart';
 import 'package:flutter/material.dart';
 
-import 'Component/view_all/viewall.dart';
+import '../view_all/screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   final List<Map<String, String>> categories = [

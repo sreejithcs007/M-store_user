@@ -1,6 +1,6 @@
 
-import 'package:ecommerce/screens/authentication/login.dart';
-import 'package:ecommerce/screens/onboard_screen.dart';
+import 'package:ecommerce/module/unauthorised/authentication/login.dart';
+import 'package:ecommerce/module/unauthorised/onboard_screen.dart';
 import 'package:flutter/material.dart';
 
 // Import your screens
