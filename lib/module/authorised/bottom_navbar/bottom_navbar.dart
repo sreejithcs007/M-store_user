@@ -1,5 +1,8 @@
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
+import 'package:ecommerce/module/authorised/profile_section/profile/view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 class NavScreen extends StatefulWidget {
@@ -15,6 +18,8 @@ class _DashboardScreenState extends State<NavScreen> {
   final List<Widget> screens = [
     DashboardScreen(), // Your main dashboard content
     Placeholder(),  // Replace with CartScreen or relevant screen
+    ProfileMainScreen()
+
   ];
 
   @override
@@ -32,17 +37,23 @@ class _DashboardScreenState extends State<NavScreen> {
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
-        items: const [
+        items:  [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: "Home",
+            icon:  SvgPicture.asset(Assets.images.svg.home),
+            // activeIcon: Icon(Icons.home),
+            label: "",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            activeIcon: Icon(Icons.shopping_cart),
-            label: "Cart",
+            icon: SvgPicture.asset(Assets.images.svg.shoppingBag),
+            // activeIcon: Icon(Icons.shopping_cart),
+            label: "",
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(Assets.images.svg.user),
+            // activeIcon: Icon(Icons.shopping_cart),
+            label: "",
             backgroundColor: Colors.white,
           ),
         ],
