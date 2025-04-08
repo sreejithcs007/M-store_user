@@ -52,10 +52,12 @@
 //   }
 // }
 
-
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
+import 'package:ecommerce/module/authorised/profile_section/profile/view.dart';
 import 'package:ecommerce/module/authorised/view_all/screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class NavScreen extends StatefulWidget {
   const NavScreen({super.key});
@@ -78,6 +80,7 @@ class _NavScreenState extends State<NavScreen> {
         },
       ),
       const ViewAllScreen(),
+      const ProfileMainScreen()
     ];
 
     return Scaffold(
@@ -89,21 +92,30 @@ class _NavScreenState extends State<NavScreen> {
           });
         },
         currentIndex: index,
-        type: BottomNavigationBarType.shifting,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
-        items: const [
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.orange,
+
+        selectedItemColor: Colors.white,
+        // unselectedItemColor: Colors.grey,
+        
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: "Home",
+            icon: SvgPicture.asset(Assets.images.svg.home),
+            // activeIcon: Icon(Icons.home),
+            
+            label: "",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            activeIcon: Icon(Icons.shopping_cart),
-            label: "Cart",
+            icon: SvgPicture.asset(Assets.images.svg.shoppingBag),
+            // activeIcon: Icon(Icons.shopping_cart),
+            label: "",
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(Assets.images.svg.user),
+            // activeIcon: Icon(Icons.shopping_cart),
+            label: "",
             backgroundColor: Colors.white,
           ),
         ],
