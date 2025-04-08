@@ -1,14 +1,15 @@
+import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
 import 'package:flutter/material.dart';
 
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+class NavScreen extends StatefulWidget {
+  const NavScreen({super.key});
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
+  State<NavScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<NavScreen> {
   int index = 0;
 
   final List<Widget> screens = [
