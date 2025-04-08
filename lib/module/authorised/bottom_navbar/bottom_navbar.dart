@@ -92,14 +92,17 @@ class _NavScreenState extends State<NavScreen> {
           });
         },
         currentIndex: index,
-        type: BottomNavigationBarType.shifting,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.orange,
+
+        selectedItemColor: Colors.white,
+        // unselectedItemColor: Colors.grey,
+        
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(Assets.images.svg.home),
             // activeIcon: Icon(Icons.home),
+            
             label: "",
             backgroundColor: Colors.white,
           ),
