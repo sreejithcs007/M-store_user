@@ -1,4 +1,4 @@
-
+import 'package:ecommerce/module/authorised/details_page/responsive/details_page.dart';
 import 'package:ecommerce/widget/custom_list_view/view.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +86,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> with TickerProviderStateM
                   const Spacer(),
                   IconButton(
                     icon: Icon(
-                      isGridView ? Icons.grid_view : Icons.view_list,
+                      isGridView ? Icons.view_list : Icons.grid_view,
                       color: Colors.orange,
                     ),
                     onPressed: () => setState(() => isGridView = !isGridView),
@@ -108,6 +108,36 @@ class _ViewAllScreenState extends State<ViewAllScreen> with TickerProviderStateM
     );
   }
 
+  // Widget _buildGridView() {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(12),
+  //     child: GridView.builder(
+  //       itemCount: products.length,
+  //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  //         crossAxisCount: 2,
+  //         crossAxisSpacing: 16,
+  //         mainAxisSpacing: 16,
+  //         childAspectRatio: 3 / 3.5,
+  //       ),
+  //       itemBuilder: (context, index) {
+  //         final item = products[index];
+  //         return ProductCard(
+  //           isListingPage: true,
+  //           productName: item["title"]!,
+  //           currentPrice: item["price"]!,
+  //           oldPrice: '',
+  //           quantityInfo: "/ ${item["quantity"]!}",
+  //           isFavorite: false,
+  //           enableActions: true,
+  //           onAddToCart: () {},
+  //           onFavoriteToggle: () {},
+  //           // image: Image.asset('', fit: BoxFit.cover),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
+
   Widget _buildGridView() {
     return Padding(
       padding: const EdgeInsets.all(12),
@@ -121,37 +151,84 @@ class _ViewAllScreenState extends State<ViewAllScreen> with TickerProviderStateM
         ),
         itemBuilder: (context, index) {
           final item = products[index];
-          return ProductCard(
-            isListingPage: true,
-            productName: item["title"]!,
-            currentPrice: item["price"]!,
-            oldPrice: '',
-            quantityInfo: "/ ${item["quantity"]!}",
-            isFavorite: false,
-            enableActions: true,
-            onAddToCart: () {},
-            onFavoriteToggle: () {},
-            // image: Image.asset('', fit: BoxFit.cover),
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ProductDetailScreen(
+                    productName: item["title"]!,
+                    price: item["price"]!,
+                    quantity: item["quantity"]!,
+                  ),
+                ),
+              );
+            },
+            child: ProductCard(
+              isListingPage: true,
+              productName: item["title"]!,
+              currentPrice: item["price"]!,
+              oldPrice: '',
+              quantityInfo: "/ ${item["quantity"]!}",
+              isFavorite: false,
+              enableActions: true,
+              onAddToCart: () {},
+              onFavoriteToggle: () {},
+            ),
           );
         },
       ),
     );
   }
 
+
+
+  // Widget _buildListView() {
+  //   return ListView.builder(
+  //     itemCount: products.length,
+  //     itemBuilder: (context, index) {
+  //       final item = products[index];
+  //       return ProductListItem(
+  //         productName: item["title"]!,
+  //         price: item["price"]!,
+  //         quantity: item["quantity"]!,
+  //         isFavorite: false,
+  //         onAddToCart: () {},
+  //         onFavoriteToggle: () {},
+  //       );
+  //     },
+  //   );
+  // }
+
   Widget _buildListView() {
     return ListView.builder(
       itemCount: products.length,
       itemBuilder: (context, index) {
         final item = products[index];
-        return ProductListItem(
-          productName: item["title"]!,
-          price: item["price"]!,
-          quantity: item["quantity"]!,
-          isFavorite: false,
-          onAddToCart: () {},
-          onFavoriteToggle: () {},
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ProductDetailScreen(
+                  productName: item["title"]!,
+                  price: item["price"]!,
+                  quantity: item["quantity"]!,
+                ),
+              ),
+            );
+          },
+          child: ProductListItem(
+            productName: item["title"]!,
+            price: item["price"]!,
+            quantity: item["quantity"]!,
+            isFavorite: false,
+            onAddToCart: () {},
+            onFavoriteToggle: () {},
+          ),
         );
       },
     );
   }
+
 }
