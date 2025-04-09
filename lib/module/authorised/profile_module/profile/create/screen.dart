@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/tag_generator/helper.dart';
-import 'package:ecommerce/module/authorised/profile/create/controller.dart';
-import 'package:ecommerce/module/authorised/profile/create/responsive/mobile.dart';
+import 'package:ecommerce/module/authorised/profile_module/profile/create/controller.dart';
+import 'package:ecommerce/module/authorised/profile_module/profile/create/responsive/mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

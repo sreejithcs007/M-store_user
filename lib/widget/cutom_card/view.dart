@@ -10,7 +10,8 @@ class ProductCard extends StatelessWidget {
   final bool isFavorite;
   final bool enableActions;
   final Widget? image;
-  final  bool isListingPage;
+  final bool isListingPage;
+  final bool oldPriceNeeded;
 
   const ProductCard({
     super.key,
@@ -24,6 +25,7 @@ class ProductCard extends StatelessWidget {
     this.enableActions = false,
     this.image,
     this.isListingPage = false,
+    this.oldPriceNeeded = true,
   });
 
   @override
@@ -128,7 +130,7 @@ class ProductCard extends StatelessWidget {
 
         // Price and quantity info
         Row(
-           mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               currentPrice,
@@ -139,7 +141,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 6),
-            if (oldPrice.isNotEmpty)
+            // if (oldPrice.isNotEmpty)
+            if (oldPriceNeeded)
               Text(
                 oldPrice,
                 style: const TextStyle(
@@ -152,7 +155,7 @@ class ProductCard extends StatelessWidget {
               quantityInfo,
               style: const TextStyle(color: Colors.grey),
             ),
-            if(isListingPage == true)
+            if (isListingPage == true)
               Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
@@ -167,31 +170,31 @@ class ProductCard extends StatelessWidget {
         const SizedBox(height: 8),
 
         // Add to cart
-        if(isListingPage == false)
-        GestureDetector(
-          onTap: enableActions ? onAddToCart : null,
-          child: Container(
-            padding:  const EdgeInsets.symmetric(horizontal: 12, vertical:6),
-            decoration: BoxDecoration(
-              color: Colors.orange.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "Add to cart",
-                        style: TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      Icon(Icons.shopping_cart, color: Colors.orange, size: 18),
-                    ],
+        if (isListingPage == false)
+          GestureDetector(
+            onTap: enableActions ? onAddToCart : null,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Add to cart",
+                    style: TextStyle(
+                      color: Colors.orange,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
+                  SizedBox(width: 6),
+                  Icon(Icons.shopping_cart, color: Colors.orange, size: 18),
+                ],
+              ),
+            ),
           ),
-        ),
       ],
     );
   }
