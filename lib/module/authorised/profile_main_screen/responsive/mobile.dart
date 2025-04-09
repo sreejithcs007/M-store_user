@@ -1,5 +1,7 @@
-import 'package:ecommerce/module/authorised/profile/view.dart';
-import 'package:ecommerce/module/authorised/profile_module/controller.dart';
+import 'package:ecommerce/module/authorised/profile_module/my_orders/screens.dart';
+import 'package:ecommerce/module/authorised/profile_module/profile/view.dart';
+import 'package:ecommerce/module/authorised/profile_main_screen/controller.dart';
+import 'package:ecommerce/module/authorised/profile_module/wishlist/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -52,7 +54,11 @@ class ProfileSectionNavMobile extends StatelessWidget {
                   icon: Icons.favorite_border,
                   label: 'Favorites',
                   onTap: () {
-                    Navigator.pushNamed(context, '/favorites');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WishlistScreen(),
+                        ));
                   },
                 ),
                 _buildMenuItem(
@@ -68,7 +74,11 @@ class ProfileSectionNavMobile extends StatelessWidget {
                   icon: Icons.inventory_2_outlined,
                   label: 'Orders',
                   onTap: () {
-                    Navigator.pushNamed(context, '/orders');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyOrdersScreen(),
+                        ));
                   },
                 ),
                 _buildMenuItem(
@@ -77,10 +87,10 @@ class ProfileSectionNavMobile extends StatelessWidget {
                   label: 'Logout',
                   onTap: () {
                     controller.showCustomDialog(
-                        context: context,
-                        title: 'Confirmation Dialogue',
-                        content: 'Are you Sure You want to logout',
-                        );
+                      context: context,
+                      title: 'Confirmation Dialogue',
+                      content: 'Are you Sure You want to logout',
+                    );
                   },
                 ),
               ],

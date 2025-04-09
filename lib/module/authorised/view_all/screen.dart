@@ -131,7 +131,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> with TickerProviderStateM
             enableActions: true,
             onAddToCart: () {},
             onFavoriteToggle: () {},
-            image: Image.asset('assets/carrot.png', fit: BoxFit.cover),
+            // image: Image.asset('', fit: BoxFit.cover),
           );
         },
       ),

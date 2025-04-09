@@ -1,6 +1,6 @@
 import 'package:ecommerce/gen/assets.gen.dart';
-import 'package:ecommerce/module/authorised/profile/controller.dart';
-import 'package:ecommerce/module/authorised/profile/create/screen.dart';
+import 'package:ecommerce/module/authorised/profile_module/profile/controller.dart';
+import 'package:ecommerce/module/authorised/profile_module/profile/create/screen.dart';
 import 'package:ecommerce/widget/custom_header_subhead/header_subhead.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
