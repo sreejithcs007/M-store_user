@@ -7,6 +7,7 @@ class ProductCard extends StatelessWidget {
   final String quantityInfo;
   final VoidCallback? onAddToCart;
   final VoidCallback? onFavoriteToggle;
+  final VoidCallback? productDetailsPageOnTap;
   final bool isFavorite;
   final bool enableActions;
   final Widget? image;
@@ -26,25 +27,29 @@ class ProductCard extends StatelessWidget {
     this.image,
     this.isListingPage = false,
     this.oldPriceNeeded = true,
+    this.productDetailsPageOnTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 2),
-          ),
-        ],
+    return InkWell(
+      onTap: productDetailsPageOnTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: isListingPage ? _buildColumnLayout() : _buildRowLayout(),
       ),
-      child: isListingPage ? _buildColumnLayout() : _buildRowLayout(),
     );
   }
 
@@ -198,4 +203,7 @@ class ProductCard extends StatelessWidget {
       ],
     );
   }
+
+
+
 }

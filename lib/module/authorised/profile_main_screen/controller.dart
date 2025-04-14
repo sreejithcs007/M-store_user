@@ -1,4 +1,5 @@
 import 'package:ecommerce/gen/assets.gen.dart';
+import 'package:ecommerce/widget/custom_details_page/custom_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -45,5 +46,13 @@ class ProfileNavSectionController extends GetxController {
         );
       },
     );
+  }
+
+
+    void onToDetailsPage(BuildContext context) {
+      Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CustomDetailsPage()),
+            );
   }
 }

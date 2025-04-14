@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 class CategoryGridItem extends StatefulWidget {
   final String title;
 
-  const CategoryGridItem({super.key, required this.title});
+  final VoidCallback onContainerTap;
+
+  const CategoryGridItem({super.key, required this.title, required this.onContainerTap});
 
   @override
   State<CategoryGridItem> createState() => _CategoryGridItemState();
@@ -16,11 +17,7 @@ class _CategoryGridItemState extends State<CategoryGridItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          isFavorited = !isFavorited;
-        });
-      },
+      onTap: widget.onContainerTap,
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -30,11 +27,18 @@ class _CategoryGridItemState extends State<CategoryGridItem> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Icon(
-                Icons.favorite_border,
-                color: isFavorited ? Colors.red : Colors.black,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  isFavorited = !isFavorited;
+                });
+              },
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Icon(
+                  Icons.favorite_border,
+                  color: isFavorited ? Colors.red : Colors.black,
+                ),
               ),
             ),
             const Spacer(),
@@ -50,4 +54,3 @@ class _CategoryGridItemState extends State<CategoryGridItem> {
     );
   }
 }
-

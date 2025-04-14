@@ -1,6 +1,7 @@
 class MyOrderModel {
   String orderId;
   String itemName;
+  String itemOrderId;
   double itemRate;
   double itemQty;
   int paymentType;
@@ -14,6 +15,7 @@ class MyOrderModel {
       required this.itemQty,
       required this.paymentType,
       required this.createdAt,
-      required this.deliveryStatus
+      required this.deliveryStatus,
+      required this.itemOrderId
       });
 }
