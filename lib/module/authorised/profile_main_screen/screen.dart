@@ -31,6 +31,8 @@ class _ProfileNavScreensState extends State<ProfileNavScreens> {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileSectionNavMobile(controller: controller,);
+    return ProfileSectionNavMobile(
+      controller: controller,
+    );
   }
 }

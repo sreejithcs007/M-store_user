@@ -10,9 +10,13 @@ class HeaderWithSubhead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [Text(headerName), 
-      SizedBox(height: 20,),
-      Text(subHeaderName)],
+      children: [
+        Text(headerName),
+        SizedBox(
+          height: 20,
+        ),
+        Text(subHeaderName)
+      ],
     );
   }
 }

@@ -1,5 +1,5 @@
-
-import 'package:ecommerce/module/unauthorised/authentication/login.dart';
+import 'package:ecommerce/module/unauthorised/authentication/login/login.dart';
+import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/module/unauthorised/onboard_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class GroceryApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const GroceryPromoScreen(),
-        '/login': (_) => LoginScreen(),
+        '/login': (_) => const LoginView(),
       },
     );
   }

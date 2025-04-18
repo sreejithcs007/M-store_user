@@ -16,6 +16,8 @@ class ViewedWishListScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
             child: ProductCard(
+                productDetailsPageOnTap: () =>
+                    controller.onToDetailsPage(context),
                 productName: controller.wishListItems[index].itemName,
                 currentPrice:
                     controller.wishListItems[index].itemCost.toString(),

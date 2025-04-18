@@ -2,28 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/controller.dart';
 import 'package:ecommerce/widget/cutom_appbar/view.dart';
+import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
 import 'package:ecommerce/widget/grid_view_dashboard/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import '../../../../widget/cutom_card/view.dart';
 
 class DashboardScreen extends StatelessWidget {
   DashboardScreen({super.key, required this.controller});
   final DashboardController controller;
-
-
-  final List<Map<String, String>> categories = [
-    {"title": "Vegetables"},
-    {"title": "Groceries"},
-    {"title": "Fruits"},
-    {"title": "Stationery"},
-  ];
-
-  final List<Widget> bannerImages = [
-    SvgPicture.asset(Assets.images.svg.shoppingBag, fit: BoxFit.fill),
-    SvgPicture.asset(Assets.images.svg.user, fit: BoxFit.fill),
-    SvgPicture.asset(Assets.images.svg.shoppingBag, fit: BoxFit.fill),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +29,10 @@ class DashboardScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Column(
-                children: [
-                  CarouselSlider(
-                    options: CarouselOptions(
-                      height: 150,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      viewportFraction: 1,
-                      autoPlayInterval: const Duration(seconds: 3),
-                    ),
-                    items: bannerImages.map((widget) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: SizedBox(width: double.infinity, child: widget),
-                      );
-                    }).toList(),
-                  ),
-                ],
+              child: SimpleCarousel(
+                bannerImages: controller.bannerImages,
               ),
             ),
-            const SizedBox(height: 8),
-            const Center(child: Icon(Icons.more_horiz)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
@@ -69,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   const Text("Categories",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   GestureDetector(
                     onTap: () => controller.onViewAllTap(context),
                     child: const Text("View All",
@@ -78,13 +49,13 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 12),
+            Gap(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: categories.length,
+                itemCount: controller.categories.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
@@ -92,7 +63,9 @@ class DashboardScreen extends StatelessWidget {
                   childAspectRatio: 3 / 2.5,
                 ),
                 itemBuilder: (context, index) {
-                  return CategoryGridItem(title: categories[index]["title"]!);
+                  return CategoryGridItem(
+                      onContainerTap: () => null,
+                      title: controller.categories[index]["title"]!);
                 },
               ),
             ),
@@ -103,19 +76,30 @@ class DashboardScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
             const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ProductCard(
-                productName: "Carrot",
-                currentPrice: "55.00",
-                oldPrice: "65.00",
-                quantityInfo: "/ 1 KG",
-                isFavorite: false,
-                enableActions: true,
-                onAddToCart: controller.onAddToCart,
-                onFavoriteToggle: controller.onFavoriteToggle,
-                image: SvgPicture.asset(Assets.images.svg.shoppingBag,
-                    fit: BoxFit.cover),
+            Obx(
+              () => ListView.builder(
+                shrinkWrap: true,
+                itemCount: controller.todaysOfferList.value.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: GestureDetector(
+                      onTap: () => controller.todaysOfferOnTap(context),
+                      child: ProductCard(
+                        productName: "Carrot",
+                        currentPrice: "55.00",
+                        oldPrice: "65.00",
+                        quantityInfo: "/ 1 KG",
+                        isFavorite: false,
+                        enableActions: true,
+                        onAddToCart: controller.onAddToCart,
+                        onFavoriteToggle: controller.onFavoriteToggle,
+                        image: SvgPicture.asset(Assets.images.svg.shoppingBag,
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 20),

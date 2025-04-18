@@ -26,11 +26,20 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/Edit 8.svg
   String get edit8 => 'assets/images/svg/Edit 8.svg';
 
+  /// File path: assets/images/svg/Minus square.svg
+  String get minusSquare => 'assets/images/svg/Minus square.svg';
+
   /// File path: assets/images/svg/User.svg
   String get user => 'assets/images/svg/User.svg';
 
+  /// File path: assets/images/svg/add.svg
+  String get add => 'assets/images/svg/add.svg';
+
   /// File path: assets/images/svg/alert-circle.svg
   String get alertCircle => 'assets/images/svg/alert-circle.svg';
+
+  /// File path: assets/images/svg/delete.svg
+  String get delete => 'assets/images/svg/delete.svg';
 
   /// File path: assets/images/svg/home.svg
   String get home => 'assets/images/svg/home.svg';
@@ -39,8 +48,18 @@ class $AssetsImagesSvgGen {
   String get shoppingBag => 'assets/images/svg/shopping-bag.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [arrowLeft, arrowRight, edit8, user, alertCircle, home, shoppingBag];
+  List<String> get values => [
+        arrowLeft,
+        arrowRight,
+        edit8,
+        minusSquare,
+        user,
+        add,
+        alertCircle,
+        delete,
+        home,
+        shoppingBag
+      ];
 }
 
 class Assets {

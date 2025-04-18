@@ -31,6 +31,8 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    return DashboardScreen(controller: controller,);
+    return DashboardScreen(
+      controller: controller,
+    );
   }
 }

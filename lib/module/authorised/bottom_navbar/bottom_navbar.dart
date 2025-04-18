@@ -124,7 +124,6 @@
 //   }
 // }
 
-
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
@@ -198,9 +197,9 @@ class _NavScreenState extends State<NavScreen> {
       padding: const EdgeInsets.all(15),
       decoration: isSelected
           ? const BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-      )
+              color: Colors.white,
+              shape: BoxShape.circle,
+            )
           : null,
       child: SvgPicture.asset(
         svgPath,

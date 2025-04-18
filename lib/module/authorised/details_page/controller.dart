@@ -16,14 +16,15 @@ class ProductDetailController {
   }
 
   void onAddToCartTap(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) =>  CartScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => CartScreen()));
   }
 
   void onBuyNowTap() {
     print("Buying Now");
   }
 
-  void onProductTap(BuildContext context, String name, String price, String quantity) {
+  void onProductTap(
+      BuildContext context, String name, String price, String quantity) {
     Navigator.push(
       context,
       MaterialPageRoute(

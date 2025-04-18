@@ -57,21 +57,25 @@ class ProductListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(productName, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(productName,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  Text("$price / $quantity", style: const TextStyle(color: Colors.grey)),
+                  Text("$price / $quantity",
+                      style: const TextStyle(color: Colors.grey)),
                   const SizedBox(height: 8),
                   isCart
                       ? GestureDetector(
-                    onTap: onRemove,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.delete_outline, color: Colors.orange, size: 20),
-                        SizedBox(width: 4),
-                        Text("Remove", style: TextStyle(color: Colors.orange)),
-                      ],
-                    ),
-                  )
+                          onTap: onRemove,
+                          child: Row(
+                            children: const [
+                              Icon(Icons.delete_outline,
+                                  color: Colors.orange, size: 20),
+                              SizedBox(width: 4),
+                              Text("Remove",
+                                  style: TextStyle(color: Colors.orange)),
+                            ],
+                          ),
+                        )
                       : const SizedBox(),
                 ],
               ),
@@ -88,19 +92,23 @@ class ProductListItem extends StatelessWidget {
                 ),
                 isCart
                     ? Row(
-                  children: [
-                    Text(quantity, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: onQuantityAdd,
-                      child: const Icon(Icons.add_box_outlined, color: Colors.orange),
-                    ),
-                  ],
-                )
+                        children: [
+                          Text(quantity,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: onQuantityAdd,
+                            child: const Icon(Icons.add_box_outlined,
+                                color: Colors.orange),
+                          ),
+                        ],
+                      )
                     : IconButton(
-                  icon: const Icon(Icons.shopping_cart_outlined, color: Colors.orange),
-                  onPressed: onAddToCart,
-                ),
+                        icon: const Icon(Icons.shopping_cart_outlined,
+                            color: Colors.orange),
+                        onPressed: onAddToCart,
+                      ),
               ],
             ),
           ],

@@ -1,4 +1,6 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class GroceryPromoScreen extends StatelessWidget {
   const GroceryPromoScreen({super.key});
@@ -22,29 +24,42 @@ class GroceryPromoScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Logo', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
-              const SizedBox(height: 24),
+              const Text('Logo',
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+              Gap(30),
               RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 28, height: 1.4, fontWeight: FontWeight.bold, color: Colors.black),
+                text: TextSpan(
+                  style: AppTextStyle().br38w700,
                   children: [
                     TextSpan(text: 'Choosing '),
-                    TextSpan(text: 'fresh groceries', style: TextStyle(color: Colors.orange)),
+                    TextSpan(
+                        text: 'fresh\ngroceries',
+                        style: AppTextStyle()
+                            .br38w700
+                            .copyWith(color: Color(0xFFEE9700))),
                     TextSpan(text: ' can\nmake\na difference\nto your health'),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Get the best quality and most\ndelicious groceries in your area.',
-                style: TextStyle(fontSize: 14, color: Colors.black87, height: 1.5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    'Get the best quality and most\ndelicious groceries in your area.',
+                    style: AppTextStyle().br20w400,
+                  ),
+                ],
               ),
-              const SizedBox(height: 32),
+              Spacer(),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                 ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/login');

@@ -12,38 +12,42 @@ class MyOrderCard extends StatelessWidget {
   final bool enableActions;
   final Widget? image;
   final bool isListingPage;
+  final VoidCallback containerOntap;
 
-  const MyOrderCard({
-    super.key,
-    required this.productName,
-    required this.currentPrice,
-    required this.quantityInfo,
-    this.onAddToCart,
-    this.onFavoriteToggle,
-    this.enableActions = false,
-    this.image,
-    this.isListingPage = false,
-    required this.deliveryStatus,
-    required this.orderId,
-  });
+  const MyOrderCard(
+      {super.key,
+      required this.productName,
+      required this.currentPrice,
+      required this.quantityInfo,
+      this.onAddToCart,
+      this.onFavoriteToggle,
+      this.enableActions = false,
+      this.image,
+      this.isListingPage = false,
+      required this.deliveryStatus,
+      required this.orderId,
+      required this.containerOntap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 6,
-            offset: Offset(0, 2),
-          ),
-        ],
+    return InkWell(
+      onTap: containerOntap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 6,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: _buildRowLayout(),
       ),
-      child: _buildRowLayout(),
     );
   }
 
@@ -52,12 +56,8 @@ class MyOrderCard extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Order Id - $orderId'),
-            Text(deliveryStatus)
-
-          ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [Text('Order Id - $orderId'), Text(deliveryStatus)],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start, // Prevent overflow
@@ -70,10 +70,11 @@ class MyOrderCard extends StatelessWidget {
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: image ?? const Icon(Icons.image, size: 40, color: Colors.grey),
+              child: image ??
+                  const Icon(Icons.image, size: 40, color: Colors.grey),
             ),
             const SizedBox(width: 16),
-        
+
             // Details next to image
             Expanded(
               child: Column(
@@ -87,31 +88,6 @@ class MyOrderCard extends StatelessWidget {
       ],
     );
   }
-
-  // Widget _buildColumnLayout() {
-  //   return Expanded(
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         // Image on top
-  //         Container(
-  //           height: 100,
-  //           width: double.infinity,
-  //           decoration: BoxDecoration(
-  //             color: Colors.grey.shade200,
-  //             borderRadius: BorderRadius.circular(12),
-  //           ),
-  //           child:
-  //               image ?? const Icon(Icons.image, size: 30, color: Colors.grey),
-  //         ),
-  //         const SizedBox(height: 12),
-
-  //         // Product details below image
-  //         _buildDetails(),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _buildDetails() {
     return Column(
@@ -129,11 +105,9 @@ class MyOrderCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            
           ],
         ),
         const SizedBox(height: 6),
-
         // Price and quantity info
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -147,33 +121,22 @@ class MyOrderCard extends StatelessWidget {
               ),
             ),
             const Gap(6),
-            // if (oldPrice.isNotEmpty)
-            // if (oldPriceNeeded)
-            //   Text(
-            //     oldPrice,
-            //     style: const TextStyle(
-            //       decoration: TextDecoration.lineThrough,
-            //       color: Colors.orange,
-            //     ),
-            //   ),
-            // const SizedBox(width: 6),
             Text(
               quantityInfo,
               style: const TextStyle(color: Colors.grey),
             ),
-            // if (isListingPage == true)
-            //   Align(
-            //     alignment: Alignment.bottomRight,
-            //     child: GestureDetector(
-            //       onTap: enableActions ? onAddToCart : null,
-            //       child: const Align(
-            //           child: Icon(Icons.shopping_cart_outlined,
-            //               color: Colors.grey, size: 18)),
-            //     ),
-            //   ),
           ],
         ),
-        const SizedBox(height: 8),
+        const Gap(6),
+        Text(
+          'prepaid',
+          style: const TextStyle(color: Colors.grey),
+        ),
+        const Gap(6),
+        Text(
+          '12/1/2025',
+          style: const TextStyle(color: Colors.grey),
+        ),
       ],
     );
   }

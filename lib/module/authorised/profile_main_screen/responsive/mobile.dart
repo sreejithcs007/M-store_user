@@ -2,6 +2,7 @@ import 'package:ecommerce/module/authorised/profile_module/my_orders/screens.dar
 import 'package:ecommerce/module/authorised/profile_module/profile/view.dart';
 import 'package:ecommerce/module/authorised/profile_main_screen/controller.dart';
 import 'package:ecommerce/module/authorised/profile_module/wishlist/screens.dart';
+import 'package:ecommerce/widget/custom_cart_view/custom_cart_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -66,7 +67,14 @@ class ProfileSectionNavMobile extends StatelessWidget {
                   icon: Icons.shopping_cart_outlined,
                   label: 'Cart',
                   onTap: () {
-                    Navigator.pushNamed(context, '/cart');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CustomViewCartScreen(
+                            detailsPageOnTap: () =>
+                                controller.onToDetailsPage(context),
+                          ),
+                        ));
                   },
                 ),
                 _buildMenuItem(

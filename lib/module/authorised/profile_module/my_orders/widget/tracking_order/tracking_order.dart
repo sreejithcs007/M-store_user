@@ -16,15 +16,15 @@ class TrackinOrderViewScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
             child: MyOrderCard(
-              orderId : controller.trackingList[index].orderId,
-                productName: controller.trackingList[index].itemName,
-                currentPrice:
-                    controller.trackingList[index].itemRate.toString(),
-                quantityInfo: "${controller.trackingList[index].itemQty}/ KG",
-                enableActions: true,
-                onAddToCart: () => print("Add to cart"),
-               deliveryStatus: controller.trackingList[index].deliveryStatus,
-               ),
+              containerOntap: () => controller.onToDetailsPage(context),
+              orderId: controller.trackingList[index].orderId,
+              productName: controller.trackingList[index].itemName,
+              currentPrice: controller.trackingList[index].itemRate.toString(),
+              quantityInfo: "${controller.trackingList[index].itemQty}/ KG",
+              enableActions: true,
+              onAddToCart: () => print("Add to cart"),
+              deliveryStatus: controller.trackingList[index].deliveryStatus,
+            ),
           );
         },
       ),
