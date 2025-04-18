@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ProductListItem extends StatelessWidget {
   final String productName;
   final String price;
-  final String quantity;
+  final int quantity;
   final bool isFavorite;
 
   // Modes: Cart or Product
@@ -93,7 +93,7 @@ class ProductListItem extends StatelessWidget {
                 isCart
                     ? Row(
                         children: [
-                          Text(quantity,
+                          Text('$quantity',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           const SizedBox(width: 4),

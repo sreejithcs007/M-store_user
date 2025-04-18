@@ -9,15 +9,15 @@ class CartScreen extends StatelessWidget {
   // Sample static cart list
   final List<CartItem> cartItems = [
     CartItem(
-        name: "Tomato", price: "100.00", quantity: "2 KG", isFavorite: true),
+        name: "Tomato", price: "100.00", quantity: 2 , isFavorite: true,id: 1),
     CartItem(
-        name: "Carrot", price: "130.00", quantity: "2 KG", isFavorite: true),
+        name: "Carrot", price: "130.00", quantity: 2 , isFavorite: true,id: 1),
     CartItem(
-        name: "Onion", price: "40.00", quantity: "1 KG", isFavorite: false),
+        name: "Onion", price: "40.00", quantity: 1 , isFavorite: false,id: 1),
     CartItem(
-        name: "Broccoli", price: "120.00", quantity: "2 KG", isFavorite: false),
+        name: "Broccoli", price: "120.00", quantity: 2 , isFavorite: false,id: 1),
     CartItem(
-        name: "Potato", price: "33.00", quantity: "1 KG", isFavorite: false),
+        name: "Potato", price: "33.00", quantity: 1 , isFavorite: false,id: 1),
   ];
 
   @override

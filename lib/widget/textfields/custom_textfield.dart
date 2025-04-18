@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 class LabeledTextField extends StatelessWidget {
@@ -33,10 +34,7 @@ class LabeledTextField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black,
-            ),
+            style: AppTextStyle().br16w400
           ),
           const SizedBox(height: 8),
           TextFormField(

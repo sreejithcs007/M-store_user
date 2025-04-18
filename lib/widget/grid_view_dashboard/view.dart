@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 class CategoryGridItem extends StatefulWidget {
@@ -46,7 +47,7 @@ class _CategoryGridItemState extends State<CategoryGridItem> {
             Center(
               child: Text(
                 widget.title,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+                style: AppTextStyle().br16w600,
               ),
             ),
           ],

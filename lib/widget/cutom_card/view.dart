@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -117,8 +118,7 @@ class ProductCard extends StatelessWidget {
             Expanded(
               child: Text(
                 productName,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: AppTextStyle().br16w600,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -139,22 +139,18 @@ class ProductCard extends StatelessWidget {
           children: [
             Text(
               currentPrice,
-              style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+              style: AppTextStyle()
+                  .br16w600
+                  .copyWith(color: const Color(0xFFEE9700)),
             ),
             const SizedBox(width: 6),
             // if (oldPrice.isNotEmpty)
             if (oldPriceNeeded)
-              Text(
-                oldPrice,
-                style: const TextStyle(
-                  decoration: TextDecoration.lineThrough,
-                  color: Colors.orange,
-                ),
-              ),
+              Text(oldPrice,
+                  style: AppTextStyle().br16w600.copyWith(
+                      color: const Color(0xFFEE9700),
+                      decoration: TextDecoration.lineThrough,
+                      decorationColor: const Color(0xFFEE9700))),
             const SizedBox(width: 6),
             Text(
               quantityInfo,
@@ -181,21 +177,19 @@ class ProductCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
+                color: const Color(0xFFEE9700).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     "Add to cart",
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTextStyle().br16w400,
                   ),
-                  SizedBox(width: 6),
-                  Icon(Icons.shopping_cart, color: Colors.orange, size: 18),
+                  const SizedBox(width: 6),
+                  const Icon(Icons.shopping_cart,
+                      color: Color(0xFFEE9700), size: 18),
                 ],
               ),
             ),

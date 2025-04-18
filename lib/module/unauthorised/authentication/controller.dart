@@ -1,3 +1,7 @@
+import 'package:ecommerce/core/db/hive_box_helper.dart';
+import 'package:ecommerce/core/db/hive_helper.dart';
+import 'package:ecommerce/core/db/hive_keys.dart';
+import 'package:ecommerce/core/db/model/user_details/user.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
@@ -8,6 +12,7 @@ import 'package:ecommerce/shared/repo/login_repo/signup_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 
 class LoginController extends GetxController {
   final loginEmailController = TextEditingController();
@@ -36,6 +41,8 @@ class LoginController extends GetxController {
       devPrintSuccess('response?.msg==${response?.msg}');
       if (response?.status == 200) {
         var data = LoginModel.fromJson(response?.data);
+
+        await setDataToLocal(data);
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const NavScreen()),
@@ -73,5 +80,26 @@ class LoginController extends GetxController {
     } else {
       fnShowSnackBarError('Please fill the fields');
     }
+  }
+}
+
+Future<void> setDataToLocal(LoginModel data) async {
+  try {
+    if (data.token != null && data.status == 'success') {
+      var res = data.data;
+      var box = HiveHelper.getUserDetailsHiveBox();
+      var Id = UserDetailsHive(
+          id: res?.userId,
+          userEmail: res!.email!,
+          userPhoneNo: res.phone!,
+          accessToken: data.token!);
+
+      box.put(DbKeys.userKey, Id);
+
+      devPrintSuccess(
+          'GetHiveHelper= ${GetHiveHelper.getUserDetailsHive()!.accessToken}');
+    }
+  } catch (e) {
+    devPrintError('set data to local catch error == $e');
   }
 }

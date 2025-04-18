@@ -125,9 +125,8 @@
 // }
 
 import 'package:ecommerce/gen/assets.gen.dart';
-import 'package:ecommerce/module/authorised/dashboard/responsive/dashboard_view.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
-import 'package:ecommerce/module/authorised/view_all/screen.dart';
+import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/profile_main_screen/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -145,8 +144,8 @@ class _NavScreenState extends State<NavScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      DashboardView(),
-      const ViewAllScreen(),
+      const DashboardView(),
+      const ProductListScreen(),
       const ProfileNavScreens(),
     ];
 

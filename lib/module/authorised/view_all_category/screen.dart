@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/tag_generator/helper.dart';
-import 'package:ecommerce/module/authorised/view_all/controller.dart';
-import 'package:ecommerce/module/authorised/view_all/responsive/mobile.dart';
+import 'package:ecommerce/module/authorised/view_all_category/controller.dart';
+import 'package:ecommerce/module/authorised/view_all_category/responsive/mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,7 +29,7 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewAllMobileScreen(
+    return ViewAllCategoryMobileScreen(
       controller: controller,
     );
   }
