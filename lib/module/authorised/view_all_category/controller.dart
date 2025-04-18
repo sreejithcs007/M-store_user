@@ -1,12 +1,14 @@
+import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
+import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ViewAllController extends GetxController {
-  RxBool isGridView = true.obs;
+  RxBool isLoading = false.obs;
 
-   RxList<CategoryModel> categories = <CategoryModel>[].obs;
-
+  RxList<CategoryModel> categories = <CategoryModel>[].obs;
 
   @override
   void onInit() {
@@ -14,9 +16,21 @@ class ViewAllController extends GetxController {
     super.onInit();
   }
 
-  Future<void> _initial() async{
+  void onCategoryContainerTap({required int index, required int id}) {
+    Navigator.push(
+      knNavGlobalKey.currentContext!,
+      MaterialPageRoute(
+        builder: (_) => ProductListScreen(
+          index: index,
+          id: id,
+        ),
+      ),
+    );
+  }
 
-       var categoryResponse = await DashBoardRepo().onCategoryFetch();
+  Future<void> _initial() async {
+    isLoading.value = true;
+    var categoryResponse = await DashBoardRepo().onCategoryFetch();
     if ((categoryResponse != null) && (categoryResponse.isNotEmpty)) {
       categories.value = categoryResponse
           .map(
@@ -26,7 +40,6 @@ class ViewAllController extends GetxController {
           .toList();
     }
 
-
-
+    isLoading.value = false;
   }
 }

@@ -2,12 +2,15 @@ import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/products_by_category/product_category_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductListScreenController extends GetxController {
+  RxBool isList = false.obs;
   RxBool isProductLoading = false.obs;
   int? index;
-  ProductListScreenController(this.index);
+  int? id;
+  ProductListScreenController(this.index, this.id);
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
   final tabs = <String>[
     'Vegetables',
@@ -15,28 +18,8 @@ class ProductListScreenController extends GetxController {
     'Stationery',
   ];
 
-  // final productsPerTab = <List<Map<String, String>>>[
-  //   [
-  //     {'name': 'Tomato', 'price': '25.00'},
-  //     {'name': 'Carrot', 'price': '65.00'},
-  //   ],
-  //   [
-  //     {'name': 'Apple', 'price': '120.00'},
-  //     {'name': 'Banana', 'price': '40.00'},
-  //   ],
-  //   [
-  //     {'name': 'Notebook', 'price': '30.00'},
-  //     {'name': 'Pen', 'price': '10.00'},
-  //   ],
-  //   [
-  //     {'name': 'Notebook', 'price': '30.00'},
-  //     {'name': 'Pen', 'price': '10.00'},
-  //   ],
-  //   [
-  //     {'name': 'Notebook', 'price': '30.00'},
-  //     {'name': 'Pen', 'price': '10.00'},
-  //   ],
-  // ];
+
+  late TabController tabController;
 
   RxList<CartItem> productsPerTab = <CartItem>[].obs;
 
@@ -79,7 +62,10 @@ class ProductListScreenController extends GetxController {
           )
           .toList();
     }
-
-    onTap(index: index ?? 0, id: categories.value[index ?? 0].id!);
+    if (index == null) {
+      onTap(index: 0, id: categories.value[0].id!);
+    } else {
+      onTap(index: index!, id: id!);
+    }
   }
 }

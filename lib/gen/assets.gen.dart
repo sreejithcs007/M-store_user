@@ -46,6 +46,12 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/Edit 8.svg
   String get edit8 => 'assets/images/svg/Edit 8.svg';
 
+  /// File path: assets/images/svg/Grid.svg
+  String get grid => 'assets/images/svg/Grid.svg';
+
+  /// File path: assets/images/svg/List.svg
+  String get list => 'assets/images/svg/List.svg';
+
   /// File path: assets/images/svg/Minus square.svg
   String get minusSquare => 'assets/images/svg/Minus square.svg';
 
@@ -84,6 +90,8 @@ class $AssetsImagesSvgGen {
         arrowLeft,
         arrowRight,
         edit8,
+        grid,
+        list,
         minusSquare,
         user,
         add,

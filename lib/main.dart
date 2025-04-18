@@ -3,6 +3,8 @@ import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/db/hive_keys.dart';
 import 'package:ecommerce/core/db/model/user_details/user.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
+import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
+import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/module/unauthorised/onboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,7 @@ class GroceryApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (_) => const GroceryPromoScreen(),
+        // '/login': (_) =>  const ViewAllScreen(),
         '/login': (_) =>  const LoginView(),
       },
       // home: ,

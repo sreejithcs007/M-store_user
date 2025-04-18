@@ -65,7 +65,7 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return CategoryGridItem(
-                        onContainerTap: () => null,
+                        onContainerTap: () => controller.onCategoryContainerTap(index: index,id: controller.categories.value[index].id!),
                         title: controller.categories.value[index].categoryName);
                   },
                 ),

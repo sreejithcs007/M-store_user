@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({super.key, this.index});
+  const ProductListScreen({super.key, this.index, this.id});
   final int? index;
+  final int? id;
 
   @override
   State<ProductListScreen> createState() => ProductListScreenState();
@@ -18,7 +19,7 @@ class ProductListScreenState extends State<ProductListScreen> {
 
   @override
   void initState() {
-    controller = Get.put(ProductListScreenController(widget.index), tag: tag);
+    controller = Get.put(ProductListScreenController(widget.index,widget.id), tag: tag);
     // TODO: implement initState
     super.initState();
   }
