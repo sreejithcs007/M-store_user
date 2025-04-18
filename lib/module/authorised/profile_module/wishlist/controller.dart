@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WishlistController extends GetxController {
-
   RxList<ProductCardModel> wishListItems = <ProductCardModel>[
     ProductCardModel(
         itemCost: 29,
@@ -82,10 +81,10 @@ class WishlistController extends GetxController {
         wishList: true),
   ].obs;
 
-    void onToDetailsPage(BuildContext context) {
-      Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CustomDetailsPage()),
-            );
+  void onToDetailsPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CustomDetailsPage()),
+    );
   }
 }

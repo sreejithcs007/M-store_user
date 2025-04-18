@@ -38,7 +38,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.shopping_cart_outlined, color: Colors.orange),
+                  child: const Icon(Icons.shopping_cart_outlined,
+                      color: Colors.orange),
                 ),
               ),
             ],
@@ -70,14 +71,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: const Icon(Icons.close, color: Colors.black54),
                 ),
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 0),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 0),
               ),
             ),
-
           ),
         ],
       ),
     );
   }
 }
-

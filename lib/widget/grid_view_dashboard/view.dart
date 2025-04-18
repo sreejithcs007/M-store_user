@@ -5,7 +5,8 @@ class CategoryGridItem extends StatefulWidget {
 
   final VoidCallback onContainerTap;
 
-  const CategoryGridItem({super.key, required this.title, required this.onContainerTap});
+  const CategoryGridItem(
+      {super.key, required this.title, required this.onContainerTap});
 
   @override
   State<CategoryGridItem> createState() => _CategoryGridItemState();

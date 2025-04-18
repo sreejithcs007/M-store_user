@@ -45,16 +45,16 @@ class DashboardController extends GetxController {
   ].obs;
 
   void todaysOfferOnTap(BuildContext context) {
-     Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ProductDetailScreen(
-                    productName: 'carrot',
-                    price: '28',
-                    quantity: '1',
-                  ),
-                ),
-              );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProductDetailScreen(
+          productName: 'carrot',
+          price: '28',
+          quantity: '1',
+        ),
+      ),
+    );
   }
 
   int _currentIndex = 0;

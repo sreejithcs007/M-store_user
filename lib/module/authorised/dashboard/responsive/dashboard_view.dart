@@ -77,7 +77,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Obx(
-              () =>  ListView.builder(
+              () => ListView.builder(
                 shrinkWrap: true,
                 itemCount: controller.todaysOfferList.value.length,
                 itemBuilder: (context, index) {

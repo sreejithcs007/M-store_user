@@ -70,7 +70,10 @@ class ProfileSectionNavMobile extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CustomViewCartScreen(detailsPageOnTap:()=> controller.onToDetailsPage(context) ,),
+                          builder: (context) => CustomViewCartScreen(
+                            detailsPageOnTap: () =>
+                                controller.onToDetailsPage(context),
+                          ),
                         ));
                   },
                 ),

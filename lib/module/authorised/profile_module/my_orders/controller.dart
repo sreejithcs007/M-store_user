@@ -101,9 +101,9 @@ class MyOrderController extends GetxController {
   ].obs;
 
   void onToDetailsPage(BuildContext context) {
-      Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => OrderDetailsPageScreen()),
-            );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OrderDetailsPageScreen()),
+    );
   }
 }

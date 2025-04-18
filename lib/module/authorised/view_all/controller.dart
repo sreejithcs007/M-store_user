@@ -15,29 +15,14 @@ class ViewAllController extends GetxController {
     {"title": "Beetroot", "price": "35.00", "quantity": "1 KG"},
   ];
 
-    final List<String> categories = [
-    'vegetables',
-    'fruits',
-    'stationery'
-  ]; 
+  final List<String> categories = ['vegetables', 'fruits', 'stationery'];
 
-
-
-  RxList<Widget> productsList = <Widget>[
-
-  ].obs;
-
+  RxList<Widget> productsList = <Widget>[].obs;
 
 //Cart View tab names
-  RxList<Widget> cartTabName = <Widget>[   
-    Text(
-      'Vegetables'
-    ),
-    Text(
-      'Fruit'
-    ),
-    Text(
-      'Stationery'
-    ),
+  RxList<Widget> cartTabName = <Widget>[
+    Text('Vegetables'),
+    Text('Fruit'),
+    Text('Stationery'),
   ].obs;
 }

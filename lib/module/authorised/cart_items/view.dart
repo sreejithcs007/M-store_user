@@ -4,15 +4,20 @@ import 'package:flutter/material.dart';
 // Assuming you put the CartItem model in a separate file
 
 class CartScreen extends StatelessWidget {
-   CartScreen({super.key});
+  CartScreen({super.key});
 
   // Sample static cart list
   final List<CartItem> cartItems = [
-    CartItem(name: "Tomato", price: "100.00", quantity: "2 KG", isFavorite: true),
-    CartItem(name: "Carrot", price: "130.00", quantity: "2 KG", isFavorite: true),
-     CartItem(name: "Onion", price: "40.00", quantity: "1 KG", isFavorite: false),
-     CartItem(name: "Broccoli", price: "120.00", quantity: "2 KG", isFavorite: false),
-     CartItem(name: "Potato", price: "33.00", quantity: "1 KG", isFavorite: false),
+    CartItem(
+        name: "Tomato", price: "100.00", quantity: "2 KG", isFavorite: true),
+    CartItem(
+        name: "Carrot", price: "130.00", quantity: "2 KG", isFavorite: true),
+    CartItem(
+        name: "Onion", price: "40.00", quantity: "1 KG", isFavorite: false),
+    CartItem(
+        name: "Broccoli", price: "120.00", quantity: "2 KG", isFavorite: false),
+    CartItem(
+        name: "Potato", price: "33.00", quantity: "1 KG", isFavorite: false),
   ];
 
   @override
@@ -72,7 +77,9 @@ class CartScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text("Subtotal (5 items):", style: TextStyle(fontSize: 16)),
-                Text("₹423.00", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                Text("₹423.00",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -85,7 +92,8 @@ class CartScreen extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
                 ),
                 icon: const Icon(Icons.shopping_bag),
                 label: const Text("Proceed to Buy"),

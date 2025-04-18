@@ -143,7 +143,9 @@ class OrderDetailsPageScreen extends StatelessWidget {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(child: Text('Delivery Address'),),
+          Center(
+            child: Text('Delivery Address'),
+          ),
           Text('Nisha', style: TextStyle(color: Colors.grey)),
           Gap(6),
           Text('nisha@gmail.com', style: TextStyle(color: Colors.grey)),

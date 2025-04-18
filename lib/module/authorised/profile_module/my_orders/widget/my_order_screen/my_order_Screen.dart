@@ -16,7 +16,7 @@ class MyOrderViewScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
             child: MyOrderCard(
-              containerOntap:() =>  controller.onToDetailsPage(context),
+              containerOntap: () => controller.onToDetailsPage(context),
               orderId: controller.trackingList[index].orderId,
               productName: controller.orderedList[index].itemName,
               currentPrice: controller.orderedList[index].itemRate.toString(),

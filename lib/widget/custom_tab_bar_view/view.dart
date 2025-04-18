@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomTabView extends StatelessWidget {
-  const CustomTabView({super.key, required this.tabCount, required this.tabs, required this.tabViews});
+  const CustomTabView(
+      {super.key,
+      required this.tabCount,
+      required this.tabs,
+      required this.tabViews});
   final int tabCount;
   final List<Widget> tabs;
   final List<Widget> tabViews;
@@ -17,7 +21,7 @@ class CustomTabView extends StatelessWidget {
             indicatorColor: Color(0xFFEE9700),
             tabs: tabs,
           ),
-           Expanded(
+          Expanded(
             child: TabBarView(
               children: tabViews,
             ),

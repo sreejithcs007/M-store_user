@@ -32,6 +32,8 @@ class _ProfileCreateEditScreenState extends State<ProfileCreateEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  ProfileCreateMobile(controller: controller,);
+    return ProfileCreateMobile(
+      controller: controller,
+    );
   }
 }

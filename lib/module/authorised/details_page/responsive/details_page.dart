@@ -13,7 +13,8 @@ class ProductDetailScreen extends StatelessWidget {
     required this.productName,
     required this.price,
     required this.quantity,
-  }) : controller = ProductDetailController(); // You can also pass externally if needed
+  }) : controller =
+            ProductDetailController(); // You can also pass externally if needed
 
   final List<Map<String, String>> relatedProducts = const [
     {"title": "Tomato", "price": "25.00", "quantity": "1 KG"},
@@ -29,13 +30,15 @@ class ProductDetailScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text("Product Detail", style: TextStyle(color: Colors.black)),
+        title:
+            const Text("Product Detail", style: TextStyle(color: Colors.black)),
         leading: const BackButton(color: Colors.black),
         actions: [
           Stack(
             children: [
               IconButton(
-                icon: const Icon(Icons.shopping_cart_outlined, color: Colors.orange),
+                icon: const Icon(Icons.shopping_cart_outlined,
+                    color: Colors.orange),
                 onPressed: () {},
               ),
               Positioned(
@@ -43,8 +46,10 @@ class ProductDetailScreen extends StatelessWidget {
                 top: 6,
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-                  child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 10)),
+                  decoration: const BoxDecoration(
+                      color: Colors.red, shape: BoxShape.circle),
+                  child: const Text('1',
+                      style: TextStyle(color: Colors.white, fontSize: 10)),
                 ),
               ),
             ],
@@ -78,12 +83,18 @@ class ProductDetailScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(productName, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text("Vegetables", style: TextStyle(color: Colors.grey)),
+                        Text(productName,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                        const Text("Vegetables",
+                            style: TextStyle(color: Colors.grey)),
                       ],
                     ),
                     Row(
-                      children: List.generate(5, (_) => const Icon(Icons.star, size: 18, color: Colors.amber)),
+                      children: List.generate(
+                          5,
+                          (_) => const Icon(Icons.star,
+                              size: 18, color: Colors.amber)),
                     ),
                   ],
                 ),
@@ -92,10 +103,14 @@ class ProductDetailScreen extends StatelessWidget {
                   children: [
                     Text(
                       "₹$price",
-                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.orange),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.orange),
                     ),
                     const SizedBox(width: 4),
-                    Text("/ $quantity", style: const TextStyle(color: Colors.grey)),
+                    Text("/ $quantity",
+                        style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -107,7 +122,10 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     Text(
                       "$quantityCount KG",
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),
                     ),
                     IconButton(
                       icon: const Icon(Icons.add, color: Colors.orange),
@@ -116,7 +134,9 @@ class ProductDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text("Description", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                const Text("Description",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 const SizedBox(height: 6),
                 const Text(
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
@@ -128,11 +148,14 @@ class ProductDetailScreen extends StatelessWidget {
                   children: [
                     OutlinedButton.icon(
                       onPressed: () => controller.onAddToCartTap(context),
-                      icon: const Icon(Icons.shopping_cart_outlined, color: Colors.orange),
-                      label: const Text("Add to Cart", style: TextStyle(color: Colors.orange)),
+                      icon: const Icon(Icons.shopping_cart_outlined,
+                          color: Colors.orange),
+                      label: const Text("Add to Cart",
+                          style: TextStyle(color: Colors.orange)),
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.orange),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -140,14 +163,17 @@ class ProductDetailScreen extends StatelessWidget {
                       onPressed: controller.onBuyNowTap,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.orange,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                       child: const Text("Buy Now"),
                     ),
                   ],
                 ),
                 const SizedBox(height: 30),
-                const Text("Related Products", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                const Text("Related Products",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                 const SizedBox(height: 12),
                 GridView.builder(
                   itemCount: relatedProducts.length,

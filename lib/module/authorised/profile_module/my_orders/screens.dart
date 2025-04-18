@@ -31,6 +31,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MyOrderMobileScreen(controller: controller,);
+    return MyOrderMobileScreen(
+      controller: controller,
+    );
   }
 }

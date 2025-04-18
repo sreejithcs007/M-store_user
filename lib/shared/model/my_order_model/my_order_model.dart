@@ -16,6 +16,5 @@ class MyOrderModel {
       required this.paymentType,
       required this.createdAt,
       required this.deliveryStatus,
-      required this.itemOrderId
-      });
+      required this.itemOrderId});
 }

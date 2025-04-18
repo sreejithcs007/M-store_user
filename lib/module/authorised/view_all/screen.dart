@@ -29,6 +29,8 @@ class _ViewAllScreenState extends State<ViewAllScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewAllMobileScreen(controller: controller,);
+    return ViewAllMobileScreen(
+      controller: controller,
+    );
   }
 }

@@ -14,20 +14,19 @@ class MyOrderCard extends StatelessWidget {
   final bool isListingPage;
   final VoidCallback containerOntap;
 
-  const MyOrderCard({
-    super.key,
-    required this.productName,
-    required this.currentPrice,
-    required this.quantityInfo,
-    this.onAddToCart,
-    this.onFavoriteToggle,
-    this.enableActions = false,
-    this.image,
-    this.isListingPage = false,
-    required this.deliveryStatus,
-    required this.orderId,
-    required this.containerOntap
-  });
+  const MyOrderCard(
+      {super.key,
+      required this.productName,
+      required this.currentPrice,
+      required this.quantityInfo,
+      this.onAddToCart,
+      this.onFavoriteToggle,
+      this.enableActions = false,
+      this.image,
+      this.isListingPage = false,
+      required this.deliveryStatus,
+      required this.orderId,
+      required this.containerOntap});
 
   @override
   Widget build(BuildContext context) {
@@ -126,19 +125,18 @@ class MyOrderCard extends StatelessWidget {
               quantityInfo,
               style: const TextStyle(color: Colors.grey),
             ),
-          
           ],
         ),
-          const Gap(6),
-            Text(
-              'prepaid',
-              style: const TextStyle(color: Colors.grey),
-            ),
-            const Gap(6),
-            Text(
-              '12/1/2025',
-              style: const TextStyle(color: Colors.grey),
-            ),
+        const Gap(6),
+        Text(
+          'prepaid',
+          style: const TextStyle(color: Colors.grey),
+        ),
+        const Gap(6),
+        Text(
+          '12/1/2025',
+          style: const TextStyle(color: Colors.grey),
+        ),
       ],
     );
   }

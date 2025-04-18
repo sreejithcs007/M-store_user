@@ -48,11 +48,10 @@ class ProfileNavSectionController extends GetxController {
     );
   }
 
-
-    void onToDetailsPage(BuildContext context) {
-      Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CustomDetailsPage()),
-            );
+  void onToDetailsPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CustomDetailsPage()),
+    );
   }
 }
