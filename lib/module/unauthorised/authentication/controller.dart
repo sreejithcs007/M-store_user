@@ -23,6 +23,7 @@ class LoginController extends GetxController {
 
   final loginFormKey = GlobalKey<FormState>();
   final signUpFormKey = GlobalKey<FormState>();
+
   Future<void> onSignInPressed(BuildContext context,
       {required String email, required String password}) async {
     devPrintError(
@@ -41,9 +42,11 @@ class LoginController extends GetxController {
         );
 
         fnShowSnackBarSucess('Successfully logged in');
+      } else {
+        fnShowSnackBarError('please check your Credentilas');
       }
     } else {
-      fnShowSnackBarError('please check your credentials');
+      fnShowSnackBarError('please fill the fields');
     }
   }
 
@@ -53,18 +56,20 @@ class LoginController extends GetxController {
       required String name,
       required String phone,
       required String address}) async {
-    var response = await SignUpRepo().onSignUp(
-        email: email,
-        password: password,
-        name: name,
-        phone: phone,
-        address: address);
+    if (signUpFormKey.currentState!.validate()) {
+      var response = await SignUpRepo().onSignUp(
+          email: email,
+          password: password,
+          name: name,
+          phone: phone,
+          address: address);
 
-    if (response?.status == 200) {
-      fnShowSnackBarSucess('Created successfully');
-      var data = SignUpModel.fromJson(response?.data);
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const LoginView()));
+      if (response?.status == 201) {
+        fnShowSnackBarSucess('Created successfully');
+        var data = SignUpModel.fromJson(response?.data);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginView()));
+      }
     } else {
       fnShowSnackBarError('Please fill the fields');
     }

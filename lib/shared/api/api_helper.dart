@@ -77,7 +77,7 @@ class ApiHelper {
       log("ApiHelper>>Api Called => status code=${response.statusCode}");
       var decodedData = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
+      if ((response.statusCode == 200) || (response.statusCode ==201)) {
         return ApiResponse(
           status: response.statusCode,
           msg: "Success",

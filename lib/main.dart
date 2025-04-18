@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/module/unauthorised/authentication/login/login.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/module/unauthorised/onboard_screen.dart';
@@ -12,6 +13,7 @@ class GroceryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: knNavGlobalKey ,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {

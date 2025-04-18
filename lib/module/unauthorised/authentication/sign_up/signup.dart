@@ -110,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         LabeledTextField(
                           label: "Pin-code",
-                          hintText: "Pin_code",
+                          hintText: "Pin-code",
                           controller: controller.signUpPinCodeController,
                           validator: (p0) {
                             devPrintError('p0==${p0}');
@@ -184,7 +184,9 @@ class SignUpScreen extends StatelessWidget {
                                 text: "Already Have an Account?\n",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w600,
+                                    height: 3
+                                    ),
                                 children: [
                                   TextSpan(
                                     text: "Sign In",

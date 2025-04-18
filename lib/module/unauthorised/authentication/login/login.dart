@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                   hintText: "sampleemail@email.com",
                   controller: controller.loginEmailController,
                   validator: (p0) {
-                    if ((p0 == null) || (p0!.isEmpty)) {
+                    if ((p0 == null) || (p0.isEmpty)) {
                       return 'please fill this field';
                     } else {
                       return null;
@@ -54,8 +54,7 @@ class LoginScreen extends StatelessWidget {
                   obscureText: true,
                   controller: controller.loginPasswordController,
                   validator: (p0) {
-                    devPrintError('p0==${p0}');
-                    if ((p0 == null) || (p0!.isEmpty)) {
+                    if ((p0 == null) || (p0.isEmpty)) {
                       return 'please fill this field';
                     } else {
                       return null;
@@ -116,7 +115,10 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUpScreen(controller: controller,)),
+                        MaterialPageRoute(
+                            builder: (context) => SignUpScreen(
+                                  controller: controller,
+                                )),
                       );
                     },
                     child: RichText(
@@ -124,7 +126,10 @@ class LoginScreen extends StatelessWidget {
                       text: const TextSpan(
                         text: "Dont Have an account?\n",
                         style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w600),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          height: 3.0,
+                        ),
                         children: [
                           TextSpan(
                             text: "Sign Up",

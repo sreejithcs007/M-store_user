@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/constants/enum/snackbar_type.dart';
+import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/extensions/snackbar/helper.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
-void showDesktopSnackbar({required String text, required SnackbarType type}) {
-  GlobalKey<NavigatorState> knNavGlobalKey = GlobalKey();
+void showDesktopSnackbar({required String text, required SnackbarType type,}) {
   OverlayEntry? overlayEntry;
   overlayEntry = OverlayEntry(
     maintainState: true,
@@ -101,16 +101,17 @@ class _CustomSnakbarWidgetState extends State<CustomSnakbarWidget>
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SvgPicture.asset(widget.type == SnackbarType.success
-                              ? Assets.images.svg.add
+                              ? Assets.images.svg.checkCircle
                               : widget.type == SnackbarType.error
-                                  ? Assets.images.svg.add
-                                  : Assets.images.svg.add),
+                                  ? Assets.images.svg.xCircle
+                                  : Assets.images.svg.alertCircle),
                           const Gap(20),
                           Expanded(
                             child: Text(
                               widget.text,
                               overflow: TextOverflow.visible,
                               textAlign: TextAlign.left,
+                              style: TextStyle(color: Colors.white),
                               // style: AppTextStyles.snackbarButtonText.copyWith(
                               //     color: widget.type.getTextColor(context)),
                             ),
