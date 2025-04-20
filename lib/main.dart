@@ -1,8 +1,11 @@
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/db/hive_keys.dart';
+import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/core/db/model/user_details/user.dart';
+import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
+import 'package:ecommerce/module/authorised/product_list_Screen.dart/responsive/mobile.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
@@ -17,7 +20,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserDetailsHiveAdapter());
+  Hive.registerAdapter(OnBoardScreenHiveModelAdapter());
   await Hive.openBox<UserDetailsHive>(DbKeys.userDetails);
+  await Hive.openBox<OnBoardScreenHiveModel>(DbKeys.user1Details);
   runApp(const GroceryApp());
 }
 
@@ -33,12 +38,16 @@ class GroceryApp extends StatelessWidget {
       navigatorKey: knNavGlobalKey,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {
-        '/': (_) => const GroceryPromoScreen(),
-        // '/login': (_) =>  const ViewAllScreen(),
-        '/login': (_) =>  const LoginView(),
-      },
-      // home: ,
+      // routes: {
+      //   '/': (_) => const GroceryPromoScreen(),
+      //   // '/login': (_) =>  const ProductListScreen(),
+      //   '/login': (_) => const LoginView(),
+      // },
+      home: GetHiveHelper.getOnBoardDetailsHive()?.isSeen == false
+          ? const GroceryPromoScreen()
+          : GetHiveHelper.getUserDetailsHive()?.accessToken == null
+              ? const LoginView()
+              : const NavScreen(),
     );
   }
 }

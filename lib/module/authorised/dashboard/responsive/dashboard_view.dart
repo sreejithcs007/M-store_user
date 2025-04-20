@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/controller.dart';
 import 'package:ecommerce/widget/cutom_appbar/view.dart';
@@ -27,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-              onCartTap: controller.onCartTap,
+              onCartTap: () => controller.onCartTap(context),
               onClearSearch: controller.onClearSearch,
             ),
             Padding(
@@ -44,7 +45,10 @@ class DashboardScreen extends StatelessWidget {
                   Text("Categories", style: AppTextStyle().br16w600),
                   GestureDetector(
                     onTap: () => controller.onViewAllTap(context),
-                    child: Text("View All", style: AppTextStyle().br16w400.copyWith(color: const Color(0xFFEE9700))),
+                    child: Text("View All",
+                        style: AppTextStyle()
+                            .br16w400
+                            .copyWith(color: const Color(0xFFEE9700))),
                   ),
                 ],
               ),
@@ -65,8 +69,18 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return CategoryGridItem(
-                        onContainerTap: () => controller.onCategoryContainerTap(index: index,id: controller.categories.value[index].id!),
-                        title: controller.categories.value[index].categoryName);
+                      imageUrl: formatImageUrl(
+                              controller.categories.value[index].imageUrl) ??
+                          '',
+                      isFavourite: false,
+                      title:
+                          controller.categories.value[index].categoryName ?? '',
+                      onTap: () => controller.onCategoryContainerTap(
+                          index: index,
+                          id: controller.categories.value[index].id!),
+                      // onContainerTap: () => controller.onCategoryContainerTap(index: index,id: controller.categories.value[index].id!),
+                      // title: controller.categories.value[index].categoryName);
+                    );
                   },
                 ),
               ),
@@ -85,7 +99,8 @@ class DashboardScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: GestureDetector(
-                      onTap: () => controller.todaysOfferOnTap(context,id: controller.todaysOfferList.value[index].id),
+                      onTap: () => controller.todaysOfferOnTap(context,
+                          id: controller.todaysOfferList.value[index].id),
                       child: ProductCard(
                         productName: "Carrot",
                         currentPrice: "55.00",

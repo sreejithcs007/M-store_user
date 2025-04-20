@@ -15,8 +15,15 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/company
   $AssetsImagesCompanyGen get company => const $AssetsImagesCompanyGen();
 
+  /// File path: assets/images/defaultimage.png
+  AssetGenImage get defaultimage =>
+      const AssetGenImage('assets/images/defaultimage.png');
+
   /// Directory path: assets/images/svg
   $AssetsImagesSvgGen get svg => const $AssetsImagesSvgGen();
+
+  /// List of all assets
+  List<AssetGenImage> get values => [defaultimage];
 }
 
 class $AssetsImagesCompanyGen {
@@ -64,11 +71,20 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/alert-circle.svg
   String get alertCircle => 'assets/images/svg/alert-circle.svg';
 
+  /// File path: assets/images/svg/cart.svg
+  String get cart => 'assets/images/svg/cart.svg';
+
   /// File path: assets/images/svg/check-circle.svg
   String get checkCircle => 'assets/images/svg/check-circle.svg';
 
   /// File path: assets/images/svg/delete.svg
   String get delete => 'assets/images/svg/delete.svg';
+
+  /// File path: assets/images/svg/favorite.svg
+  String get favorite => 'assets/images/svg/favorite.svg';
+
+  /// File path: assets/images/svg/filter.svg
+  String get filter => 'assets/images/svg/filter.svg';
 
   /// File path: assets/images/svg/home.svg
   String get home => 'assets/images/svg/home.svg';
@@ -76,8 +92,14 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/image 1 8.svg
   String get image18 => 'assets/images/svg/image 1 8.svg';
 
+  /// File path: assets/images/svg/log-out.svg
+  String get logOut => 'assets/images/svg/log-out.svg';
+
   /// File path: assets/images/svg/shopping-bag.svg
   String get shoppingBag => 'assets/images/svg/shopping-bag.svg';
+
+  /// File path: assets/images/svg/sort.svg
+  String get sort => 'assets/images/svg/sort.svg';
 
   /// File path: assets/images/svg/warning.svg
   String get warning => 'assets/images/svg/warning.svg';
@@ -96,11 +118,16 @@ class $AssetsImagesSvgGen {
         user,
         add,
         alertCircle,
+        cart,
         checkCircle,
         delete,
+        favorite,
+        filter,
         home,
         image18,
+        logOut,
         shoppingBag,
+        sort,
         warning,
         xCircle
       ];

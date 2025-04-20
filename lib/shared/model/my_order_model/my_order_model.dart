@@ -4,9 +4,11 @@ class MyOrderModel {
   String itemOrderId;
   double itemRate;
   double itemQty;
-  int paymentType;
+  String paymentType;
   String deliveryStatus;
-  double createdAt;
+  String createdAt;
+  List<String> imageUrl;
+  String unit;
 
   MyOrderModel(
       {required this.orderId,
@@ -16,5 +18,8 @@ class MyOrderModel {
       required this.paymentType,
       required this.createdAt,
       required this.deliveryStatus,
-      required this.itemOrderId});
+      required this.itemOrderId,
+      required this.imageUrl,
+      this.unit = '',
+      });
 }

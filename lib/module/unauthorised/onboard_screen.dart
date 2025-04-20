@@ -1,5 +1,9 @@
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/db/hive_box_helper.dart';
+import 'package:ecommerce/core/db/hive_keys.dart';
+import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
+import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -78,12 +82,23 @@ class GroceryPromoScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8)),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                var box = HiveHelper.getOnboardDetailsHiveBox();
+                var Id = OnBoardScreenHiveModel(isSeen: true);
+                box.put(DbKeys.user1Key, Id);
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginView(),
+                    ));
               },
-              child:  Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Shop now', style: AppTextStyle().br16w400.copyWith(color: Colors.white)),
+                  Text('Shop now',
+                      style: AppTextStyle()
+                          .br16w400
+                          .copyWith(color: Colors.white)),
                   SizedBox(width: 8),
                   Icon(Icons.arrow_forward, color: Colors.white, size: 16),
                 ],

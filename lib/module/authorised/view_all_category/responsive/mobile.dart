@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/view_all_category/controller.dart';
 import 'package:ecommerce/widget/grid_view_dashboard/view.dart';
@@ -31,7 +32,10 @@ class ViewAllCategoryMobileScreen extends StatelessWidget {
       ),
       body: Obx(
         () => controller.isLoading.value
-            ? const Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: Color(0xFFEE9700),
+              ))
             : GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -42,14 +46,23 @@ class ViewAllCategoryMobileScreen extends StatelessWidget {
                 itemCount: controller.categories.value.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, left: 20, right: 20),
-                    child: CategoryGridItem(
-                        onContainerTap: () => controller.onCategoryContainerTap(
+                      padding:
+                          const EdgeInsets.only(top: 10, left: 20, right: 20),
+                      child: CategoryGridItem(
+                        imageUrl:
+                           formatImageUrl( controller.categories.value[index].imageUrl ?? ''),
+                        isFavourite: false,
+                        title:
+                            controller.categories.value[index].categoryName ??
+                                '',
+                        onTap: () => controller.onCategoryContainerTap(
                             index: index,
                             id: controller.categories.value[index].id!),
-                        title: controller.categories.value[index].categoryName),
-                  );
+                        // onContainerTap: () => controller.onCategoryContainerTap(
+                        //     index: index,
+                        //     id: controller.categories.value[index].id!),
+                        // title: controller.categories.value[index].categoryName),
+                      ));
                 },
               ),
       ),

@@ -66,7 +66,10 @@ class ProductCard extends StatelessWidget {
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: image ?? const Icon(Icons.image, size: 40, color: Colors.grey),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: image ??
+                  const Icon(Icons.image, size: 40, color: Colors.grey)),
         ),
         const SizedBox(width: 16),
 

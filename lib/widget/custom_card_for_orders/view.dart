@@ -1,8 +1,10 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class MyOrderCard extends StatelessWidget {
   final String productName;
+  final String paymentType;
   final String currentPrice;
   final String quantityInfo;
   final String deliveryStatus;
@@ -13,20 +15,24 @@ class MyOrderCard extends StatelessWidget {
   final Widget? image;
   final bool isListingPage;
   final VoidCallback containerOntap;
+  final String orderDate;
 
-  const MyOrderCard(
-      {super.key,
-      required this.productName,
-      required this.currentPrice,
-      required this.quantityInfo,
-      this.onAddToCart,
-      this.onFavoriteToggle,
-      this.enableActions = false,
-      this.image,
-      this.isListingPage = false,
-      required this.deliveryStatus,
-      required this.orderId,
-      required this.containerOntap});
+  const MyOrderCard({
+    super.key,
+    required this.productName,
+    required this.currentPrice,
+    required this.quantityInfo,
+    this.onAddToCart,
+    this.onFavoriteToggle,
+    this.enableActions = false,
+    this.image,
+    this.isListingPage = false,
+    required this.deliveryStatus,
+    required this.orderId,
+    required this.containerOntap,
+    this.paymentType = 'Cash on Delivery',
+    required this.orderDate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +63,16 @@ class MyOrderCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text('Order Id - $orderId'), Text(deliveryStatus)],
+          children: [
+            Text(
+              'Order Id - $orderId',
+              style: AppTextStyle().br14w600,
+            ),
+            Text(
+              deliveryStatus,
+              style: AppTextStyle().br16w600,
+            )
+          ],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start, // Prevent overflow
@@ -65,13 +80,16 @@ class MyOrderCard extends StatelessWidget {
             // Image on the left
             Container(
               width: 80,
-              height: 80,
+              height: 100,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: image ??
-                  const Icon(Icons.image, size: 40, color: Colors.grey),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: image ??
+                    const Icon(Icons.image, size: 40, color: Colors.grey),
+              ),
             ),
             const SizedBox(width: 16),
 
@@ -100,8 +118,7 @@ class MyOrderCard extends StatelessWidget {
             Expanded(
               child: Text(
                 productName,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: AppTextStyle().br16w600,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -112,30 +129,25 @@ class MyOrderCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              currentPrice,
-              style: const TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
+            Text(currentPrice,
+                style:
+                    AppTextStyle().br14w600.copyWith(color: Color(0xFFEE9700))),
             const Gap(6),
             Text(
-              quantityInfo,
-              style: const TextStyle(color: Colors.grey),
+              '/ $quantityInfo',
+              style: AppTextStyle().br14w600.copyWith(color: Color(0xFFB3B3B3)),
             ),
           ],
         ),
         const Gap(6),
         Text(
-          'prepaid',
-          style: const TextStyle(color: Colors.grey),
+          paymentType,
+          style: AppTextStyle().br16w400.copyWith(color: Color(0xFF14AE5C)),
         ),
         const Gap(6),
         Text(
-          '12/1/2025',
-          style: const TextStyle(color: Colors.grey),
+          orderDate,
+          style: AppTextStyle().br14w400,
         ),
       ],
     );

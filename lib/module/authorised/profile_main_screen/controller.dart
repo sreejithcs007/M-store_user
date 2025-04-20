@@ -9,6 +9,7 @@ class ProfileNavSectionController extends GetxController {
     required BuildContext context,
     required String title,
     required String content,
+    required VoidCallback onPressed,
   }) {
     showDialog(
       context: context,
@@ -34,9 +35,7 @@ class ProfileNavSectionController extends GetxController {
                       side: const BorderSide(color: Color(0xFFEE9700))),
                 ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: onPressed,
               child: const Text(
                 'yes',
                 style: TextStyle(color: Colors.white),

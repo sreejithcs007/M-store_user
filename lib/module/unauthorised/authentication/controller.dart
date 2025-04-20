@@ -15,6 +15,10 @@ import 'package:get/get.dart';
 import 'package:http/http.dart';
 
 class LoginController extends GetxController {
+  RxBool isSignInLoading = false.obs;
+  RxBool isSignUpLoading = false.obs;
+  RxBool showSignUpPass = false.obs;
+  RxBool showSignInPass = false.obs;
   final loginEmailController = TextEditingController();
   final loginPasswordController = TextEditingController();
 
@@ -29,10 +33,18 @@ class LoginController extends GetxController {
   final loginFormKey = GlobalKey<FormState>();
   final signUpFormKey = GlobalKey<FormState>();
 
+  void showSignUPPass() {
+    showSignUpPass.value = !showSignUpPass.value;
+  }
+  void showSignINPass() {
+    showSignInPass.value = !showSignInPass.value;
+  }
+
   Future<void> onSignInPressed(BuildContext context,
       {required String email, required String password}) async {
     devPrintError(
         'formKey.currentState!.validate() ==${loginFormKey.currentState!.validate()}');
+    isSignInLoading.value = true;
     if (loginFormKey.currentState!.validate()) {
       var response =
           await LoginRepo().onLogin(email: email, password: password);
@@ -55,6 +67,8 @@ class LoginController extends GetxController {
     } else {
       fnShowSnackBarError('please fill the fields');
     }
+
+    isSignInLoading.value = false;
   }
 
   Future<void> onSignUp(BuildContext context,
@@ -63,6 +77,7 @@ class LoginController extends GetxController {
       required String name,
       required String phone,
       required String address}) async {
+    isSignUpLoading.value = true;
     if (signUpFormKey.currentState!.validate()) {
       var response = await SignUpRepo().onSignUp(
           email: email,
@@ -80,6 +95,7 @@ class LoginController extends GetxController {
     } else {
       fnShowSnackBarError('Please fill the fields');
     }
+    isSignUpLoading.value = false;
   }
 }
 

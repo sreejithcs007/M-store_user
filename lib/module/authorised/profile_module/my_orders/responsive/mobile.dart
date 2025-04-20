@@ -1,7 +1,7 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/profile_module/my_orders/controller.dart';
 import 'package:ecommerce/module/authorised/profile_module/my_orders/widget/my_order_screen/my_order_Screen.dart';
-import 'package:ecommerce/module/authorised/profile_module/my_orders/widget/tracking_order/tracking_order.dart';
 import 'package:ecommerce/widget/custom_tab_bar_view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,24 +24,24 @@ class MyOrderMobileScreen extends StatelessWidget {
             icon: SvgPicture.asset(
               Assets.images.svg.arrowLeft,
             )),
-        title: const Text(
+        title: Text(
           'My Orders',
-          style: TextStyle(color: Colors.black),
+          style: AppTextStyle().br24w600,
         ),
       ),
       body: CustomTabView(
-        tabCount: 2,
-        tabs: const [
-          Text('Ordered'),
-          Text('Tracking'),
+        tabCount: 1,
+        tabs: [
+          Text('Ordered', style: AppTextStyle().br16w600),
+          // Text('Tracking'),
         ],
         tabViews: [
           MyOrderViewScreen(
             controller: controller,
           ),
-          TrackinOrderViewScreen(
-            controller: controller,
-          ),
+          // TrackinOrderViewScreen(
+          //   controller: controller,
+          // ),
         ],
       ),
     );

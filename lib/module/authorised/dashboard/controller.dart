@@ -5,6 +5,7 @@ import 'package:ecommerce/module/authorised/details_page/responsive/details_page
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
+import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/authorised/category_list/category_list.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/model/product_card/model.dart';
@@ -66,8 +67,13 @@ class DashboardController extends GetxController {
     );
   }
 
-  void onCartTap() {
-    print("Cart tapped");
+  void onCartTap(BuildContext context) {
+ 
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CartView(),
+        ));
   }
 
   void onClearSearch() {

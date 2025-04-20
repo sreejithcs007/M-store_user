@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailsScreenView extends StatefulWidget {
-  const DetailsScreenView({super.key, required this.id});
+  const DetailsScreenView({super.key, required this.id,this.isRelatedProductNeed = true});
   final int id;
+  final bool isRelatedProductNeed;
 
   @override
   State<DetailsScreenView> createState() => DetailsScreenStateView();
@@ -18,7 +19,7 @@ class DetailsScreenStateView extends State<DetailsScreenView> {
 
   @override
   void initState() {
-    controller = Get.put(ProductDetailController(id: widget.id), tag: tag);
+    controller = Get.put(ProductDetailController(id: widget.id,isRelatedProductNeed: widget.isRelatedProductNeed), tag: tag);
     super.initState();
   }
 
@@ -30,6 +31,8 @@ class DetailsScreenStateView extends State<DetailsScreenView> {
 
   @override
   Widget build(BuildContext context) {
-    return  ProductDetailScreen(controller: controller,);
+    return ProductDetailScreen(
+      controller: controller,
+    );
   }
 }

@@ -1,4 +1,7 @@
+import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
+import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,36 +20,13 @@ class ProductDetailScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text("Product Detail",
-              style: TextStyle(color: Colors.black)),
-          leading: const BackButton(color: Colors.black),
-          actions: [
-            Stack(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.shopping_cart_outlined,
-                      color: Colors.orange),
-                  onPressed: () {},
-                ),
-                Positioned(
-                  right: 6,
-                  top: 6,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                        color: Colors.red, shape: BoxShape.circle),
-                    child: const Text('1',
-                        style: TextStyle(color: Colors.white, fontSize: 10)),
-                  ),
-                ),
-              ],
-            ),
-          ],
+          title: Text("Product Detail", style: AppTextStyle().br16w600),
+          leading: const BackButton(color: Color(0xFFEE9700)),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Obx(
-            () =>  Column(
+            () => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 12),
@@ -57,8 +37,17 @@ class ProductDetailScreen extends StatelessWidget {
                     color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Center(
-                    child: Icon(Icons.image, size: 60, color: Colors.grey),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      formatImageUrl(controller.image.value),
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const Icon(
+                        Icons.image,
+                        size: 36,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -68,11 +57,17 @@ class ProductDetailScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${controller.productName}',
+                        Text(controller.productName.value,
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text("Vegetables",
-                            style: TextStyle(color: Colors.grey)),
+                        Text(controller.categoryName.value,
+                            style: AppTextStyle()
+                                .br14w400
+                                .copyWith(color: const Color(0xFF757575))),
+                        Text('Available stock ${controller.totalStock.value}',
+                            style: AppTextStyle()
+                                .br14w400
+                                .copyWith(color: const Color(0xFF757575))),
                       ],
                     ),
                     Row(
@@ -87,14 +82,16 @@ class ProductDetailScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "₹${controller.price.value}",
+                      "${controller.price.value}",
                       style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.orange),
                     ),
                     const SizedBox(width: 4),
-                    Text("/1 KG", style: const TextStyle(color: Colors.grey)),
+                    Text(
+                        "/ ${controller.quantity.value} ${controller.unit.value}",
+                        style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
                 const SizedBox(height: 12),
@@ -105,7 +102,7 @@ class ProductDetailScreen extends StatelessWidget {
                       onPressed: () => controller.decreaseQuantity(),
                     ),
                     Text(
-                      '${controller.quantity.value} KG',
+                      '${controller.quantity.value} ${controller.unit.value}',
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -118,23 +115,31 @@ class ProductDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                const Text("Description",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text("Description",
+                    style: AppTextStyle()
+                        .br14w600
+                        .copyWith(color: const Color(0xFF5A5A5A))),
                 const SizedBox(height: 6),
-                const Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                  style: TextStyle(height: 1.4),
+                Text(
+                  controller.description.value,
+                  style: AppTextStyle()
+                      .br14w400
+                      .copyWith(color: const Color(0xFF5A5A5A)),
                 ),
                 const SizedBox(height: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     OutlinedButton.icon(
-                      onPressed: () => controller.onAddToCartTap(context),
+                      onPressed: () => controller.onAddToCartTap(context,
+                          productId: controller.id,
+                          quantity: controller.quantity.value),
                       icon: const Icon(Icons.shopping_cart_outlined,
                           color: Colors.orange),
-                      label: const Text("Add to Cart",
-                          style: TextStyle(color: Colors.orange)),
+                      label: Text("Add to Cart",
+                          style: AppTextStyle()
+                              .br16w400
+                              .copyWith(color: const Color(0xFFEE9700))),
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: Colors.orange),
                         shape: RoundedRectangleBorder(
@@ -145,52 +150,56 @@ class ProductDetailScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: controller.onBuyNowTap,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: const Color(0xFFEE9700),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
                       ),
-                      child: const Text("Buy Now"),
+                      child: Text(
+                        "Buy Now",
+                        style: AppTextStyle()
+                            .br16w400
+                            .copyWith(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 30),
-                const Text("Related Products",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                controller.isNeed.value
+                    ? Text("Related Products", style: AppTextStyle().br16w400)
+                    : SizedBox.shrink(),
                 const SizedBox(height: 12),
-                // GridView.builder(
-                //   itemCount: relatedProducts.length,
-                //   shrinkWrap: true,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   padding: const EdgeInsets.only(bottom: 24),
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     crossAxisSpacing: 16,
-                //     mainAxisSpacing: 16,
-                //     childAspectRatio: 3 / 3.5,
-                //   ),
-                //   itemBuilder: (context, index) {
-                //     final item = relatedProducts[index];
-                //     return GestureDetector(
-                //       onTap: () => controller.onProductTap(
-                //         context,
-                //         item["title"]!,
-                //         item["price"]!,
-                //         item["quantity"]!,
-                //       ),
-                //       child: ProductCard(
-                //         isListingPage: true,
-                //         productName: item["title"]!,
-                //         currentPrice: item["price"]!,
-                //         oldPrice: '',
-                //         quantityInfo: "/ ${item["quantity"]!}",
-                //         isFavorite: false,
-                //         enableActions: true,
-                //         onAddToCart: controller.onAddToCartFromCard,
-                //         onFavoriteToggle: controller.onFavoriteToggle,
-                //       ),
-                //     );
-                //   },
-                // ),
+                controller.isNeed.value
+                    ? GridView.builder(
+                        itemCount: controller.relatedProducts.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 3 / 3.5,
+                        ),
+                        itemBuilder: (context, index) {
+                          final item = controller.relatedProducts[index];
+                          return GestureDetector(
+                            onTap: () => null,
+                            child: ProductCard(
+                              isListingPage: true,
+                              productName: item.productName,
+                              currentPrice: item.currentPrice,
+                              oldPrice: '',
+                              quantityInfo: "/ ${item.quantityInfo}",
+                              isFavorite: false,
+                              enableActions: true,
+                              onAddToCart: controller.onAddToCartFromCard,
+                              onFavoriteToggle: controller.onFavoriteToggle,
+                            ),
+                          );
+                        },
+                      )
+                    : SizedBox.shrink()
               ],
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:ecommerce/module/unauthorised/authentication/sign_up/signup.dart
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginController controller;
@@ -43,47 +44,69 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Password Field
-                LabeledTextField(
-                  label: "Password",
-                  hintText: "********",
-                  obscureText: true,
-                  controller: controller.loginPasswordController,
-                  validator: (p0) {
-                    if ((p0 == null) || (p0.isEmpty)) {
-                      return 'please fill this field';
-                    } else {
-                      return null;
-                    }
-                  },
+                Obx(
+                  () => LabeledTextField(
+                    label: "Password",
+                    hintText: "********",
+                    obscureText: controller.showSignInPass.value ? false : true,
+                    controller: controller.loginPasswordController,
+                    validator: (p0) {
+                      if ((p0 == null) || (p0.isEmpty)) {
+                        return 'please fill this field';
+                      } else {
+                        return null;
+                      }
+                    },
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.showSignINPass();
+                        },
+                        icon: controller.showSignInPass.value
+                            ? const Icon(Icons.visibility_off)
+                            : const Icon(Icons.visibility)),
+                  ),
                 ),
                 const SizedBox(height: 30),
 
                 // Sign In Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF59E0B),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                Obx(
+                  () => SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFF59E0B),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      controller.onSignInPressed(context,
-                          email: controller.loginEmailController.text,
-                          password: controller.loginPasswordController.text);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Sign In",
-                            style: AppTextStyle()
-                                .br16w400
-                                .copyWith(color: Colors.white)),
-                        const Gap(10),
-                        const Icon(Icons.arrow_forward, size: 18,color: Colors.white,),
-                      ],
+                      onPressed: () {
+                        controller.onSignInPressed(context,
+                            email: controller.loginEmailController.text,
+                            password: controller.loginPasswordController.text);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Sign In",
+                              style: AppTextStyle()
+                                  .br16w400
+                                  .copyWith(color: Colors.white)),
+                          const Gap(10),
+                          controller.isSignInLoading.value
+                              ? const SizedBox(
+                                  height: 14,
+                                  width: 14,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ))
+                              : const Icon(
+                                  Icons.arrow_forward,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,3 +1,7 @@
+import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
+import 'package:ecommerce/module/authorised/details_page/screen.dart';
+import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
@@ -18,10 +22,15 @@ class ProductListScreenController extends GetxController {
     'Stationery',
   ];
 
+  RxList<CartItemCustomModel> productsPerTab = <CartItemCustomModel>[].obs;
 
-  late TabController tabController;
-
-  RxList<CartItem> productsPerTab = <CartItem>[].obs;
+  void onCartTap(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CartView(),
+        ));
+  }
 
   void onTap({required int index, required int id}) async {
     isProductLoading.value = true;
@@ -30,12 +39,14 @@ class ProductListScreenController extends GetxController {
     if ((responnse != null) && (responnse.isNotEmpty)) {
       productsPerTab.value = responnse
           .map(
-            (e) => CartItem(
+            (e) => CartItemCustomModel(
+              productId: e.id!,
               isFavorite: false,
               name: e.name ?? '',
               price: e.price ?? '',
               quantity: e.quantity ?? 0,
               id: e.id!,
+              // imageUrl: e.images as List<String> 
             ),
           )
           .toList();
@@ -43,6 +54,18 @@ class ProductListScreenController extends GetxController {
       productsPerTab.value = [];
     }
     isProductLoading.value = false;
+  }
+
+  void onProductContainerTap({required int index, required int id}) {
+    devPrintError('pushed');
+    Navigator.push(
+      knNavGlobalKey.currentContext!,
+      MaterialPageRoute(
+        builder: (_) => DetailsScreenView(
+          id: id,
+        ),
+      ),
+    );
   }
 
   @override
