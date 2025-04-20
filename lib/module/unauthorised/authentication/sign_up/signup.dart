@@ -1,9 +1,12 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/unauthorised/authentication/controller.dart';
 import 'package:ecommerce/module/unauthorised/authentication/login/login.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatelessWidget {
   final LoginController controller;
@@ -33,14 +36,7 @@ class SignUpScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Sign-UP",
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
+                        Text("Sign-UP", style: AppTextStyle().br32w400),
                         const SizedBox(height: 28),
 
                         LabeledTextField(
@@ -64,7 +60,10 @@ class SignUpScreen extends StatelessWidget {
                             devPrintError('p0==${p0}');
                             if ((p0 == null) || (p0!.isEmpty)) {
                               return 'please fill this field';
-                            } else {
+                            } else if(!(p0.contains('@gmail.com'))){
+                              return 'please include @gmail.com';
+                            }
+                            else {
                               return null;
                             }
                           },
@@ -110,7 +109,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         LabeledTextField(
                           label: "Pin-code",
-                          hintText: "Pin_code",
+                          hintText: "Pin-code",
                           controller: controller.signUpPinCodeController,
                           validator: (p0) {
                             devPrintError('p0==${p0}');
@@ -121,50 +120,81 @@ class SignUpScreen extends StatelessWidget {
                             }
                           },
                         ),
-                        LabeledTextField(
-                          label: "Password",
-                          hintText: "********",
-                          obscureText: true,
-                          controller: controller.signUpPasswordController,
-                          validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
-                              return 'please fill this field';
-                            } else {
-                              return null;
-                            }
-                          },
+                        Obx(
+                          () =>  LabeledTextField(
+                            label: "Password",
+                            hintText: "********",
+                            obscureText:
+                                controller.showSignUpPass.value ? false : true,
+                            controller: controller.signUpPasswordController,
+                            validator: (p0) {
+                              devPrintError('p0==${p0}');
+                              if ((p0 == null) && (p0!.isEmpty)) {
+                                return 'please fill this field';
+                              } else if ((p0.length > 8)) {
+                                return 'Minimum 8 characters required';
+                              } else {
+                                return null;
+                              }
+                            },
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  controller.showSignUPPass();
+                                },
+                                icon: controller.showSignUpPass.value
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility)),
+                          ),
                         ),
                         const SizedBox(height: 28),
 
                         // Sign Up Button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFF59E0B),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                        Obx(
+                          () => SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFF59E0B),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
-                            ),
-                            onPressed: () {
-                              controller.onSignUp(context,
-                                  email: controller.signUpEmailController.text,
-                                  name: controller.signUpNameController.text,
-                                  address:
-                                      controller.signUpAddressController.text,
-                                  password:
-                                      controller.signUpPasswordController.text,
-                                  phone: controller.signUpPhoneController.text);
-                            },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Sign Up", style: TextStyle(fontSize: 16)),
-                                SizedBox(width: 8),
-                                Icon(Icons.arrow_forward, size: 18),
-                              ],
+                              onPressed: () {
+                                controller.onSignUp(context,
+                                    email:
+                                        controller.signUpEmailController.text,
+                                    name: controller.signUpNameController.text,
+                                    address:
+                                        controller.signUpAddressController.text,
+                                    password: controller
+                                        .signUpPasswordController.text,
+                                    phone:
+                                        controller.signUpPhoneController.text);
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Sign Up",
+                                      style: AppTextStyle()
+                                          .br16w400
+                                          .copyWith(color: Colors.white)),
+                                  const Gap(10),
+                                  controller.isSignUpLoading.value
+                                      ? const SizedBox(
+                                          height: 14,
+                                          width: 14,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : const Icon(
+                                          Icons.arrow_forward,
+                                          size: 18,
+                                          color: Colors.white,
+                                        ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -175,24 +205,21 @@ class SignUpScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (_) => const LoginView()),
+                                MaterialPageRoute(
+                                    builder: (_) => const LoginView()),
                               );
                             },
                             child: RichText(
                               textAlign: TextAlign.center,
-                              text: const TextSpan(
+                              text: TextSpan(
                                 text: "Already Have an Account?\n",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600),
+                                style:
+                                    AppTextStyle().br16w600.copyWith(height: 3),
                                 children: [
                                   TextSpan(
-                                    text: "Sign In",
-                                    style: TextStyle(
-                                      color: Color(0xFFF59E0B),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                      text: "Sign In",
+                                      style: AppTextStyle().br16w600.copyWith(
+                                          color: const Color(0xFFEE9700))),
                                 ],
                               ),
                             ),

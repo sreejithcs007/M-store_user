@@ -1,6 +1,6 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/profile_module/wishlist/controller.dart';
-import 'package:ecommerce/module/authorised/profile_module/wishlist/responsive/widgets/viewed/viewed_wishlist.dart';
 import 'package:ecommerce/module/authorised/profile_module/wishlist/responsive/widgets/wishlist_view/wishlist_view.dart';
 import 'package:ecommerce/widget/custom_tab_bar_view/view.dart';
 import 'package:flutter/material.dart';
@@ -24,24 +24,27 @@ class WishlistMobileScreen extends StatelessWidget {
             icon: SvgPicture.asset(
               Assets.images.svg.arrowLeft,
             )),
-        title: const Text(
+        title: Text(
           'My products',
-          style: TextStyle(color: Colors.black),
+          style: AppTextStyle().br24w600,
         ),
       ),
       body: CustomTabView(
-        tabCount: 2,
-        tabs: const [
-          Text('Wish list'),
-          Text('Viewed'),
+        tabCount: 1,
+        tabs: [
+          Text(
+            'Wish list',
+            style: AppTextStyle().br16w600,
+          ),
+          // Text('Viewed'),
         ],
         tabViews: [
           WishlistViewScreen(
             controller: controller,
           ),
-          ViewedWishListScreen(
-            controller: controller,
-          )
+          // ViewedWishListScreen(
+          //   controller: controller,
+          // )
         ],
       ),
     );

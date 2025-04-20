@@ -16,6 +16,7 @@ class CustomTabView extends StatelessWidget {
       child: Column(
         children: [
           TabBar(
+
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
             indicatorColor: Color(0xFFEE9700),

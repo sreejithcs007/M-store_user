@@ -1,9 +1,15 @@
+import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/db/hive_box_helper.dart';
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/profile_module/my_orders/screens.dart';
 import 'package:ecommerce/module/authorised/profile_module/profile/view.dart';
 import 'package:ecommerce/module/authorised/profile_main_screen/controller.dart';
 import 'package:ecommerce/module/authorised/profile_module/wishlist/screens.dart';
+import 'package:ecommerce/module/authorised/view_cart/screen.dart';
+import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/widget/custom_cart_view/custom_cart_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class ProfileSectionNavMobile extends StatelessWidget {
@@ -22,14 +28,21 @@ class ProfileSectionNavMobile extends StatelessWidget {
               height: 168,
               width: 250,
               color: Colors.amber,
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Nimisha',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text('Nimisha', style: AppTextStyle().br16w600),
                   SizedBox(height: 8),
-                  Text('Super Coin: 25', style: TextStyle(fontSize: 16)),
+                  RichText(
+                      text: TextSpan(children: [
+                    TextSpan(
+                        text: 'Super Coin ', style: AppTextStyle().br14w400),
+                    TextSpan(
+                        text: '25 ',
+                        style: AppTextStyle()
+                            .br14w400
+                            .copyWith(color: Color(0xFFEE9700))),
+                  ]))
                 ],
               ),
             ),
@@ -40,7 +53,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
               children: [
                 _buildMenuItem(
                   context,
-                  icon: Icons.person_outline,
+                  leadingWidget: SvgPicture.asset(Assets.images.svg.user),
                   label: 'Profile',
                   onTap: () {
                     Navigator.push(
@@ -52,7 +65,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                 ),
                 _buildMenuItem(
                   context,
-                  icon: Icons.favorite_border,
+                  leadingWidget: SvgPicture.asset(Assets.images.svg.favorite),
                   label: 'Favorites',
                   onTap: () {
                     Navigator.push(
@@ -64,38 +77,43 @@ class ProfileSectionNavMobile extends StatelessWidget {
                 ),
                 _buildMenuItem(
                   context,
-                  icon: Icons.shopping_cart_outlined,
+                  leadingWidget: SvgPicture.asset(Assets.images.svg.cart),
                   label: 'Cart',
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CustomViewCartScreen(
-                            detailsPageOnTap: () =>
-                                controller.onToDetailsPage(context),
-                          ),
-                        ));
+                            builder: (context) => const CartView()));
                   },
                 ),
                 _buildMenuItem(
                   context,
-                  icon: Icons.inventory_2_outlined,
+                  leadingWidget:
+                      SvgPicture.asset(Assets.images.svg.shoppingBag),
                   label: 'Orders',
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyOrdersScreen(),
+                          builder: (context) => const MyOrdersScreen(),
                         ));
                   },
                 ),
                 _buildMenuItem(
                   context,
-                  icon: Icons.logout,
+                  leadingWidget: SvgPicture.asset(Assets.images.svg.logOut),
                   label: 'Logout',
                   onTap: () {
                     controller.showCustomDialog(
                       context: context,
+                      onPressed: () async {
+                        await HiveHelper.getUserDetailsHiveBox().clear();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginView(),
+                            ));
+                      },
                       title: 'Confirmation Dialogue',
                       content: 'Are you Sure You want to logout',
                     );
@@ -111,7 +129,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
 
   Widget _buildMenuItem(
     BuildContext context, {
-    required IconData icon,
+    required Widget leadingWidget,
     required String label,
     required VoidCallback onTap,
   }) {
@@ -123,8 +141,11 @@ class ProfileSectionNavMobile extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        leading: Icon(icon),
-        title: Text(label),
+        leading: leadingWidget,
+        title: Text(
+          label,
+          style: AppTextStyle().br14w400,
+        ),
         onTap: onTap,
       ),
     );

@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/controller.dart';
 import 'package:ecommerce/widget/cutom_appbar/view.dart';
@@ -24,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomAppBar(
-              onCartTap: controller.onCartTap,
+              onCartTap: () => controller.onCartTap(context),
               onClearSearch: controller.onClearSearch,
             ),
             Padding(
@@ -38,42 +42,53 @@ class DashboardScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Categories",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text("Categories", style: AppTextStyle().br16w600),
                   GestureDetector(
                     onTap: () => controller.onViewAllTap(context),
-                    child: const Text("View All",
-                        style: TextStyle(color: Colors.orange)),
+                    child: Text("View All",
+                        style: AppTextStyle()
+                            .br16w400
+                            .copyWith(color: const Color(0xFFEE9700))),
                   ),
                 ],
               ),
             ),
-            Gap(20),
+            const Gap(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: controller.categories.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 3 / 2.5,
+              child: Obx(
+                () => GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: min(4, controller.categories.value.length),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 3 / 2.5,
+                  ),
+                  itemBuilder: (context, index) {
+                    return CategoryGridItem(
+                      imageUrl: formatImageUrl(
+                              controller.categories.value[index].imageUrl) ??
+                          '',
+                      isFavourite: false,
+                      title:
+                          controller.categories.value[index].categoryName ?? '',
+                      onTap: () => controller.onCategoryContainerTap(
+                          index: index,
+                          id: controller.categories.value[index].id!),
+                      // onContainerTap: () => controller.onCategoryContainerTap(index: index,id: controller.categories.value[index].id!),
+                      // title: controller.categories.value[index].categoryName);
+                    );
+                  },
                 ),
-                itemBuilder: (context, index) {
-                  return CategoryGridItem(
-                      onContainerTap: () => null,
-                      title: controller.categories[index]["title"]!);
-                },
               ),
             ),
             const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text("Today's Offer",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text("Today's Offer", style: AppTextStyle().br16w600),
             ),
             const SizedBox(height: 12),
             Obx(
@@ -84,7 +99,8 @@ class DashboardScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: GestureDetector(
-                      onTap: () => controller.todaysOfferOnTap(context),
+                      onTap: () => controller.todaysOfferOnTap(context,
+                          id: controller.todaysOfferList.value[index].id),
                       child: ProductCard(
                         productName: "Carrot",
                         currentPrice: "55.00",

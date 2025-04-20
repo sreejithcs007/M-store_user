@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:flutter/material.dart';
 
 class LabeledTextField extends StatelessWidget {
@@ -10,6 +11,7 @@ class LabeledTextField extends StatelessWidget {
   final Color? borderColor;
   final Color? fillColor;
   final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
   const LabeledTextField(
       {super.key,
@@ -21,7 +23,7 @@ class LabeledTextField extends StatelessWidget {
       this.isBorderNeed = false,
       this.borderColor,
       this.fillColor,
-      this.validator
+      this.validator, this.suffixIcon
       });
 
   @override
@@ -33,10 +35,7 @@ class LabeledTextField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.black,
-            ),
+            style: AppTextStyle().br16w400
           ),
           const SizedBox(height: 8),
           TextFormField(
@@ -45,6 +44,7 @@ class LabeledTextField extends StatelessWidget {
             keyboardType: keyboardType,
             validator: validator,
             decoration: InputDecoration(
+              suffixIcon: suffixIcon,
               hintText: hintText,
               filled: true,
               fillColor: fillColor ?? const Color(0xFFF5F5F5),

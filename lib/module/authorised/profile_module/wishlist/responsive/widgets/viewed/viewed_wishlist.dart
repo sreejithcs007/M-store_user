@@ -17,26 +17,26 @@ class ViewedWishListScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
             child: ProductCard(
                 productDetailsPageOnTap: () =>
-                    controller.onToDetailsPage(context),
-                productName: controller.wishListItems[index].itemName,
+                    controller.onToDetailsPage(context,id: 1),
+                productName: controller.viewdWishListItems[index].itemName,
                 currentPrice:
-                    controller.wishListItems[index].itemCost.toString(),
+                    controller.viewdWishListItems[index].itemCost.toString(),
                 oldPrice:
-                    controller.wishListItems[index].previousCost.toString(),
-                quantityInfo: "${controller.wishListItems[index].qty}/ KG",
-                isFavorite: controller.wishListItems[index].wishList,
+                    controller.viewdWishListItems[index].previousCost.toString(),
+                quantityInfo: "${controller.viewdWishListItems[index].qty}/ KG",
+                isFavorite: controller.viewdWishListItems[index].wishList,
                 enableActions: true,
                 onAddToCart: () => print("Add to cart"),
                 onFavoriteToggle: () {
-                  controller.wishListItems[index].wishList =
-                      !controller.wishListItems[index].wishList;
+                  controller.viewdWishListItems[index].wishList =
+                      !controller.viewdWishListItems[index].wishList;
 
                   print(
                       "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                   print(
                       "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                   print(
-                      'wishlist$index =======${controller.wishListItems[index].wishList}');
+                      'wishlist$index =======${controller.viewdWishListItems[index].wishList}');
                   print(
                       "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 },

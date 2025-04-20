@@ -1,9 +1,12 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/unauthorised/authentication/controller.dart';
 import 'package:ecommerce/module/unauthorised/authentication/forgot_pwrd/forgot_pass.dart';
 import 'package:ecommerce/module/unauthorised/authentication/sign_up/signup.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   final LoginController controller;
@@ -22,14 +25,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Sign-in",
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
+                Text("Sign-in", style: AppTextStyle().br32w400),
                 const SizedBox(height: 28),
 
                 // Email Field
@@ -38,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                   hintText: "sampleemail@email.com",
                   controller: controller.loginEmailController,
                   validator: (p0) {
-                    if ((p0 == null) || (p0!.isEmpty)) {
+                    if ((p0 == null) || (p0.isEmpty)) {
                       return 'please fill this field';
                     } else {
                       return null;
@@ -48,45 +44,69 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Password Field
-                LabeledTextField(
-                  label: "Password",
-                  hintText: "********",
-                  obscureText: true,
-                  controller: controller.loginPasswordController,
-                  validator: (p0) {
-                    devPrintError('p0==${p0}');
-                    if ((p0 == null) || (p0!.isEmpty)) {
-                      return 'please fill this field';
-                    } else {
-                      return null;
-                    }
-                  },
+                Obx(
+                  () => LabeledTextField(
+                    label: "Password",
+                    hintText: "********",
+                    obscureText: controller.showSignInPass.value ? false : true,
+                    controller: controller.loginPasswordController,
+                    validator: (p0) {
+                      if ((p0 == null) || (p0.isEmpty)) {
+                        return 'please fill this field';
+                      } else {
+                        return null;
+                      }
+                    },
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.showSignINPass();
+                        },
+                        icon: controller.showSignInPass.value
+                            ? const Icon(Icons.visibility_off)
+                            : const Icon(Icons.visibility)),
+                  ),
                 ),
                 const SizedBox(height: 30),
 
                 // Sign In Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF59E0B),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                Obx(
+                  () => SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFF59E0B),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      controller.onSignInPressed(context,
-                          email: controller.loginEmailController.text,
-                          password: controller.loginPasswordController.text);
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Sign In", style: TextStyle(fontSize: 16)),
-                        SizedBox(width: 8),
-                        Icon(Icons.arrow_forward, size: 18),
-                      ],
+                      onPressed: () {
+                        controller.onSignInPressed(context,
+                            email: controller.loginEmailController.text,
+                            password: controller.loginPasswordController.text);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Sign In",
+                              style: AppTextStyle()
+                                  .br16w400
+                                  .copyWith(color: Colors.white)),
+                          const Gap(10),
+                          controller.isSignInLoading.value
+                              ? const SizedBox(
+                                  height: 14,
+                                  width: 14,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ))
+                              : const Icon(
+                                  Icons.arrow_forward,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -102,9 +122,11 @@ class LoginScreen extends StatelessWidget {
                             builder: (context) => ForgotPasswordScreen()),
                       );
                     },
-                    child: const Text(
+                    child: Text(
                       "Forgot password",
-                      style: TextStyle(color: Color(0xFFF59E0B)),
+                      style: AppTextStyle()
+                          .br16w400
+                          .copyWith(color: const Color(0xFFEE9700)),
                     ),
                   ),
                 ),
@@ -116,22 +138,23 @@ class LoginScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SignUpScreen(controller: controller,)),
+                        MaterialPageRoute(
+                            builder: (context) => SignUpScreen(
+                                  controller: controller,
+                                )),
                       );
                     },
                     child: RichText(
                       textAlign: TextAlign.center,
-                      text: const TextSpan(
+                      text: TextSpan(
                         text: "Dont Have an account?\n",
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w600),
+                        style: AppTextStyle().br16w600.copyWith(height: 3),
                         children: [
                           TextSpan(
                             text: "Sign Up",
-                            style: TextStyle(
-                              color: Color(0xFFF59E0B),
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: AppTextStyle()
+                                .br16w600
+                                .copyWith(color: const Color(0xFFEE9700)),
                           ),
                         ],
                       ),

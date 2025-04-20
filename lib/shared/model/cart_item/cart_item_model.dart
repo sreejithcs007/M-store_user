@@ -1,13 +1,20 @@
-class CartItem {
+class CartItemCustomModel {
+  final int id;
+  final int productId;
   final String name;
   final String price;
-  final String quantity;
+  int? quantity;
   final bool isFavorite;
+  final String unit;
+  final List<String>? imageUrl;
 
-  CartItem({
-    required this.name,
-    required this.price,
-    required this.quantity,
-    required this.isFavorite,
-  });
+  CartItemCustomModel(
+      {required this.id,
+      required this.productId,
+      required this.name,
+      required this.price,
+      required this.quantity,
+      required this.isFavorite,
+      this.imageUrl,
+      this.unit = 'KG'});
 }

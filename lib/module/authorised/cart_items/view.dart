@@ -7,17 +7,42 @@ class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
   // Sample static cart list
-  final List<CartItem> cartItems = [
-    CartItem(
-        name: "Tomato", price: "100.00", quantity: "2 KG", isFavorite: true),
-    CartItem(
-        name: "Carrot", price: "130.00", quantity: "2 KG", isFavorite: true),
-    CartItem(
-        name: "Onion", price: "40.00", quantity: "1 KG", isFavorite: false),
-    CartItem(
-        name: "Broccoli", price: "120.00", quantity: "2 KG", isFavorite: false),
-    CartItem(
-        name: "Potato", price: "33.00", quantity: "1 KG", isFavorite: false),
+  final List<CartItemCustomModel> cartItems = [
+    CartItemCustomModel(
+        productId: 1,
+        name: "Tomato",
+        price: "100.00",
+        quantity: 2,
+        isFavorite: true,
+        id: 1),
+    CartItemCustomModel(
+        productId: 1,
+        name: "Carrot",
+        price: "130.00",
+        quantity: 2,
+        isFavorite: true,
+        id: 1),
+    CartItemCustomModel(
+        productId: 1,
+        name: "Onion",
+        price: "40.00",
+        quantity: 1,
+        isFavorite: false,
+        id: 1),
+    CartItemCustomModel(
+        productId: 1,
+        name: "Broccoli",
+        price: "120.00",
+        quantity: 2,
+        isFavorite: false,
+        id: 1),
+    CartItemCustomModel(
+        productId: 1,
+        name: "Potato",
+        price: "33.00",
+        quantity: 1,
+        isFavorite: false,
+        id: 1),
   ];
 
   @override
@@ -60,7 +85,7 @@ class CartScreen extends StatelessWidget {
                 return ProductListItem(
                   productName: item.name,
                   price: item.price,
-                  quantity: item.quantity,
+                  quantity: item.quantity ?? 1,
                   isFavorite: item.isFavorite,
                   isCart: true,
                   onRemove: () {}, // hook up logic later

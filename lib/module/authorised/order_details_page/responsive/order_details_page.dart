@@ -1,10 +1,15 @@
+import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
+import 'package:ecommerce/module/authorised/order_details_page/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class OrderDetailsPageScreen extends StatelessWidget {
-  const OrderDetailsPageScreen({super.key});
+  const OrderDetailsPageScreen({super.key, required this.controller});
+  final OrderDetailsPageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,16 @@ class OrderDetailsPageScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildFirstContainer(),
+            Obx(
+              () => ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: controller.orderedList.value.length,
+                itemBuilder: (context, index) {
+                  return _buildFirstContainer(index: index);
+                },
+              ),
+            ),
             const SizedBox(height: 16),
             _buildSecondDetails(),
           ],
@@ -30,7 +44,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFirstContainer() {
+  Widget _buildFirstContainer({required int index}) {
     return Container(
       height: 200,
       margin: const EdgeInsets.symmetric(vertical: 6),
@@ -48,9 +62,18 @@ class OrderDetailsPageScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Order Id - 11111'), Text('Ongoing')],
+            children: [
+              Text(
+                'Order Id - ${controller.orderedList[index].itemOrderId}',
+                style: AppTextStyle().br14w600,
+              ),
+              Text(
+                controller.orderedList[index].deliveryStatus,
+                style: AppTextStyle().br16w600,
+              )
+            ],
           ),
           const SizedBox(height: 12),
           Row(
@@ -59,12 +82,23 @@ class OrderDetailsPageScreen extends StatelessWidget {
               // Image on the left
               Container(
                 width: 80,
-                height: 80,
+                height: 90,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.image, size: 40, color: Colors.grey),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    formatImageUrl(
+                        controller.orderedList[index].imageUrl.first),
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.image,
+                      size: 36,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(width: 16),
 
@@ -72,7 +106,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [_buildDetails()],
+                  children: [_buildDetails(index: index)],
                 ),
               ),
             ],
@@ -82,16 +116,16 @@ class OrderDetailsPageScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetails() {
-    return const Column(
+  Widget _buildDetails({required int index}) {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Expanded(
               child: Text(
-                "productName",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                controller.orderedList[index].itemName,
+                style: AppTextStyle().br16w600,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -100,25 +134,26 @@ class OrderDetailsPageScreen extends StatelessWidget {
         SizedBox(height: 6),
         Row(
           children: [
-            Text(
-              "₹123",
-              style: TextStyle(
-                color: Colors.orange,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
+            Text('${controller.orderedList[index].itemRate}',
+                style:
+                    AppTextStyle().br14w600.copyWith(color: Color(0xFFEE9700))),
             Gap(6),
             Text(
-              "1 KG",
-              style: TextStyle(color: Colors.grey),
-            ),
+              '/ ${controller.orderedList[index].itemQty} ${controller.orderedList[index].unit}',
+              style: AppTextStyle().br14w600.copyWith(color: Color(0xFFB3B3B3)),
+            )
           ],
         ),
         Gap(6),
-        Text('Prepaid', style: TextStyle(color: Colors.grey)),
+        Text(
+          controller.orderedList[index].paymentType,
+          style: AppTextStyle().br16w400.copyWith(color: Color(0xFF14AE5C)),
+        ),
         Gap(6),
-        Text('12/1/2025', style: TextStyle(color: Colors.grey)),
+        Text(
+          controller.orderedList[index].createdAt,
+          style: AppTextStyle().br14w400,
+        ),
       ],
     );
   }
