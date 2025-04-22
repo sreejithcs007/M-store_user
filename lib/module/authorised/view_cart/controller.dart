@@ -30,7 +30,7 @@ class CartViewController extends GetxController {
               price: e.product?.price ?? '',
               quantity: e.quantity ?? 1,
               unit: e.product?.quantityUnit ?? 'KG',
-              imageUrl: e.product?.images ?? [],
+              imageUrl: e.product?.images,
               productId: e.product!.id!,
             ),
           )

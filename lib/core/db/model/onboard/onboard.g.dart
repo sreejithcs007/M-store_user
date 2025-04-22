@@ -18,7 +18,7 @@ class OnBoardScreenHiveModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return OnBoardScreenHiveModel(
-      isSeen: fields[0] as dynamic,
+      isSeen: fields[0] as bool?,
     );
   }
 

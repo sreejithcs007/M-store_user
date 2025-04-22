@@ -16,32 +16,37 @@ class _SimpleCarouselState extends State<SimpleCarousel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CarouselSlider(
-          items: widget.bannerImages.map((widget) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Container(
-                padding: EdgeInsets.all(20),
+        Container(
+          // padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+          color: Colors.white,
+            borderRadius: BorderRadius.circular(15)),
+          child: CarouselSlider(
+            items: widget.bannerImages.map((widget) {
+              return Container(
+                padding: EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 width: double.infinity,
-                child: widget,
-              ),
-            );
-          }).toList(),
-          options: CarouselOptions(
-            height: 150,
-            autoPlay: true,
-            enlargeCenterPage: true,
-            viewportFraction: 1,
-            autoPlayInterval: const Duration(seconds: 3),
-            onPageChanged: (index, reason) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: widget),
+              );
+            }).toList(),
+            options: CarouselOptions(
+              height: 150,
+              autoPlay: true,
+              enlargeCenterPage: true,
+              viewportFraction: 1,
+              autoPlayInterval: const Duration(seconds: 3),
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
           ),
         ),
         const SizedBox(height: 12),

@@ -1,22 +1,6 @@
 
 
-class ProductDetailsModel {
-    Product? product;
-
-    ProductDetailsModel({
-        this.product,
-    });
-
-    factory ProductDetailsModel.fromJson(Map<String, dynamic> json) => ProductDetailsModel(
-        product: json["product"] == null ? null : Product.fromJson(json["product"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "product": product?.toJson(),
-    };
-}
-
-class Product {
+class RelatedProductsModel {
     int? id;
     String? name;
     dynamic itemType;
@@ -28,8 +12,8 @@ class Product {
     String? discount;
     int? stock;
     List<String>? images;
-    dynamic colors;
-    dynamic sizes;
+    String? colors;
+    String? sizes;
     String? averageRating;
     int? totalReviews;
     DateTime? createdAt;
@@ -41,9 +25,9 @@ class Product {
     int? quantity;
     String? quantityUnit;
     String? productType;
-    Category? category;
+    bool? isFavorited;
 
-    Product({
+    RelatedProductsModel({
         this.id,
         this.name,
         this.itemType,
@@ -68,10 +52,10 @@ class Product {
         this.quantity,
         this.quantityUnit,
         this.productType,
-        this.category,
+        this.isFavorited,
     });
 
-    factory Product.fromJson(Map<String, dynamic> json) => Product(
+    factory RelatedProductsModel.fromJson(Map<String, dynamic> json) => RelatedProductsModel(
         id: json["id"],
         name: json["name"],
         itemType: json["item_type"],
@@ -96,7 +80,7 @@ class Product {
         quantity: json["quantity"],
         quantityUnit: json["quantity_unit"],
         productType: json["product_type"],
-        category: json["category"] == null ? null : Category.fromJson(json["category"]),
+        isFavorited: json["is_favorited"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -124,46 +108,6 @@ class Product {
         "quantity": quantity,
         "quantity_unit": quantityUnit,
         "product_type": productType,
-        "category": category?.toJson(),
-    };
-}
-
-class Category {
-    int? id;
-    String? name;
-    String? description;
-    String? image;
-    dynamic parentId;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-
-    Category({
-        this.id,
-        this.name,
-        this.description,
-        this.image,
-        this.parentId,
-        this.createdAt,
-        this.updatedAt,
-    });
-
-    factory Category.fromJson(Map<String, dynamic> json) => Category(
-        id: json["id"],
-        name: json["name"],
-        description: json["description"],
-        image: json["image"],
-        parentId: json["parent_id"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "description": description,
-        "image": image,
-        "parent_id": parentId,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
+        "is_favorited": isFavorited,
     };
 }

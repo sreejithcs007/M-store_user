@@ -3,6 +3,7 @@ import 'package:ecommerce/module/authorised/profile_module/wishlist/controller.d
 import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class WishlistViewScreen extends StatelessWidget {
   const WishlistViewScreen({super.key, required this.controller});
@@ -11,39 +12,45 @@ class WishlistViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => ListView.builder(
-        itemCount: controller.wishListItems.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
-            child: ProductCard(
-                productDetailsPageOnTap: () => controller.onToDetailsPage(
-                    context,
-                    id: controller.wishListItems[index].productId),
-                productName: controller.wishListItems[index].name,
-                currentPrice: controller.wishListItems[index].price.toString(),
-                oldPrice: '0',
-                quantityInfo:
-                    "/ ${controller.wishListItems[index].quantity}  ${controller.wishListItems[index].unit}",
-                isFavorite: true,
-                enableActions: true,
-                onAddToCart: () => controller.onAddToCartTap(context,
-                    productId: controller.wishListItems[index].productId,
-                    quantity: controller.wishListItems[index].quantity ?? 1),
-                onFavoriteToggle: () {},
-                image: Image.network(
-                  formatImageUrl(
-                      controller.wishListItems[index].imageUrl?.first),
-                  errorBuilder: (context, error, stackTrace) => const Icon(
-                    Icons.image,
-                    size: 36,
-                    color: Colors.grey,
-                  ),
-                ),
-                oldPriceNeeded: false),
-          );
-        },
-      ),
+      () => controller.wishListItems.value.isEmpty
+          ? Center(child: Lottie.asset('assets/animation/Anime1.json'))
+          : ListView.builder(
+              itemCount: controller.wishListItems.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 15.0, right: 15, top: 15),
+                  child: ProductCard(
+                      productDetailsPageOnTap: () => controller.onToDetailsPage(
+                          context,
+                          id: controller.wishListItems[index].productId),
+                      productName: controller.wishListItems[index].name,
+                      currentPrice:
+                          controller.wishListItems[index].price.toString(),
+                      oldPrice: '0',
+                      quantityInfo:
+                          "/ ${controller.wishListItems[index].quantity}  ${controller.wishListItems[index].unit}",
+                      isFavorite: true,
+                      enableActions: true,
+                      onAddToCart: () => controller.onAddToCartTap(context,
+                          productId: controller.wishListItems[index].productId,
+                          quantity:
+                              controller.wishListItems[index].quantity ?? 1),
+                      onFavoriteToggle: () {},
+                      image: Image.network(
+                        formatImageUrl(
+                            controller.wishListItems[index].imageUrl?.first),
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                          Icons.image,
+                          size: 36,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      oldPriceNeeded: false),
+                );
+              },
+            ),
     );
   }
 }

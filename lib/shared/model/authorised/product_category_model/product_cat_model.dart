@@ -1,3 +1,5 @@
+
+
 class ProductCategoryModel {
     int? id;
     String? name;
@@ -9,9 +11,9 @@ class ProductCategoryModel {
     int? categoryId;
     String? discount;
     int? stock;
-    dynamic images;
-    dynamic colors;
-    List<String>? sizes;
+    List<String>? images;
+    String? colors;
+    String? sizes;
     String? averageRating;
     int? totalReviews;
     DateTime? createdAt;
@@ -21,7 +23,9 @@ class ProductCategoryModel {
     String? purchaseRate;
     String? gstAmount;
     int? quantity;
-    ProductType? productType;
+    String? quantityUnit;
+    String? productType;
+    bool? isFavorited;
 
     ProductCategoryModel({
         this.id,
@@ -46,7 +50,9 @@ class ProductCategoryModel {
         this.purchaseRate,
         this.gstAmount,
         this.quantity,
+        this.quantityUnit,
         this.productType,
+        this.isFavorited,
     });
 
     factory ProductCategoryModel.fromJson(Map<String, dynamic> json) => ProductCategoryModel(
@@ -60,9 +66,9 @@ class ProductCategoryModel {
         categoryId: json["category_id"],
         discount: json["discount"],
         stock: json["stock"],
-        images: json["images"],
+        images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
         colors: json["colors"],
-        sizes: json["sizes"] == null ? [] : List<String>.from(json["sizes"]!.map((x) => x)),
+        sizes: json["sizes"],
         averageRating: json["average_rating"],
         totalReviews: json["total_reviews"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -72,7 +78,9 @@ class ProductCategoryModel {
         purchaseRate: json["purchase_rate"],
         gstAmount: json["gst_amount"],
         quantity: json["quantity"],
-        productType: productTypeValues.map[json["product_type"]]!,
+        quantityUnit: json["quantity_unit"],
+        productType: json["product_type"],
+        isFavorited: json["is_favorited"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -86,9 +94,9 @@ class ProductCategoryModel {
         "category_id": categoryId,
         "discount": discount,
         "stock": stock,
-        "images": images,
+        "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
         "colors": colors,
-        "sizes": sizes == null ? [] : List<dynamic>.from(sizes!.map((x) => x)),
+        "sizes": sizes,
         "average_rating": averageRating,
         "total_reviews": totalReviews,
         "created_at": createdAt?.toIso8601String(),
@@ -98,28 +106,8 @@ class ProductCategoryModel {
         "purchase_rate": purchaseRate,
         "gst_amount": gstAmount,
         "quantity": quantity,
-        "product_type": productTypeValues.reverse[productType],
+        "quantity_unit": quantityUnit,
+        "product_type": productType,
+        "is_favorited": isFavorited,
     };
-}
-
-enum ProductType {
-    OTHER,
-    OWN
-}
-
-final productTypeValues = EnumValues({
-    "other": ProductType.OTHER,
-    "own": ProductType.OWN
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-            reverseMap = map.map((k, v) => MapEntry(v, k));
-            return reverseMap;
-    }
 }

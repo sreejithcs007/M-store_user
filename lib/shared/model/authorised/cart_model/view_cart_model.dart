@@ -1,12 +1,4 @@
-// To parse this JSON data, do
-//
-//     final cartModel = cartModelFromJson(jsonString);
 
-import 'dart:convert';
-
-CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
-
-String cartModelToJson(CartModel data) => json.encode(data.toJson());
 
 class CartModel {
     List<CartItem>? cartItems;
@@ -80,8 +72,8 @@ class Product {
     String? discount;
     int? stock;
     List<String>? images;
-    List<String>? colors;
-    List<String>? sizes;
+    dynamic colors;
+    dynamic sizes;
     String? averageRating;
     int? totalReviews;
     DateTime? createdAt;
@@ -133,8 +125,8 @@ class Product {
         discount: json["discount"],
         stock: json["stock"],
         images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
-        colors: json["colors"] == null ? [] : List<String>.from(json["colors"]!.map((x) => x)),
-        sizes: json["sizes"] == null ? [] : List<String>.from(json["sizes"]!.map((x) => x)),
+        colors: json["colors"],
+        sizes: json["sizes"],
         averageRating: json["average_rating"],
         totalReviews: json["total_reviews"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -160,8 +152,8 @@ class Product {
         "discount": discount,
         "stock": stock,
         "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
-        "colors": colors == null ? [] : List<dynamic>.from(colors!.map((x) => x)),
-        "sizes": sizes == null ? [] : List<dynamic>.from(sizes!.map((x) => x)),
+        "colors": colors,
+        "sizes": sizes,
         "average_rating": averageRating,
         "total_reviews": totalReviews,
         "created_at": createdAt?.toIso8601String(),

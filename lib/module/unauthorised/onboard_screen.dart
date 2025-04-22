@@ -81,10 +81,8 @@ class GroceryPromoScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)),
               ),
-              onPressed: () {
-                var box = HiveHelper.getOnboardDetailsHiveBox();
-                var Id = OnBoardScreenHiveModel(isSeen: true);
-                box.put(DbKeys.user1Key, Id);
+              onPressed: ()async {
+  await saveOnboardingSeen();
 
                 Navigator.push(
                     context,
@@ -109,4 +107,10 @@ class GroceryPromoScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> saveOnboardingSeen() async {
+  var box = HiveHelper.getOnboardDetailsHiveBox();
+var id = OnBoardScreenHiveModel(isSeen: true);
+await box.put(DbKeys.user1Key, id);
+}
 }
