@@ -4,7 +4,7 @@ part 'onboard.g.dart';
 @HiveType(typeId: 1)
 class OnBoardScreenHiveModel {
   @HiveField(0)
-  late bool? isSeen;
+  bool? isSeen;
 
-  OnBoardScreenHiveModel({isSeen});
+  OnBoardScreenHiveModel({this.isSeen = false});
 }

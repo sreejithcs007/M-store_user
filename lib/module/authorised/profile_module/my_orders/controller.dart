@@ -103,10 +103,13 @@ class MyOrderController extends GetxController {
     //     itemOrderId: ''),
   ].obs;
 
-  void onToDetailsPage(BuildContext context,{required int id}) {
+  void onToDetailsPage(BuildContext context, {required int id}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => OrderDetailsPage(id: id,)),
+      MaterialPageRoute(
+          builder: (context) => OrderDetailsPage(
+                id: id,
+              )),
     );
   }
 
@@ -121,6 +124,8 @@ class MyOrderController extends GetxController {
 
     if ((response != null) && (response.isNotEmpty)) {
       orderedList.value = response
+          .where((e) =>
+              e.items != null && e.items!.every((item) => item.product != null))
           .map(
             (e) => MyOrderModel(
               createdAt: formatDateFromEpoch(
@@ -128,12 +133,9 @@ class MyOrderController extends GetxController {
                   '',
               deliveryStatus: e.deliveryStatus ?? '',
               paymentType: e.paymentMethod ?? '',
-              itemName: e.items
-                      ?.map(
-                        (element) => element.product?.name,
-                      )
-                      .join(',') ??
-                  '',
+              itemName:
+                  e.items?.map((element) => element.product?.name).join(',') ??
+                      '',
               itemOrderId: e.id.toString(),
               itemQty: e.items?.fold<double>(
                     0.0,
@@ -148,8 +150,7 @@ class MyOrderController extends GetxController {
                       .map((item) => item.product?.images?.isNotEmpty == true
                           ? item.product!.images!.first
                           : null)
-                      .whereType<
-                          String>() // filters out nulls and keeps only String
+                      .whereType<String>()
                       .toList()
                   : [],
             ),

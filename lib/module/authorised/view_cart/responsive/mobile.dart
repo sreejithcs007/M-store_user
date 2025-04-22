@@ -7,6 +7,7 @@ import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class CartViewMobile extends StatelessWidget {
   const CartViewMobile({
@@ -18,6 +19,7 @@ class CartViewMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF5F5F5),
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
@@ -27,33 +29,37 @@ class CartViewMobile extends StatelessWidget {
         title: Text('Items in your cart'),
       ),
       body: Obx(
-        () => ListView.builder(
-            itemCount: controller.cartItems.value.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
-                child: InkWell(
-                  onTap: () => controller.onProductContainerTap(
-                      id: controller.cartItems[index].productId, index: index),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
-                          offset: Offset(0, 2),
+        () => controller.cartItems.value.isEmpty
+            ? Center(child: Lottie.asset('assets/animation/Anime1.json'))
+            : ListView.builder(
+                itemCount: controller.cartItems.value.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(left: 15.0, right: 15, top: 15),
+                    child: InkWell(
+                      onTap: () => controller.onProductContainerTap(
+                          id: controller.cartItems[index].productId,
+                          index: index),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 6),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
-                      ],
+                        child: _buildRowLayout(index: index),
+                      ),
                     ),
-                    child: _buildRowLayout(index: index),
-                  ),
-                ),
-              );
-            }),
+                  );
+                }),
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
@@ -66,7 +72,7 @@ class CartViewMobile extends StatelessWidget {
                 children: [
                   Text("Subtotal (${controller.cartItems.length} items):",
                       style: AppTextStyle().br16w600),
-                  Text("${controller.subtotal.value}",
+                  Text("${controller.subtotal.value.toStringAsFixed(2)}",
                       style: AppTextStyle().br24w600),
                 ],
               ),

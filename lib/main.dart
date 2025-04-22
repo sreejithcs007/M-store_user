@@ -3,6 +3,7 @@ import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/db/hive_keys.dart';
 import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/core/db/model/user_details/user.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/responsive/mobile.dart';
@@ -31,6 +32,8 @@ class GroceryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    devPrintError(
+        'GetHiveHelper.getOnBoardDetailsHive()?.isSeen == ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
     return MaterialApp(
       // theme: ThemeData(
       //   textTheme: GoogleFonts.(), // Set Poppins as default
@@ -43,7 +46,7 @@ class GroceryApp extends StatelessWidget {
       //   // '/login': (_) =>  const ProductListScreen(),
       //   '/login': (_) => const LoginView(),
       // },
-      home: GetHiveHelper.getOnBoardDetailsHive()?.isSeen == false
+      home: GetHiveHelper.getOnBoardDetailsHive()?.isSeen == null
           ? const GroceryPromoScreen()
           : GetHiveHelper.getUserDetailsHive()?.accessToken == null
               ? const LoginView()

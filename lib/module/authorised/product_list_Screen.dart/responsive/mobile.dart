@@ -208,7 +208,7 @@ class ShoppingPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Obx(
-        () =>  GridView.builder(
+        () => GridView.builder(
           itemCount: items.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -219,97 +219,105 @@ class ShoppingPage extends StatelessWidget {
           ),
           itemBuilder: (_, index) {
             final item = items[index];
-        
-            return Container(
-              width: 120,
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 4,
-                    offset: Offset(0, 2),
-                  )
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Product Image
-                  Stack(children: [
-                    Container(
-                      color: Colors.amber,
-                      height: 100,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          formatImageUrl(item.imageUrl?.first),
-                          height: 80,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(
-                            Icons.image,
-                            size: 36,
-                            color: Colors.grey,
+
+            return GestureDetector(
+              onTap: () =>
+                  controller.onProductContainerTap(index: index, id: item.id),
+              child: Container(
+                width: 120,
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Product Image
+                    Stack(children: [
+                      Container(
+                        color: Colors.grey[350],
+                        height: 100,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            formatImageUrl(item.imageUrl?.first),
+                            height: 80,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(
+                              Icons.image,
+                              size: 36,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 6,
-                      right: 6,
-                      child: Icon(
-                        item.isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: item.isFavorite ? Colors.red : Colors.grey,
-                        size: 18,
-                      ),
-                    ),
-                  ]),
-                  const SizedBox(height: 8),
-                  // Product Name
-                  Text(
-                    item.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  // const SizedBox(height: 4),
-                  // Price Row
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '₹ ${item.price}',
-                        style: const TextStyle(
-                          color: Colors.orange,
-                          fontWeight: FontWeight.bold,
+                      Positioned(
+                        top: 6,
+                        right: 6,
+                        child: Icon(
+                          item.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: item.isFavorite ? Colors.red : Colors.grey,
+                          size: 18,
                         ),
                       ),
-                      Text(
-                        ' / ${item.quantity}',
-                        style: const TextStyle(color: Colors.grey),
+                    ]),
+                    const SizedBox(height: 8),
+                    // Product Name
+                    Text(
+                      item.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
-                      const Spacer(),
-                      IconButton(
-                        icon: const Icon(Icons.shopping_cart_outlined,
-                            color: Colors.grey),
-                        onPressed: () {
-                          // handle add to cart
-                        },
-                        iconSize: 20,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                    ],
-                  ),
-                ],
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    // const SizedBox(height: 4),
+                    // Price Row
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '₹ ${item.price}',
+                          style: const TextStyle(
+                            color: Colors.orange,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          ' / ${item.quantity}',
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          icon: const Icon(Icons.shopping_cart_outlined,
+                              color: Colors.grey),
+                          onPressed: () {
+                            // handle add to cart
+                          },
+                          iconSize: 20,
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
+          
+          
           },
         ),
       ),

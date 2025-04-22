@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/db/hive_box_helper.dart';
 import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/db/hive_keys.dart';
+import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/core/db/model/user_details/user.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
@@ -36,6 +37,7 @@ class LoginController extends GetxController {
   void showSignUPPass() {
     showSignUpPass.value = !showSignUpPass.value;
   }
+
   void showSignINPass() {
     showSignInPass.value = !showSignInPass.value;
   }
@@ -115,6 +117,26 @@ Future<void> setDataToLocal(LoginModel data) async {
       devPrintSuccess(
           'GetHiveHelper= ${GetHiveHelper.getUserDetailsHive()!.accessToken}');
     }
+  } catch (e) {
+    devPrintError('set data to local catch error == $e');
+  }
+}
+
+Future<void> setDataToLocalOboard(OnBoardScreenHiveModel data) async {
+  try {
+    // var res = data.data;
+    // var box = HiveHelper.getUserDetailsHiveBox();
+    // var Id = UserDetailsHive(
+    //     id: res?.userId,
+    //     userEmail: res!.email!,
+    //     userPhoneNo: res.phone!,
+    //     accessToken: data.token!);
+    var box = HiveHelper.getOnboardDetailsHiveBox();
+    var Id = OnBoardScreenHiveModel(isSeen: true);
+    box.put(DbKeys.user1Key, Id);
+
+    devPrintSuccess(
+        'GetHiveHelper= ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
   } catch (e) {
     devPrintError('set data to local catch error == $e');
   }

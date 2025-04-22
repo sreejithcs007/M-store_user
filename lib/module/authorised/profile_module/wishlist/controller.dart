@@ -98,22 +98,25 @@ class WishlistController extends GetxController {
     var response = await WishListRepo().onWishListFetch();
 
     if (response != null) {
-      wishListItems.value = response.favorites
-              ?.map(
-                (e) => CartItemCustomModel(
-                    id: e.id!,
-                    price: e.product?.price ?? '0.0',
-                    name: e.product?.name ?? '',
-                    quantity:
-                        int.tryParse(e.product?.quantity.toString() ?? '0') ??
-                            0,
-                    isFavorite: true,
-                    unit: e.product?.quantityUnit ?? 'KG',
-                    imageUrl: e.product?.images,
-                    productId: e.product!.id!),
-              )
-              .toList() ??
-          [];
+  wishListItems.value = response.favorites
+          ?.where((e) => e.product != null)
+          .map(
+            (e) => CartItemCustomModel(
+              id: e.id!,
+              price: e.product?.price ?? '0.0',
+              name: e.product?.name ?? '',
+              quantity:
+                  int.tryParse(e.product?.quantity.toString() ?? '0') ?? 0,
+              isFavorite: true,
+              unit: e.product?.quantityUnit ?? 'KG',
+              imageUrl: e.product?.images,
+              productId: e.product!.id!,
+            ),
+          )
+          .toList() ??
+      [];
+
+
     }
   }
 }

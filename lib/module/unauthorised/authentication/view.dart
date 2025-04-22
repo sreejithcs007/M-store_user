@@ -1,3 +1,5 @@
+import 'package:ecommerce/core/db/hive_helper.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/utils/tag_generator/helper.dart';
 import 'package:ecommerce/module/unauthorised/authentication/controller.dart';
 import 'package:ecommerce/module/unauthorised/authentication/login/login.dart';
@@ -30,6 +32,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    devPrintError(
+        'GetHiveHelper.getOnBoardDetailsHive()?.isSeen==${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
     return LoginScreen(controller: controller);
   }
 }
