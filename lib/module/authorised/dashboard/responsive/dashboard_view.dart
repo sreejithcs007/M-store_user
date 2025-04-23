@@ -16,7 +16,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../widget/cutom_card/view.dart';
 
 class DashboardScreen extends StatelessWidget {
-  DashboardScreen({super.key, required this.controller});
+  const DashboardScreen({super.key, required this.controller});
   final DashboardController controller;
 
   @override

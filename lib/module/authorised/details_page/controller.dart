@@ -73,13 +73,13 @@ class ProductDetailController extends GetxController {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PurchaseSuccessScreen(),
+            builder: (context) => const PurchaseSuccessScreen(),
           ));
     }else{
        Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PurchaseSuccessScreen(),
+            builder: (context) => const PurchaseSuccessScreen(),
           ));
     }
   }
@@ -138,7 +138,7 @@ class ProductDetailController extends GetxController {
         relatedProducts.value = response
             .map(
               (e) => CartItemCustomModel(
-                productId: e!.id!,
+                productId: e.id!,
                 isFavorite: false,
                 name: e.name ?? '',
                 price: e.price ?? '',

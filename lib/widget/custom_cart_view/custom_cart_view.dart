@@ -16,7 +16,7 @@ class CustomViewCartScreen extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: SvgPicture.asset(Assets.images.svg.arrowLeft)),
-          title: Text('Items in your cart'),
+          title: const Text('Items in your cart'),
         ),
         body: ListView.builder(
             itemCount: 3,
@@ -82,17 +82,17 @@ class CustomViewCartScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
+            const Expanded(
               child: Text(
                 "productName",
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             GestureDetector(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 // isFavorite ? Icons.favorite  //: Icons.favorite_border,
                 Icons.favorite,
                 // color: isFavorite ? Colors.red : Colors.grey,
@@ -107,9 +107,9 @@ class CustomViewCartScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "currentPrice",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.orange,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -117,9 +117,9 @@ class CustomViewCartScreen extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             // if (oldPrice.isNotEmpty)
-            Text(
+            const Text(
               "/quantityInfo",
-              style: const TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.grey),
             ),
             Align(
               alignment: Alignment.bottomRight,
@@ -149,24 +149,24 @@ class CustomViewCartScreen extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       "remove",
                       style: TextStyle(
                         color: Colors.orange,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Gap(10),
+                    const Gap(10),
                     SvgPicture.asset(Assets.images.svg.delete),
                   ],
                 ),
               ),
             ),
-            Gap(20),
+            const Gap(20),
             SvgPicture.asset(Assets.images.svg.minusSquare),
-            Gap(5),
-            Text('2'),
-            Gap(5),
+            const Gap(5),
+            const Text('2'),
+            const Gap(5),
             SvgPicture.asset(Assets.images.svg.add),
           ],
         ),

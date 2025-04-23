@@ -1,4 +1,3 @@
-import 'package:ecommerce/shared/model/authorised/cart_model/view_cart_model.dart';
 
 class TodaysOfferModel {
   int? id;

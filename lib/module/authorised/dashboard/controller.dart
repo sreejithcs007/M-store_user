@@ -233,12 +233,12 @@ class DashboardController extends GetxController {
 
   void onCartTap(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CartView()));
+        context, MaterialPageRoute(builder: (context) => const CartView()));
   }
 
   void onViewAllTap(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ViewAllScreen()));
+        context, MaterialPageRoute(builder: (context) => const ViewAllScreen()));
   }
 
   void onClearSearch() {

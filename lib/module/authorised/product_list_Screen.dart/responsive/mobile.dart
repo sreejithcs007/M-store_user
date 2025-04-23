@@ -69,7 +69,7 @@ class ShoppingPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                   child: TextField(
-                    onChanged: (value) => null,
+                    onChanged: (value) {},
                     decoration: InputDecoration(
                       hintText: 'Search',
                       prefixIcon: const Icon(Icons.search),

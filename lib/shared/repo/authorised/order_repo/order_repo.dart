@@ -14,12 +14,10 @@ class OrderRepo {
 
       if (res.status == 200) {
         var OrderList = res.data['orders'] as List<dynamic>;
-        if (OrderList != null) {
-          return OrderList.map(
-            (e) => Order.fromJson(e),
-          ).toList();
-        }
-      }
+        return OrderList.map(
+          (e) => Order.fromJson(e),
+        ).toList();
+            }
     } catch (e) {
       devPrintError('catch error in order list repo ==$e');
     }

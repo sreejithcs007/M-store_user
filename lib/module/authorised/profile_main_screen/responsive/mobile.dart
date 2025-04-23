@@ -32,7 +32,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Nimisha', style: AppTextStyle().br16w600),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
@@ -41,7 +41,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                         text: '25 ',
                         style: AppTextStyle()
                             .br14w400
-                            .copyWith(color: Color(0xFFEE9700))),
+                            .copyWith(color: const Color(0xFFEE9700))),
                   ]))
                 ],
               ),
@@ -111,7 +111,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginView(),
+                              builder: (context) => const LoginView(),
                             ));
                       },
                       title: 'Confirmation Dialogue',

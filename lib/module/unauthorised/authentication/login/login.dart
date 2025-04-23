@@ -1,5 +1,4 @@
 import 'package:ecommerce/core/constants/text_style.dart';
-import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/unauthorised/authentication/controller.dart';
 import 'package:ecommerce/module/unauthorised/authentication/forgot_pwrd/forgot_pass.dart';
 import 'package:ecommerce/module/unauthorised/authentication/sign_up/signup.dart';

@@ -36,7 +36,6 @@ class ProductDetailsRepo {
               (e) => RelatedProductsModel.fromJson(e),
             )
             .toList();
-        ;
       }
     } catch (e) {
       devPrintError('catch error in productDetails repo == $e');

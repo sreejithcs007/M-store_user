@@ -19,14 +19,14 @@ class CartViewMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: SvgPicture.asset(Assets.images.svg.arrowLeft)),
-        title: Text('Items in your cart'),
+        title: const Text('Items in your cart'),
       ),
       body: Obx(
         () => controller.cartItems.value.isEmpty
@@ -72,7 +72,7 @@ class CartViewMobile extends StatelessWidget {
                 children: [
                   Text("Subtotal (${controller.cartItems.length} items):",
                       style: AppTextStyle().br16w600),
-                  Text("${controller.subtotal.value.toStringAsFixed(2)}",
+                  Text(controller.subtotal.value.toStringAsFixed(2),
                       style: AppTextStyle().br24w600),
                 ],
               ),
@@ -170,7 +170,7 @@ class CartViewMobile extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 // isFavorite ? Icons.favorite  //: Icons.favorite_border,
                 Icons.favorite,
                 // color: isFavorite ? Colors.red : Colors.grey,
@@ -187,12 +187,12 @@ class CartViewMobile extends StatelessWidget {
           children: [
             Text(controller.cartItems[index].price,
                 style:
-                    AppTextStyle().br16w600.copyWith(color: Color(0xFFEE9700))),
+                    AppTextStyle().br16w600.copyWith(color: const Color(0xFFEE9700))),
 
             // if (oldPrice.isNotEmpty)
             Text(
               " / ${controller.cartItems[index].quantity} ${controller.cartItems[index].unit}",
-              style: AppTextStyle().br16w600.copyWith(color: Color(0xFFB3B3B3)),
+              style: AppTextStyle().br16w600.copyWith(color: const Color(0xFFB3B3B3)),
             ),
           ],
         ),
@@ -210,7 +210,7 @@ class CartViewMobile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: Color(0xFFEE9700).withOpacity(0.1),
+                  color: const Color(0xFFEE9700).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -219,35 +219,35 @@ class CartViewMobile extends StatelessWidget {
                     Text("Remove",
                         style: AppTextStyle()
                             .br16w400
-                            .copyWith(color: Color(0xFFEE9700))),
-                    Gap(10),
+                            .copyWith(color: const Color(0xFFEE9700))),
+                    const Gap(10),
                     SvgPicture.asset(Assets.images.svg.delete),
                   ],
                 ),
               ),
             ),
-            Gap(20),
+            const Gap(20),
             IconButton(
               // icon: const Icon(Icons.remove, color: Color(0xFFEE9700)),
               icon: SvgPicture.asset(
                 Assets.images.svg.minusSquare,
-                color: Color(0xFFEE9700),
+                color: const Color(0xFFEE9700),
               ),
               onPressed: () => controller.decreaseQuantity(index: index),
             ),
-            Gap(5),
+            const Gap(5),
             Obx(
               () => Text(
                 '${controller.cartItems[index].quantity}',
                 style:
-                    AppTextStyle().br16w600.copyWith(color: Color(0xFF757575)),
+                    AppTextStyle().br16w600.copyWith(color: const Color(0xFF757575)),
               ),
             ),
-            Gap(5),
+            const Gap(5),
             IconButton(
               icon: SvgPicture.asset(
                 Assets.images.svg.add,
-                color: Color(0xFFEE9700),
+                color: const Color(0xFFEE9700),
               ),
               onPressed: () => controller.increaseQuantity(index: index),
             ),
