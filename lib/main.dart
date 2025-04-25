@@ -44,7 +44,7 @@ class GroceryApp extends StatelessWidget {
           ? const GroceryPromoScreen()
           : GetHiveHelper.getUserDetailsHive()?.accessToken == null
               ? const LoginView()
-              : const NavScreen(),
+              :  NavScreen(),
     );
   }
 }

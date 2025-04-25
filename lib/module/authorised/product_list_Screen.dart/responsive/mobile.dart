@@ -7,6 +7,7 @@ import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class ShoppingPage extends StatelessWidget {
@@ -43,6 +44,29 @@ class ShoppingPage extends StatelessWidget {
               elevation: 0,
               backgroundColor: Colors.grey[50],
               actions: [
+                Obx(() => Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CircleAvatar(
+                        maxRadius: 20, // Adjust radius as needed
+                        backgroundColor: Colors.grey[100],
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: Image.network(
+                            formatImageUrl(controller.imageUrl.value),
+                            fit: BoxFit.cover,
+                            width: 80, // match the maxRadius * 2
+                            height: 80,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(
+                              Icons.image,
+                              size: 20,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )),
+                Gap(10),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: GestureDetector(
