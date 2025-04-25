@@ -42,7 +42,7 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const NavScreen(),
+            builder: (context) =>  NavScreen(),
           ));
     });
   }

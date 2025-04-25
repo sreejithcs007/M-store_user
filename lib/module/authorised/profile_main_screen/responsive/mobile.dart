@@ -36,7 +36,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                 children: [
                   Obx(() => CircleAvatar(
                         maxRadius: 40, // Adjust radius as needed
-                        backgroundColor: Colors.red,
+                        backgroundColor: const Color.fromARGB(255, 206, 202, 202),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(40),
                           child: Image.network(

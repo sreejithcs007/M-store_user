@@ -61,7 +61,7 @@ class LoginController extends GetxController {
         await setDataToLocal(data);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NavScreen()),
+          MaterialPageRoute(builder: (context) =>  NavScreen()),
         );
 
         fnShowSnackBarSucess('Successfully logged in');

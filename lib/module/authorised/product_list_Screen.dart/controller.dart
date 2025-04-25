@@ -7,6 +7,7 @@ import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/products_by_category/product_category_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/wishlist_list_repo/wishlist_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class ProductListScreenController extends GetxController {
     'Fruits',
     'Stationery',
   ];
+
+  RxString imageUrl = ''.obs;
 
   RxList<CartItemCustomModel> productsPerTab = <CartItemCustomModel>[].obs;
 
@@ -142,6 +145,11 @@ class ProductListScreenController extends GetxController {
   }
 
   Future<void> _initial() async {
+    var response = await ProfileRepo().onProfileFetch();
+    if (response != null) {
+      imageUrl.value = response.uProfilePic ?? '';
+    }
+
     var categoryResponse = await DashBoardRepo().onCategoryFetch();
     if ((categoryResponse != null) && (categoryResponse.isNotEmpty)) {
       categories.value = categoryResponse
