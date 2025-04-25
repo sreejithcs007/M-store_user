@@ -29,14 +29,15 @@ class WishlistViewScreen extends StatelessWidget {
                           controller.wishListItems[index].price.toString(),
                       oldPrice: '0',
                       quantityInfo:
-                          "/ ${controller.wishListItems[index].quantity}  ${controller.wishListItems[index].unit}",
-                      isFavorite: true,
-                      enableActions: true,
+                          "/ 1 ${controller.wishListItems[index].unit}",
+                      isFavorite: controller.wishListItems[index].isFavorite,
                       onAddToCart: () => controller.onAddToCartTap(context,
                           productId: controller.wishListItems[index].productId,
                           quantity:
                               controller.wishListItems[index].quantity ?? 1),
-                      onFavoriteToggle: () {},
+                      onFavoriteToggle: () {
+                        controller.onFavoriteToggle(index: index);
+                      },
                       image: Image.network(
                         formatImageUrl(
                             controller.wishListItems[index].imageUrl?.first),

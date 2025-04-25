@@ -5,6 +5,9 @@ class ProductCardModel {
   double qty;
   bool wishList;
   int id;
+  String unit;
+  String imageUrl;
+  int? productId;
 
   ProductCardModel(
       {required this.itemName,
@@ -12,7 +15,9 @@ class ProductCardModel {
       required this.previousCost,
       required this.qty,
       required this.wishList,
-      required this.id
-      
+      required this.id,
+      this.unit = 'KG',
+      required this.imageUrl,
+      this.productId ,
       });
 }

@@ -4,7 +4,7 @@ import 'package:ecommerce/shared/api/api_helper.dart';
 import 'package:ecommerce/shared/model/authorised/wishlist_Model/wishlist_model.dart';
 
 class WishListRepo {
-  Future<WishListFetchModel?> onWishListFetch() async {
+  Future<List<WishListFetchModel>?> onWishListFetch() async {
     try {
       var res = await ApiHelper.getData(
           endPoint: '/favorite/list',
@@ -12,11 +12,46 @@ class WishListRepo {
               access: GetHiveHelper.getUserDetailsHive()?.accessToken));
 
       if (res.status == 200) {
-        return WishListFetchModel.fromJson(res.data);
+           List<WishListFetchModel> wishList = (res.data as List)
+          .map((item) => WishListFetchModel.fromJson(item))
+          .toList();
+      
+      return wishList;
       }
     } catch (e) {
       devPrintError('Catch error in wishlist rep ==$e');
     }
+    return null;
+  }
+
+  Future<ApiResponse?> onWishListPostAdd({required int productId}) async {
+    try {
+      var res = await ApiHelper.postData(
+          endPoint: '/favorite/add',
+          body: {
+            "user_id": GetHiveHelper.getUserDetailsHive()?.accessToken,
+            " product_id": productId
+          },
+          header: ApiHelper.getApiHeader(
+              access: GetHiveHelper.getUserDetailsHive()?.accessToken));
+    } catch (e) {
+      devPrintError('catch Error in wishlist post  == $e');
+    }
+
+    return null;
+  }
+
+  Future<ApiResponse?> onWishListPostDelete({required int productId}) async {
+    try {
+      var res = await ApiHelper.delete(
+          endPoint: '/remove',
+          body: {" product_id": productId},
+          header: ApiHelper.getApiHeader(
+              access: GetHiveHelper.getUserDetailsHive()?.accessToken));
+    } catch (e) {
+      devPrintError('catch Error in wishlist post  == $e');
+    }
+
     return null;
   }
 }

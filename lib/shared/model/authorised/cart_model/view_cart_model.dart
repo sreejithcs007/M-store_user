@@ -1,4 +1,12 @@
+// To parse this JSON data, do
+//
+//     final cartModel = cartModelFromJson(jsonString);
 
+import 'dart:convert';
+
+CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
+
+String cartModelToJson(CartModel data) => json.encode(data.toJson());
 
 class CartModel {
     List<CartItem>? cartItems;
@@ -62,6 +70,7 @@ class CartItem {
 
 class Product {
     int? id;
+    dynamic itemCode;
     String? name;
     dynamic itemType;
     String? description;
@@ -85,9 +94,11 @@ class Product {
     int? quantity;
     String? quantityUnit;
     String? productType;
+    bool? isFavorited;
 
     Product({
         this.id,
+        this.itemCode,
         this.name,
         this.itemType,
         this.description,
@@ -111,10 +122,12 @@ class Product {
         this.quantity,
         this.quantityUnit,
         this.productType,
+        this.isFavorited,
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
+        itemCode: json["item_code"],
         name: json["name"],
         itemType: json["item_type"],
         description: json["description"],
@@ -138,10 +151,12 @@ class Product {
         quantity: json["quantity"],
         quantityUnit: json["quantity_unit"],
         productType: json["product_type"],
+        isFavorited: json["is_favorited"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "item_code": itemCode,
         "name": name,
         "item_type": itemType,
         "description": description,
@@ -165,5 +180,6 @@ class Product {
         "quantity": quantity,
         "quantity_unit": quantityUnit,
         "product_type": productType,
+        "is_favorited": isFavorited,
     };
 }

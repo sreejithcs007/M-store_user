@@ -1,14 +1,33 @@
 import 'package:ecommerce/shared/model/profile_model/profile_model.dart';
+import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
-  RxList<ProfileModel> profileHeaders = <ProfileModel>[
-    ProfileModel(headerName: 'Name', value: 'sreejith'),
-    ProfileModel(headerName: 'Email', value: 'sreejith@gmail.com'),
-    ProfileModel(headerName: 'Address', value: 'Ernakulam'),
-    ProfileModel(headerName: 'Phone No.', value: '98765432'),
-    ProfileModel(headerName: 'State', value: 'Kerala'),
-    ProfileModel(headerName: 'City', value: 'Ernakulam'),
-    ProfileModel(headerName: 'Pincode', value: '1234'),
-  ].obs;
+  RxList<ProfileModel> profileHeaders = <ProfileModel>[].obs;
+
+  RxString imageUrl = ''.obs;
+
+  @override
+  void onInit() {
+    _initial();
+    super.onInit();
+  }
+
+  Future<void> _initial() async {
+    var response = await ProfileRepo().onProfileFetch();
+
+    if (response != null) {
+      imageUrl.value = response.uProfilePic ?? '' ;
+      
+      profileHeaders.value = [
+        ProfileModel(headerName: 'Name', value: response.uName ?? ''),
+        ProfileModel(headerName: 'Email', value: response.uEmail ?? ''),
+        ProfileModel(headerName: 'Address', value: response.uAddress ?? ''),
+        ProfileModel(headerName: 'Phone No.', value: response.uPhone ?? ''),
+        // ProfileModel(headerName: 'State', value:  response.``),
+        ProfileModel(headerName: 'City', value: response.city ?? ''),
+        ProfileModel(headerName: 'Pincode', value: response.pinCode ?? ''),
+      ];
+    }
+  }
 }

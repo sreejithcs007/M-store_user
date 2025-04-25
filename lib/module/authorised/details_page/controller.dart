@@ -1,6 +1,7 @@
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
+import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/cart_items/view.dart';
 import 'package:ecommerce/module/authorised/details_page/responsive/details_page.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce/shared/model/authorised/order_create_model/order_creat
 import 'package:ecommerce/shared/model/authorised/product_detail_model/prdt_details_model.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/view_cart/view_cart_repo.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,9 @@ import 'package:get/get.dart';
 class ProductDetailController extends GetxController {
   int id;
   bool isRelatedProductNeed;
+  bool isTodaysOffer;
   ProductDetailController(
-      {required this.id, required this.isRelatedProductNeed});
+      {required this.id, required this.isRelatedProductNeed,required this.isTodaysOffer});
   RxInt quantity = 0.obs;
   RxBool isAddToCart = false.obs;
 
@@ -27,18 +30,26 @@ class ProductDetailController extends GetxController {
   final RxString price = ''.obs;
   final RxString description = ''.obs;
   final RxString unit = ''.obs;
-  final RxString image = ''.obs;
+  final RxList<Widget> image = <Widget>[].obs;
   final RxDouble totalStock = 0.0.obs;
   final RxBool isNeed = true.obs;
 
   RxList<CartItemCustomModel> relatedProducts = <CartItemCustomModel>[].obs;
 
-  void increaseQuantity() {
-    quantity = quantity + 1;
+  void increaseQuantity({required double stockQty}) {
+    if (quantity < (int.tryParse(stockQty.toString() ?? '0') ?? 0)) {
+      quantity = quantity + 1;
+    } else {
+      fnShowSnackBarWarning('Maximum reached!');
+    }
   }
 
   void decreaseQuantity() {
-    quantity = quantity - 1;
+    if (quantity.value > 1) {
+      quantity = quantity - 1;
+    } else {
+      fnShowSnackBarWarning('Quantity must be atleast 1');
+    }
   }
 
   Future<void> onAddToCartTap(BuildContext context,
@@ -58,6 +69,8 @@ class ProductDetailController extends GetxController {
       {required int productId,
       required int quantity,
       required int price}) async {
+    devPrintError('price == $price');
+
     var response = await ProductDetailsRepo().onBuyNow(
         productId: productId,
         quantity: quantity,
@@ -75,8 +88,8 @@ class ProductDetailController extends GetxController {
           MaterialPageRoute(
             builder: (context) => PurchaseSuccessScreen(),
           ));
-    }else{
-       Navigator.push(
+    } else {
+      Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PurchaseSuccessScreen(),
@@ -121,12 +134,23 @@ class ProductDetailController extends GetxController {
       var data = ProductDetailsModel.fromJson(response.data);
       productName.value = data.product?.name ?? '';
       description.value = data.product?.description ?? '';
-      price.value = data.product?.price ?? '0';
+      price.value = isTodaysOffer == true ? (data.product?.discount ?? '0') :  data.product?.price ?? '0';
       quantity.value =
           (data.product?.quantity != 0 ? data.product?.quantity : 1) ?? 1;
       categoryName.value = data.product?.category?.name ?? '';
       unit.value = 'KG'; //data.product?.
-      image.value = data.product?.images?.first ?? '';
+      image.value = data.product?.images
+              ?.map((e) => Image.network(
+                    formatImageUrl(e),
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.image,
+                      size: 36,
+                      color: Colors.grey,
+                    ),
+                  ))
+              .toList() ??
+          [];
       totalStock.value =
           double.tryParse(data.product?.stock.toString() ?? '0') ?? 1;
     }
@@ -138,14 +162,14 @@ class ProductDetailController extends GetxController {
         relatedProducts.value = response
             .map(
               (e) => CartItemCustomModel(
-                productId: e!.id!,
-                isFavorite: false,
-                name: e.name ?? '',
-                price: e.price ?? '',
-                quantity: e.quantity ?? 0,
-                id: e.id!,
-                // imageUrl: e.images as List<String>
-              ),
+                  productId: e!.id!,
+                  isFavorite: false,
+                  name: e.name ?? '',
+                  price: e.price ?? '',
+                  quantity: e.quantity ?? 0,
+                  id: e.id!,
+                  stockQty: e.stock,
+                  imageUrl: e.images),
             )
             .toList();
       } else {

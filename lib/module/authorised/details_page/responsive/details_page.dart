@@ -1,7 +1,9 @@
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
+import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,24 +32,10 @@ class ProductDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 12),
-                Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.network(
-                      formatImageUrl(controller.image.value),
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => const Icon(
-                        Icons.image,
-                        size: 36,
-                        color: Colors.grey,
-                      ),
-                    ),
+                Obx(
+                  () => SimpleCarousel(
+                    isPaddingNeed: false,
+                    bannerImages: controller.image.value,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -89,8 +77,7 @@ class ProductDetailScreen extends StatelessWidget {
                           color: Colors.orange),
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                        "/ ${controller.quantity.value} ${controller.unit.value}",
+                    Text("/ 1 ${controller.unit.value}",
                         style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
@@ -110,7 +97,8 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     IconButton(
                       icon: const Icon(Icons.add, color: Colors.orange),
-                      onPressed: () => controller.increaseQuantity(),
+                      onPressed: () => controller.increaseQuantity(
+                          stockQty: controller.totalStock.value),
                     ),
                   ],
                 ),
@@ -148,11 +136,17 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     ElevatedButton(
-                      onPressed: () => controller.onBuyNowTap(context,
-                          price:
-                              int.tryParse(controller.price.value ?? '0') ?? 0,
-                          productId: controller.id,
-                          quantity: controller.quantity.value),
+                      onPressed: () {
+
+                        devPrint(' int.tryPars  ${ int.tryParse(controller.price.value ?? '0') ?? 0}');
+                        devPrint(' int  ${ controller.price.value ?? '0'}');
+                        controller.onBuyNowTap(context,
+                            price:
+                               (double.tryParse(controller.price.value ?? '0')?.toInt()) ??
+                                    0,
+                            productId: controller.id,
+                            quantity: controller.quantity.value);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFEE9700),
                         shape: RoundedRectangleBorder(

@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:ecommerce/appconfig/appconfig.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:http/http.dart' as http;
 
 class ApiHelper {
   static Map<String, String> getApiHeader({String? access, String? dbName}) {
     if (access != null) {
       return {
-        // 'Content-Type': 'application/json',   
+        // 'Content-Type': 'application/json',
         'Authorization': 'Bearer $access',
       };
     } else if (dbName != null) {
@@ -58,7 +59,7 @@ class ApiHelper {
     Map<String, dynamic>? body,
   }) async {
     log("Api-helper -> postData");
-    log("$body");
+    devPrintError("$body");
 
     final url = Uri.parse(AppConfig.baseurl + endPoint);
     log("header=$header");
@@ -72,12 +73,14 @@ class ApiHelper {
       }
     });
 
+    devPrintSuccess('safeBody \n $safeBody'); 
+
     try {
       var response = await http.post(url, body: safeBody, headers: header);
       log("ApiHelper>>Api Called => status code=${response.statusCode}");
       var decodedData = jsonDecode(response.body);
 
-      if ((response.statusCode == 200) || (response.statusCode ==201)) {
+      if ((response.statusCode == 200) || (response.statusCode == 201)) {
         return ApiResponse(
           status: response.statusCode,
           msg: "Success",
@@ -98,6 +101,42 @@ class ApiHelper {
     }
   }
 
+static Future<ApiResponse?> postDatas({
+  required String endPoint,
+  required Map<String, dynamic> body,
+  required Map<String, String> header,
+}) async {
+  try {
+    var url = Uri.parse(AppConfig.baseurl + endPoint);
+    
+    // Ensure body is encoded properly as JSON
+    var response = await http.post(
+      url,
+      headers: header,
+      body: json.encode(body),  // Ensure the body is JSON-encoded
+    );
+
+    if (response.statusCode == 200) {
+      return ApiResponse(
+          status: response.statusCode,
+          msg: "Success",
+          data: response.body,
+        );
+    } else {
+      // Handle error response
+      return ApiResponse(
+          status: response.statusCode,
+          msg: "Failed",
+          data: response.body,
+        );
+    }
+  } catch (e) {
+    throw Exception('Error in postData: $e');
+  }
+}
+
+  
+  
   static Future<ApiResponse> delete({
     required String endPoint,
     Map<String, String>? header,

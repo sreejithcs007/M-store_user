@@ -27,4 +27,27 @@ class ProductCategoryRepo {
 
     return null;
   }
+  Future<List<ProductCategoryModel>?> onProductFilter(
+      {required int id,required int min, required int max}) async {
+    try {
+      var response = await ApiHelper.getData(
+          endPoint: '/products/filter-by-multiple-criteria?category_id=$id&min_price=$min&max_price=$max',
+          header: ApiHelper.getApiHeader(
+              access: GetHiveHelper.getUserDetailsHive()!.accessToken));
+
+      if (response.status == 200) {
+        List data = response.data;
+
+        return data
+            .map(
+              (e) => ProductCategoryModel.fromJson(e),
+            )
+            .toList();
+      }
+    } catch (e) {
+      devPrint('productCategory repo catch $e');
+    }
+
+    return null;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/controller.dart';
@@ -90,67 +91,146 @@ class ShoppingPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // TODO: Filter logic
-                        },
-                        iconAlignment: IconAlignment.end,
-                        icon: SvgPicture.asset(Assets.images.svg.filter),
-                        label: Text(
-                          'Filters by',
-                          style: AppTextStyle()
-                              .br16w400
-                              .copyWith(color: const Color(0xFFEE9700)),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton.icon(
-                        iconAlignment: IconAlignment.end,
-                        onPressed: () {
-                          // TODO: Sort logic
-                        },
-                        icon: SvgPicture.asset(Assets.images.svg.sort),
-                        label: Text(
-                          'Sort by',
-                          style: AppTextStyle()
-                              .br16w400
-                              .copyWith(color: const Color(0xFFEE9700)),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.black,
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                          icon: SvgPicture.asset(
-                            Assets.images.svg.grid,
-                            color: controller.isList.value
-                                ? const Color(0xFFB2B2B2)
-                                : const Color(0xFFEE9700),
-                          ),
+                      // Filter Button
+                      Flexible(
+                        child: ElevatedButton.icon(
                           onPressed: () {
-                            controller.isList.value = false;
-                            controller.isList.refresh();
-                          }),
+                            final minCostController = TextEditingController();
+                            final maxCostController = TextEditingController();
+
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Filter by Cost'),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextField(
+                                        controller: minCostController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Minimum Cost',
+                                          prefixIcon: Icon(Icons.money),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      TextField(
+                                        controller: maxCostController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Maximum Cost',
+                                          prefixIcon:
+                                              Icon(Icons.money_outlined),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        devPrintError(
+                                            'ind = ${controller.index}');
+                                        devPrintError(
+                                            'onpresse ${controller.categories.value[controller.index ?? 0].id}');
+                                        final min = double.tryParse(
+                                                minCostController.text) ??
+                                            0;
+                                        final max = double.tryParse(
+                                                maxCostController.text) ??
+                                            double.infinity;
+                                        // controller.onFilterApply(
+                                        //     ids: controller
+                                        //             .categories
+                                        //             .value[
+                                        //                 controller.index ?? 0]
+                                        //             .id ??
+                                        //         1,
+                                        //     min: min.toString(),
+                                        //     max: max.toString());
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Apply'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          iconAlignment: IconAlignment.end,
+                          icon: SvgPicture.asset(Assets.images.svg.filter),
+                          label: Text(
+                            'Filters',
+                            style: AppTextStyle()
+                                .br16w400
+                                .copyWith(color: const Color(0xFFEE9700)),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8), // Space between buttons
+
+                      // Sort Button
+                      Flexible(
+                        child: ElevatedButton.icon(
+                          iconAlignment: IconAlignment.end,
+                          onPressed: () {
+                            // TODO: Sort logic
+                          },
+                          icon: SvgPicture.asset(Assets.images.svg.sort),
+                          label: Text(
+                            'Sort by',
+                            style: AppTextStyle()
+                                .br16w400
+                                .copyWith(color: const Color(0xFFEE9700)),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8), // Space between buttons
+
+                      // Grid View Icon Button
                       IconButton(
-                        icon: SvgPicture.asset(Assets.images.svg.list,
-                            color: controller.isList.value
-                                ? const Color(0xFFEE9700)
-                                : const Color(0xFFB2B2B2)),
+                        icon: SvgPicture.asset(
+                          Assets.images.svg.grid,
+                          color: controller.isList.value
+                              ? const Color(0xFFB2B2B2)
+                              : const Color(0xFFEE9700),
+                        ),
+                        onPressed: () {
+                          controller.isList.value = false;
+                          controller.isList.refresh();
+                        },
+                      ),
+                      // List View Icon Button
+                      IconButton(
+                        icon: SvgPicture.asset(
+                          Assets.images.svg.list,
+                          color: controller.isList.value
+                              ? const Color(0xFFEE9700)
+                              : const Color(0xFFB2B2B2),
+                        ),
                         onPressed: () {
                           controller.isList.value = true;
                           controller.isList.refresh();
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -159,6 +239,8 @@ class ShoppingPage extends StatelessWidget {
                 TabBar(
                   onTap: (value) {
                     controller.productsPerTab.value = [];
+                    controller.index = value;
+                    controller.id = controller.categories[value].id!;
                     controller.onTap(
                         index: value, id: controller.categories[value].id!);
                   },
@@ -205,6 +287,7 @@ class ShoppingPage extends StatelessWidget {
     if (items.isEmpty) {
       return const Center(child: Text('No data found'));
     }
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Obx(
@@ -212,10 +295,9 @@ class ShoppingPage extends StatelessWidget {
           itemCount: items.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            // childAspectRatio: 3 / 3.8,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            mainAxisExtent: 195,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 3 / 4, // Adjust for better aspect responsiveness
           ),
           itemBuilder: (_, index) {
             final item = items[index];
@@ -224,7 +306,7 @@ class ShoppingPage extends StatelessWidget {
               onTap: () =>
                   controller.onProductContainerTap(index: index, id: item.id),
               child: Container(
-                width: 120,
+                constraints: const BoxConstraints(minHeight: 220),
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -238,86 +320,96 @@ class ShoppingPage extends StatelessWidget {
                   ],
                 ),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Product Image
-                    Stack(children: [
-                      Container(
-                        color: Colors.grey[350],
-                        height: 100,
+                    // 🖼️ Image (flexible and minimum height)
+                    Expanded(
+                      flex: 6,
+                      child: Container(
                         width: double.infinity,
-                        child: ClipRRect(
+                        constraints: const BoxConstraints(minHeight: 100),
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            formatImageUrl(item.imageUrl?.first),
-                            height: 80,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(
-                              Icons.image,
-                              size: 36,
-                              color: Colors.grey,
+                          color: Colors.grey[300],
+                        ),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                formatImageUrl(item.imageUrl?.first),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Center(
+                                  child: Icon(
+                                    Icons.image,
+                                    size: 36,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Positioned(
+                              top: 6,
+                              right: 6,
+                              child: GestureDetector(
+                                onTap: () =>
+                                    controller.onFavoriteToggle(index: index),
+                                child: SvgPicture.asset(
+                                  item.isFavorite
+                                      ? Assets.images.svg.redheart
+                                      : Assets.images.svg.greyheart,
+                                  height: 20,
+                                  width: 30,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        top: 6,
-                        right: 6,
-                        child: Icon(
-                          item.isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: item.isFavorite ? Colors.red : Colors.grey,
-                          size: 18,
-                        ),
-                      ),
-                    ]),
-                    const SizedBox(height: 8),
-                    // Product Name
-                    Text(
-                      item.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
                     ),
-                    // const SizedBox(height: 4),
-                    // Price Row
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '₹ ${item.price}',
-                          style: const TextStyle(
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
+
+                    const SizedBox(height: 8),
+
+                    // 📝 Text Info (fixed height)
+                    Container(
+                      height: 70,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                        Text(
-                          ' / ${item.quantity}',
-                          style: const TextStyle(color: Colors.grey),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          icon: const Icon(Icons.shopping_cart_outlined,
-                              color: Colors.grey),
-                          onPressed: () {
-                            // handle add to cart
-                          },
-                          iconSize: 20,
-                          padding: EdgeInsets.zero,
-                          constraints: const BoxConstraints(),
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Text(
+                                '₹ ${item.price}',
+                                style: const TextStyle(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                ' / 1 ${item.unit}',
+                                style: const TextStyle(color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             );
-          
-          
           },
         ),
       ),
@@ -341,9 +433,9 @@ class ShoppingPage extends StatelessWidget {
               currentPrice: item.price,
               oldPrice: '',
               quantityInfo: "${item.quantity}/ KG",
-              isFavorite: false,
-              enableActions: true,
-              onAddToCart: () => print("Add to cart"),
+              isFavorite: item.isFavorite,
+              onAddToCart: () => controller.onAddToCart(
+                  productId: item.productId, quantity: 1),
               image: Image.network(
                 formatImageUrl(item.imageUrl?.first),
                 fit: BoxFit.cover,
@@ -354,10 +446,7 @@ class ShoppingPage extends StatelessWidget {
                 ),
               ),
               onFavoriteToggle: () {
-                print(
-                    "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                print(
-                    "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                controller.onFavoriteToggle(index: index);
               },
               // image: Image.asset('', fit: BoxFit.cover),
               oldPriceNeeded: false),
