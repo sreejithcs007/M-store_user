@@ -39,9 +39,9 @@ class ViewAllCategoryMobileScreen extends StatelessWidget {
             : GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 5,
-                  mainAxisExtent: 170,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 3 / 2.5,
                 ),
                 itemCount: controller.categories.value.length,
                 itemBuilder: (context, index) {

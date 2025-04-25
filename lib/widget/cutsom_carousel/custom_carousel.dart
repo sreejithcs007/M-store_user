@@ -3,7 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class SimpleCarousel extends StatefulWidget {
   final List<Widget> bannerImages;
-  const SimpleCarousel({super.key, required this.bannerImages});
+  final bool isPaddingNeed ;
+  const SimpleCarousel({super.key, required this.bannerImages,this.isPaddingNeed= true});
 
   @override
   _SimpleCarouselState createState() => _SimpleCarouselState();
@@ -19,20 +20,18 @@ class _SimpleCarouselState extends State<SimpleCarousel> {
         Container(
           // padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-          color: Colors.white,
-            borderRadius: BorderRadius.circular(15)),
+              color: Colors.white, borderRadius: BorderRadius.circular(15)),
           child: CarouselSlider(
-            items: widget.bannerImages.map((widget) {
+            items: widget.bannerImages.map((e) {
               return Container(
-                padding: const EdgeInsets.all(15),
+                padding: widget.isPaddingNeed == true? EdgeInsets.all(15) : EdgeInsets.zero,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 width: double.infinity,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: widget),
+                    borderRadius: BorderRadius.circular(12), child: e),
               );
             }).toList(),
             options: CarouselOptions(

@@ -25,7 +25,7 @@ class ViewedWishListScreen extends StatelessWidget {
                     controller.viewdWishListItems[index].previousCost.toString(),
                 quantityInfo: "${controller.viewdWishListItems[index].qty}/ KG",
                 isFavorite: controller.viewdWishListItems[index].wishList,
-                enableActions: true,
+          
                 onAddToCart: () => print("Add to cart"),
                 onFavoriteToggle: () {
                   controller.viewdWishListItems[index].wishList =

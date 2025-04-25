@@ -4,7 +4,8 @@ class CartItemCustomModel {
   final String name;
   final String price;
   int? quantity;
-  final bool isFavorite;
+  int? stockQty;
+   bool isFavorite;
   final String unit;
   final List<String>? imageUrl;
 
@@ -15,6 +16,7 @@ class CartItemCustomModel {
       required this.price,
       required this.quantity,
       required this.isFavorite,
+      required this.stockQty,
       this.imageUrl,
       this.unit = 'KG'});
 }

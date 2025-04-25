@@ -1,5 +1,7 @@
 import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductCard extends StatelessWidget {
   final String productName;
@@ -10,7 +12,7 @@ class ProductCard extends StatelessWidget {
   final VoidCallback? onFavoriteToggle;
   final VoidCallback? productDetailsPageOnTap;
   final bool isFavorite;
-  final bool enableActions;
+
   final Widget? image;
   final bool isListingPage;
   final bool oldPriceNeeded;
@@ -24,7 +26,7 @@ class ProductCard extends StatelessWidget {
     this.onAddToCart,
     this.onFavoriteToggle,
     this.isFavorite = false,
-    this.enableActions = false,
+ 
     this.image,
     this.isListingPage = false,
     this.oldPriceNeeded = true,
@@ -126,11 +128,8 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: enableActions ? onFavoriteToggle : null,
-              child: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? Colors.red : Colors.grey,
-              ),
+              onTap: onFavoriteToggle,
+              child: SvgPicture.asset(isFavorite ? Assets.images.svg.redheart :  Assets.images.svg.greyheart,height: 20,width: 20,),
             ),
           ],
         ),
@@ -163,7 +162,7 @@ class ProductCard extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: GestureDetector(
-                  onTap: enableActions ? onAddToCart : null,
+                  onTap:  onAddToCart ,
                   child: const Align(
                       child: Icon(Icons.shopping_cart_outlined,
                           color: Colors.grey, size: 18)),
@@ -176,7 +175,7 @@ class ProductCard extends StatelessWidget {
         // Add to cart
         if (isListingPage == false)
           GestureDetector(
-            onTap: enableActions ? onAddToCart : null,
+            onTap:  onAddToCart ,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
