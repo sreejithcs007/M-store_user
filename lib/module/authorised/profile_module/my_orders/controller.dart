@@ -1,9 +1,7 @@
 import 'package:ecommerce/core/functions/date_function/date_function.dart';
-import 'package:ecommerce/module/authorised/order_details_page/responsive/order_details_page.dart';
 import 'package:ecommerce/module/authorised/order_details_page/screens.dart';
 import 'package:ecommerce/shared/model/my_order_model/my_order_model.dart';
 import 'package:ecommerce/shared/repo/authorised/order_repo/order_repo.dart';
-import 'package:ecommerce/widget/custom_details_page/custom_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

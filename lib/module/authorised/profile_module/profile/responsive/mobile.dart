@@ -16,7 +16,7 @@ class ProfileMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F5F5),
         foregroundColor: Colors.white,
@@ -39,7 +39,7 @@ class ProfileMobileScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ProfileCreateEditScreen()),
+                        builder: (context) => const ProfileCreateEditScreen()),
                   );
                 },
                 icon: SvgPicture.asset(Assets.images.svg.edit8)),

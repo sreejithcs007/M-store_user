@@ -56,7 +56,7 @@ class _SimpleCarouselState extends State<SimpleCarousel> {
             return Container(
               width: _currentIndex == index ? 16.0 : 12.0,
               height: _currentIndex == index ? 16.0 : 12.0,
-              margin: EdgeInsets.symmetric(horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _currentIndex == index ? Colors.black : Colors.grey,

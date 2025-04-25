@@ -66,8 +66,8 @@ class ProductListItem extends StatelessWidget {
                   isCart
                       ? GestureDetector(
                           onTap: onRemove,
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               Icon(Icons.delete_outline,
                                   color: Colors.orange, size: 20),
                               SizedBox(width: 4),

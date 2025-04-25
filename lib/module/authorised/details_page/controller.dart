@@ -86,13 +86,13 @@ class ProductDetailController extends GetxController {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PurchaseSuccessScreen(),
+            builder: (context) => const PurchaseSuccessScreen(),
           ));
     } else {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PurchaseSuccessScreen(),
+            builder: (context) => const PurchaseSuccessScreen(),
           ));
     }
   }

@@ -62,6 +62,7 @@ class ViewCartRepo {
     } catch (e) {
       devPrintError('catch error in cart view delete == $e');
     }
+    return null;
   }
 
   Future<ApiResponse?> onQuantutyUpdateCartItem(

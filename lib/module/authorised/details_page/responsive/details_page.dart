@@ -70,7 +70,7 @@ class ProductDetailScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "${controller.price.value}",
+                      controller.price.value,
                       style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -164,7 +164,7 @@ class ProductDetailScreen extends StatelessWidget {
                 const SizedBox(height: 30),
                 controller.isNeed.value
                     ? Text("Related Products", style: AppTextStyle().br16w400)
-                    : SizedBox.shrink(),
+                    : const SizedBox.shrink(),
                 const SizedBox(height: 12),
                 controller.isNeed.value
                     ? GridView.builder(
@@ -299,7 +299,7 @@ class ProductDetailScreen extends StatelessWidget {
                           );
                         },
                       )
-                    : SizedBox.shrink()
+                    : const SizedBox.shrink()
               ],
             ),
           ),

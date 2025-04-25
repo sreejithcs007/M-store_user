@@ -111,7 +111,7 @@ class _CustomSnakbarWidgetState extends State<CustomSnakbarWidget>
                               widget.text,
                               overflow: TextOverflow.visible,
                               textAlign: TextAlign.left,
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                               // style: AppTextStyles.snackbarButtonText.copyWith(
                               //     color: widget.type.getTextColor(context)),
                             ),

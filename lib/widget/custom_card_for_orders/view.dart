@@ -131,18 +131,18 @@ class MyOrderCard extends StatelessWidget {
           children: [
             Text(currentPrice,
                 style:
-                    AppTextStyle().br14w600.copyWith(color: Color(0xFFEE9700))),
+                    AppTextStyle().br14w600.copyWith(color: const Color(0xFFEE9700))),
             const Gap(6),
             Text(
               '/ $quantityInfo',
-              style: AppTextStyle().br14w600.copyWith(color: Color(0xFFB3B3B3)),
+              style: AppTextStyle().br14w600.copyWith(color: const Color(0xFFB3B3B3)),
             ),
           ],
         ),
         const Gap(6),
         Text(
           paymentType,
-          style: AppTextStyle().br16w400.copyWith(color: Color(0xFF14AE5C)),
+          style: AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
         ),
         const Gap(6),
         Text(

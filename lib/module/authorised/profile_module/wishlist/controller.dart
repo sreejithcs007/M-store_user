@@ -1,12 +1,10 @@
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
-import 'package:ecommerce/shared/model/authorised/cart_model/view_cart_model.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/shared/model/product_card/model.dart';
 import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/wishlist_list_repo/wishlist_repo.dart';
-import 'package:ecommerce/widget/custom_details_page/custom_details_page.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -137,7 +137,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginView(),
+                              builder: (context) => const LoginView(),
                             ));
                       },
                       title: 'Confirmation Dialogue',

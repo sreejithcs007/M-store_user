@@ -96,11 +96,11 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text("Subtotal (5 items):", style: TextStyle(fontSize: 16)),
                 Text("₹423.00",
                     style:

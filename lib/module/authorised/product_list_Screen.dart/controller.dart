@@ -31,7 +31,7 @@ class ProductListScreenController extends GetxController {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CartView(),
+          builder: (context) => const CartView(),
         ));
   }
 

@@ -13,7 +13,6 @@ import 'package:ecommerce/shared/repo/login_repo/signup_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class LoginController extends GetxController {
   RxBool isSignInLoading = false.obs;
