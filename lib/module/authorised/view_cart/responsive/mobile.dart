@@ -283,7 +283,6 @@ class CartViewMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
-      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
