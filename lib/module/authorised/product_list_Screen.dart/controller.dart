@@ -5,7 +5,11 @@ import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/products_by_category/product_category_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/wishlist_list_repo/wishlist_repo.dart';
+import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,17 +26,21 @@ class ProductListScreenController extends GetxController {
     'Stationery',
   ];
 
+  RxString imageUrl = ''.obs;
+
   RxList<CartItemCustomModel> productsPerTab = <CartItemCustomModel>[].obs;
 
   void onCartTap(BuildContext context) {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CartView(),
+          builder: (context) => const CartView(),
         ));
   }
 
   void onTap({required int index, required int id}) async {
+    index = index;
+    id = id;
     isProductLoading.value = true;
     var responnse = await ProductCategoryRepo().onProductCategoryFetch(id: id);
 
@@ -40,20 +48,81 @@ class ProductListScreenController extends GetxController {
       productsPerTab.value = responnse
           .map(
             (e) => CartItemCustomModel(
-              productId: e.id!,
-              isFavorite: false,
-              name: e.name ?? '',
-              price: e.price ?? '',
-              quantity: e.quantity ?? 0,
-              id: e.id!,
-              // imageUrl: e.images as List<String> 
-            ),
+                stockQty: e.stock,
+                productId: e.id!,
+                isFavorite: e.isFavorited ?? false,
+                name: e.name ?? '',
+                price: e.price ?? '',
+                quantity: e.quantity ?? 0,
+                unit: e.quantityUnit ?? 'KG',
+                id: e.id!,
+                imageUrl: e.images),
           )
           .toList();
     } else {
       productsPerTab.value = [];
     }
     isProductLoading.value = false;
+  }
+
+  Future<void> onAddToCart(
+      {required int productId, required int quantity}) async {
+    var response = await ProductDetailsRepo()
+        .onAddToCart(productId: productId, quantity: quantity);
+
+    devPrintSuccess('api reponse == $response');
+
+    if ((response != null) && (response.status == 201)) {
+      fnShowSnackBarSucess('Product added to cart successfully');
+    }
+  }
+
+  Future<void> onFilterApply(
+      {required int ids, required String min, required String max}) async {
+    devPrintError('ca $id');
+    productsPerTab.value = [];
+    var response = await ProductCategoryRepo().onProductFilter(
+        id: ids, max: int.tryParse(max) ?? 0, min: int.tryParse(min) ?? 0);
+
+    if ((response != null) && (response.isNotEmpty)) {
+      productsPerTab.value = response
+          .map(
+            (e) => CartItemCustomModel(
+                stockQty: e.stock,
+                productId: e.id!,
+                isFavorite: e.isFavorited ?? false,
+                name: e.name ?? '',
+                price: e.price ?? '',
+                quantity: e.quantity ?? 0,
+                unit: e.quantityUnit ?? 'KG',
+                id: e.id!,
+                imageUrl: e.images),
+          )
+          .toList();
+    }
+  }
+
+  void onFavoriteToggle({required int index}) {
+    productsPerTab.value[index].isFavorite =
+        !productsPerTab.value[index].isFavorite;
+
+    if (productsPerTab.value[index].isFavorite == true) {
+      onFavouritePressedToAdd(
+          productId: productsPerTab.value[index].productId!);
+    } else {
+      onFavouritePressedToDelete(
+          productId: productsPerTab.value[index].productId!);
+    }
+    productsPerTab.refresh();
+  }
+
+  Future<void> onFavouritePressedToAdd({required int productId}) async {
+    var response = await WishListRepo().onWishListPostAdd(productId: productId);
+  }
+
+  Future<void> onFavouritePressedToDelete({required int productId}) async {
+    var response =
+        await WishListRepo().onWishListPostDelete(productId: productId);
   }
 
   void onProductContainerTap({required int index, required int id}) {
@@ -76,12 +145,20 @@ class ProductListScreenController extends GetxController {
   }
 
   Future<void> _initial() async {
+    var response = await ProfileRepo().onProfileFetch();
+    if (response != null) {
+      imageUrl.value = response.uProfilePic ?? '';
+    }
+
     var categoryResponse = await DashBoardRepo().onCategoryFetch();
     if ((categoryResponse != null) && (categoryResponse.isNotEmpty)) {
       categories.value = categoryResponse
           .map(
             (e) => CategoryModel(
-                categoryName: e.name ?? '', imageUrl: e.image ?? '', id: e.id),
+              categoryName: e.name ?? '',
+              imageUrl: e.image ?? '',
+              id: e.id,
+            ),
           )
           .toList();
     }

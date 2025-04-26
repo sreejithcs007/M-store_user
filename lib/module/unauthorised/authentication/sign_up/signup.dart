@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class SignUpScreen extends StatelessWidget {
   final LoginController controller;
 
-  SignUpScreen({
+  const SignUpScreen({
     super.key,
     required this.controller,
   });
@@ -44,8 +44,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "Name",
                           controller: controller.signUpNameController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else {
                               return null;
@@ -57,8 +57,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "sampleemail@email.com",
                           controller: controller.signUpEmailController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else if(!(p0.contains('@gmail.com'))){
                               return 'please include @gmail.com';
@@ -73,8 +73,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "Phone No",
                           controller: controller.signUpPhoneController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else {
                               return null;
@@ -86,8 +86,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "Address",
                           controller: controller.signUpAddressController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else {
                               return null;
@@ -99,8 +99,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "Location",
                           controller: controller.signUpLocationController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else {
                               return null;
@@ -112,8 +112,8 @@ class SignUpScreen extends StatelessWidget {
                           hintText: "Pin-code",
                           controller: controller.signUpPinCodeController,
                           validator: (p0) {
-                            devPrintError('p0==${p0}');
-                            if ((p0 == null) || (p0!.isEmpty)) {
+                            devPrintError('p0==$p0');
+                            if ((p0 == null) || (p0.isEmpty)) {
                               return 'please fill this field';
                             } else {
                               return null;
@@ -128,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
                                 controller.showSignUpPass.value ? false : true,
                             controller: controller.signUpPasswordController,
                             validator: (p0) {
-                              devPrintError('p0==${p0}');
+                              devPrintError('p0==$p0');
                               if ((p0 == null) && (p0!.isEmpty)) {
                                 return 'please fill this field';
                               } else if ((p0.length > 8)) {

@@ -12,7 +12,7 @@ class HeaderWithSubhead extends StatelessWidget {
     return Column(
       children: [
         Text(headerName),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Text(subHeaderName)

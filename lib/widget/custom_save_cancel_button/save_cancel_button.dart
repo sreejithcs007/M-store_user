@@ -37,7 +37,7 @@ class CustomSaveCancel extends StatelessWidget {
             shape: WidgetStateProperty.all(
               BeveledRectangleBorder(
                   borderRadius: BorderRadius.circular(2),
-                  side: const BorderSide(color: const Color(0xFFEE9700))),
+                  side: const BorderSide(color: Color(0xFFEE9700))),
             ),
           ),
           onPressed: saveOnPress,

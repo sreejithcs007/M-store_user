@@ -152,6 +152,10 @@ import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/shared/model/product_card/model.dart';
 import 'package:ecommerce/shared/repo/authorised/dashboard_repo/dash_board_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
+import 'package:ecommerce/shared/repo/authorised/wishlist_list_repo/wishlist_repo.dart';
+import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -163,6 +167,10 @@ class DashboardController extends GetxController {
   final RxBool isBannerLoading = false.obs;
   final RxBool isCategoriesLoading = false.obs;
   final RxBool isTodaysOfferLoading = false.obs;
+  RxBool isAddToCart = false.obs;
+  RxString imageUrl = ''.obs;
+  RxString email = ''.obs;
+  RxString name = ''.obs;
 
   @override
   void onInit() {
@@ -171,6 +179,12 @@ class DashboardController extends GetxController {
   }
 
   Future<void> _initial() async {
+    var response = await ProfileRepo().onProfileFetch();
+    if (response != null) {
+      imageUrl.value = response.uProfilePic ?? '';
+      name.value = response.uName ?? '';
+      email.value = response.uEmail ?? '';
+    }
     await fetchCategories();
     await fetchBanners();
     await fetchTodaysOffers();
@@ -223,8 +237,11 @@ class DashboardController extends GetxController {
                 qty:
                     double.tryParse((e.product?.quantity?.toString() ?? '1')) ??
                         1,
-                wishList: false,
+                wishList: e.product?.isFavorited ?? false,
                 id: e.id!,
+                unit: e.product?.quantityUnit ?? 'Kg',
+                imageUrl: e.product?.images?.first ?? '',
+                productId: e.product?.id,
               ))
           .toList();
     }
@@ -233,24 +250,52 @@ class DashboardController extends GetxController {
 
   void onCartTap(BuildContext context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => CartView()));
+        context, MaterialPageRoute(builder: (context) => const CartView()));
   }
 
   void onViewAllTap(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ViewAllScreen()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ViewAllScreen()));
   }
 
   void onClearSearch() {
     print("Clear search");
   }
 
-  void onAddToCart() {
-    print("Add to cart");
+  Future<void> onAddToCart(
+      {required int productId, required int quantity}) async {
+    isAddToCart = true.obs;
+    var response = await ProductDetailsRepo()
+        .onAddToCart(productId: productId, quantity: quantity);
+
+    devPrintSuccess('api reponse == $response');
+
+    if ((response != null) && (response.status == 201)) {
+      fnShowSnackBarSucess('Product added to cart successfully');
+    }
   }
 
-  void onFavoriteToggle() {
-    print("Toggle fav");
+  void onFavoriteToggle({required int index}) {
+    todaysOfferList.value[index].wishList =
+        !todaysOfferList.value[index].wishList;
+
+    if (todaysOfferList.value[index].wishList == true) {
+      onFavouritePressedToAdd(
+          productId: todaysOfferList.value[index].productId!);
+    } else {
+      onFavouritePressedToDelete(
+          productId: todaysOfferList.value[index].productId!);
+    }
+    todaysOfferList.refresh();
+  }
+
+  Future<void> onFavouritePressedToAdd({required int productId}) async {
+    var response = await WishListRepo().onWishListPostAdd(productId: productId);
+  }
+
+  Future<void> onFavouritePressedToDelete({required int productId}) async {
+    var response =
+        await WishListRepo().onWishListPostDelete(productId: productId);
   }
 
   void onCategoryContainerTap({required int index, required int id}) {
@@ -266,7 +311,10 @@ class DashboardController extends GetxController {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => DetailsScreenView(id: id),
+        builder: (_) => DetailsScreenView(
+          id: id,
+          isTodaysOffer: true,
+        ),
       ),
     );
   }

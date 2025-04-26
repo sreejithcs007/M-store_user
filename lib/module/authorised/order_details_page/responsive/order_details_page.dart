@@ -19,7 +19,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           icon: SvgPicture.asset(Assets.images.svg.arrowLeft),
         ),
-        title: Text('My Orders'),
+        title: const Text('My Orders'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -29,7 +29,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
             Obx(
               () => ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: controller.orderedList.value.length,
                 itemBuilder: (context, index) {
                   return _buildFirstContainer(index: index);
@@ -131,25 +131,25 @@ class OrderDetailsPageScreen extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 6),
+        const SizedBox(height: 6),
         Row(
           children: [
             Text('${controller.orderedList[index].itemRate}',
                 style:
-                    AppTextStyle().br14w600.copyWith(color: Color(0xFFEE9700))),
-            Gap(6),
+                    AppTextStyle().br14w600.copyWith(color: const Color(0xFFEE9700))),
+            const Gap(6),
             Text(
               '/ ${controller.orderedList[index].itemQty} ${controller.orderedList[index].unit}',
-              style: AppTextStyle().br14w600.copyWith(color: Color(0xFFB3B3B3)),
+              style: AppTextStyle().br14w600.copyWith(color: const Color(0xFFB3B3B3)),
             )
           ],
         ),
-        Gap(6),
+        const Gap(6),
         Text(
           controller.orderedList[index].paymentType,
-          style: AppTextStyle().br16w400.copyWith(color: Color(0xFF14AE5C)),
+          style: AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
         ),
-        Gap(6),
+        const Gap(6),
         Text(
           controller.orderedList[index].createdAt,
           style: AppTextStyle().br14w400,

@@ -87,7 +87,7 @@ class GroceryPromoScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LoginView(),
+                      builder: (context) => const LoginView(),
                     ));
               },
               child: Row(
@@ -97,8 +97,8 @@ class GroceryPromoScreen extends StatelessWidget {
                       style: AppTextStyle()
                           .br16w400
                           .copyWith(color: Colors.white)),
-                  SizedBox(width: 8),
-                  Icon(Icons.arrow_forward, color: Colors.white, size: 16),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.arrow_forward, color: Colors.white, size: 16),
                 ],
               ),
             ),

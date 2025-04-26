@@ -13,7 +13,6 @@ import 'package:ecommerce/shared/repo/login_repo/signup_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class LoginController extends GetxController {
   RxBool isSignInLoading = false.obs;
@@ -50,6 +49,9 @@ class LoginController extends GetxController {
     if (loginFormKey.currentState!.validate()) {
       var response =
           await LoginRepo().onLogin(email: email, password: password);
+
+
+      devPrintSuccess('response?==${response}');
       devPrintSuccess('response?.status==${response?.status}');
       devPrintSuccess('response?.data==${response?.data}');
       devPrintSuccess('response?.msg==${response?.msg}');
@@ -59,7 +61,7 @@ class LoginController extends GetxController {
         await setDataToLocal(data);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const NavScreen()),
+          MaterialPageRoute(builder: (context) =>  NavScreen()),
         );
 
         fnShowSnackBarSucess('Successfully logged in');

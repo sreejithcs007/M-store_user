@@ -1,7 +1,16 @@
+// To parse this JSON data, do
+//
+//     final productCategoryModel = productCategoryModelFromJson(jsonString);
 
+import 'dart:convert';
+
+List<ProductCategoryModel> productCategoryModelFromJson(String str) => List<ProductCategoryModel>.from(json.decode(str).map((x) => ProductCategoryModel.fromJson(x)));
+
+String productCategoryModelToJson(List<ProductCategoryModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductCategoryModel {
     int? id;
+    dynamic itemCode;
     String? name;
     dynamic itemType;
     String? description;
@@ -12,8 +21,8 @@ class ProductCategoryModel {
     String? discount;
     int? stock;
     List<String>? images;
-    String? colors;
-    String? sizes;
+    dynamic colors;
+    dynamic sizes;
     String? averageRating;
     int? totalReviews;
     DateTime? createdAt;
@@ -29,6 +38,7 @@ class ProductCategoryModel {
 
     ProductCategoryModel({
         this.id,
+        this.itemCode,
         this.name,
         this.itemType,
         this.description,
@@ -57,6 +67,7 @@ class ProductCategoryModel {
 
     factory ProductCategoryModel.fromJson(Map<String, dynamic> json) => ProductCategoryModel(
         id: json["id"],
+        itemCode: json["item_code"],
         name: json["name"],
         itemType: json["item_type"],
         description: json["description"],
@@ -85,6 +96,7 @@ class ProductCategoryModel {
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "item_code": itemCode,
         "name": name,
         "item_type": itemType,
         "description": description,

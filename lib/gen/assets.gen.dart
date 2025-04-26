@@ -18,8 +18,11 @@ class $AssetsAnimationGen {
   /// File path: assets/animation/Anime2.json
   String get anime2 => 'assets/animation/Anime2.json';
 
+  /// File path: assets/animation/emptyAnime.json
+  String get emptyAnime => 'assets/animation/emptyAnime.json';
+
   /// List of all assets
-  List<String> get values => [anime1, anime2];
+  List<String> get values => [anime1, anime2, emptyAnime];
 }
 
 class $AssetsImagesGen {
@@ -99,6 +102,9 @@ class $AssetsImagesSvgGen {
   /// File path: assets/images/svg/filter.svg
   String get filter => 'assets/images/svg/filter.svg';
 
+  /// File path: assets/images/svg/greyheart.svg
+  String get greyheart => 'assets/images/svg/greyheart.svg';
+
   /// File path: assets/images/svg/home.svg
   String get home => 'assets/images/svg/home.svg';
 
@@ -107,6 +113,9 @@ class $AssetsImagesSvgGen {
 
   /// File path: assets/images/svg/log-out.svg
   String get logOut => 'assets/images/svg/log-out.svg';
+
+  /// File path: assets/images/svg/redheart.svg
+  String get redheart => 'assets/images/svg/redheart.svg';
 
   /// File path: assets/images/svg/shopping-bag.svg
   String get shoppingBag => 'assets/images/svg/shopping-bag.svg';
@@ -136,9 +145,11 @@ class $AssetsImagesSvgGen {
         delete,
         favorite,
         filter,
+        greyheart,
         home,
         image18,
         logOut,
+        redheart,
         shoppingBag,
         sort,
         warning,

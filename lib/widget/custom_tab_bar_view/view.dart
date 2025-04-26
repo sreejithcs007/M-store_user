@@ -19,7 +19,7 @@ class CustomTabView extends StatelessWidget {
 
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
-            indicatorColor: Color(0xFFEE9700),
+            indicatorColor: const Color(0xFFEE9700),
             tabs: tabs,
           ),
           Expanded(

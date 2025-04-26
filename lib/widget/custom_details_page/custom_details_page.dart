@@ -42,13 +42,13 @@ class CustomDetailsPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('nma',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        const Text("Vegetables",
+                        Text("Vegetables",
                             style: TextStyle(color: Colors.grey)),
                       ],
                     ),
@@ -61,17 +61,17 @@ class CustomDetailsPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Row(
+                const Row(
                   children: [
                     Text(
                       "₹1",
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.orange),
                     ),
-                    const SizedBox(width: 4),
-                    const Text("/2", style: TextStyle(color: Colors.grey)),
+                    SizedBox(width: 4),
+                    Text("/2", style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 const SizedBox(height: 12),

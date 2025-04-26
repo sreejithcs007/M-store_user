@@ -23,11 +23,11 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 600),
     );
 
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 1), // Start from bottom
+      begin: const Offset(0, 1), // Start from bottom
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
 
@@ -38,11 +38,11 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
 
     _controller.forward();
 
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NavScreen(),
+            builder: (context) =>  NavScreen(),
           ));
     });
   }

@@ -5,15 +5,9 @@ import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/core/db/model/user_details/user.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
-import 'package:ecommerce/module/authorised/dashboard/view.dart';
-import 'package:ecommerce/module/authorised/product_list_Screen.dart/responsive/mobile.dart';
-import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
-import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/module/unauthorised/onboard_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 // Import your screens
@@ -50,7 +44,7 @@ class GroceryApp extends StatelessWidget {
           ? const GroceryPromoScreen()
           : GetHiveHelper.getUserDetailsHive()?.accessToken == null
               ? const LoginView()
-              : const NavScreen(),
+              :  NavScreen(),
     );
   }
 }

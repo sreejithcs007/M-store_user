@@ -1,21 +1,21 @@
-
-
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/profile_main_screen/screen.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavScreen extends StatefulWidget {
-  const NavScreen({super.key});
+   NavScreen({super.key, this.index = 0});
+   int index;
 
   @override
   State<NavScreen> createState() => _NavScreenState();
 }
 
 class _NavScreenState extends State<NavScreen> {
-  int index = 0;
+  // int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,14 @@ class _NavScreenState extends State<NavScreen> {
     ];
 
     return Scaffold(
-      body: screens[index],
+      body: screens[widget.index],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (tapIndex) {
           setState(() {
-            index = tapIndex;
+           widget.index = tapIndex;
           });
         },
-        currentIndex: index,
+        currentIndex: widget.index,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.orange,
         selectedItemColor: Colors.black,
@@ -44,21 +44,21 @@ class _NavScreenState extends State<NavScreen> {
           BottomNavigationBarItem(
             icon: _buildNavIcon(
               svgPath: Assets.images.svg.home,
-              isSelected: index == 0,
+              isSelected: widget.index == 0,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: _buildNavIcon(
               svgPath: Assets.images.svg.shoppingBag,
-              isSelected: index == 1,
+              isSelected: widget.index == 1,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: _buildNavIcon(
               svgPath: Assets.images.svg.user,
-              isSelected: index == 2,
+              isSelected: widget.index == 2,
             ),
             label: '',
           ),

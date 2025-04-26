@@ -8,41 +8,41 @@ class CartScreen extends StatelessWidget {
 
   // Sample static cart list
   final List<CartItemCustomModel> cartItems = [
-    CartItemCustomModel(
-        productId: 1,
-        name: "Tomato",
-        price: "100.00",
-        quantity: 2,
-        isFavorite: true,
-        id: 1),
-    CartItemCustomModel(
-        productId: 1,
-        name: "Carrot",
-        price: "130.00",
-        quantity: 2,
-        isFavorite: true,
-        id: 1),
-    CartItemCustomModel(
-        productId: 1,
-        name: "Onion",
-        price: "40.00",
-        quantity: 1,
-        isFavorite: false,
-        id: 1),
-    CartItemCustomModel(
-        productId: 1,
-        name: "Broccoli",
-        price: "120.00",
-        quantity: 2,
-        isFavorite: false,
-        id: 1),
-    CartItemCustomModel(
-        productId: 1,
-        name: "Potato",
-        price: "33.00",
-        quantity: 1,
-        isFavorite: false,
-        id: 1),
+    // CartItemCustomModel(
+    //     productId: 1,
+    //     name: "Tomato",
+    //     price: "100.00",
+    //     quantity: 2,
+    //     isFavorite: true,
+    //     id: 1),
+    // CartItemCustomModel(
+    //     productId: 1,
+    //     name: "Carrot",
+    //     price: "130.00",
+    //     quantity: 2,
+    //     isFavorite: true,
+    //     id: 1),
+    // CartItemCustomModel(
+    //     productId: 1,
+    //     name: "Onion",
+    //     price: "40.00",
+    //     quantity: 1,
+    //     isFavorite: false,
+    //     id: 1),
+    // CartItemCustomModel(
+    //     productId: 1,
+    //     name: "Broccoli",
+    //     price: "120.00",
+    //     quantity: 2,
+    //     isFavorite: false,
+    //     id: 1),
+    // CartItemCustomModel(
+    //     productId: 1,
+    //     name: "Potato",
+    //     price: "33.00",
+    //     quantity: 1,
+    //     isFavorite: false,
+    //     id: 1),
   ];
 
   @override
@@ -96,11 +96,11 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text("Subtotal (5 items):", style: TextStyle(fontSize: 16)),
                 Text("₹423.00",
                     style:
