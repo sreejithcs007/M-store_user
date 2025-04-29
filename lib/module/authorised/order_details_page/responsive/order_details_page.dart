@@ -2,6 +2,7 @@ import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/order_details_page/controller.dart';
+import 'package:ecommerce/widget/custom_time_line/custome_time_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -38,6 +39,8 @@ class OrderDetailsPageScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _buildSecondDetails(),
+            const SizedBox(height: 16),
+            _buildThirdContainer(),
           ],
         ),
       ),
@@ -135,19 +138,23 @@ class OrderDetailsPageScreen extends StatelessWidget {
         Row(
           children: [
             Text('${controller.orderedList[index].itemRate}',
-                style:
-                    AppTextStyle().br14w600.copyWith(color: const Color(0xFFEE9700))),
+                style: AppTextStyle()
+                    .br14w600
+                    .copyWith(color: const Color(0xFFEE9700))),
             const Gap(6),
             Text(
               '/ ${controller.orderedList[index].itemQty} ${controller.orderedList[index].unit}',
-              style: AppTextStyle().br14w600.copyWith(color: const Color(0xFFB3B3B3)),
+              style: AppTextStyle()
+                  .br14w600
+                  .copyWith(color: const Color(0xFFB3B3B3)),
             )
           ],
         ),
         const Gap(6),
         Text(
           controller.orderedList[index].paymentType,
-          style: AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
+          style:
+              AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
         ),
         const Gap(6),
         Text(
@@ -160,7 +167,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
 
   Widget _buildSecondDetails() {
     return Container(
-      height: 200,
+      height: 160,
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.all(12),
@@ -175,22 +182,46 @@ class OrderDetailsPageScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Text('Delivery Address'),
-          ),
-          Text('Nisha', style: TextStyle(color: Colors.grey)),
-          Gap(6),
-          Text('nisha@gmail.com', style: TextStyle(color: Colors.grey)),
-          Gap(6),
-          Text('12 Kollam', style: TextStyle(color: Colors.grey)),
-          Gap(6),
-          Text('Kerala, Nadakav', style: TextStyle(color: Colors.grey)),
-          Gap(6),
-          Text('1234', style: TextStyle(color: Colors.grey)),
-        ],
+      child: Obx(
+        () => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                'Delivery Address',
+                style: AppTextStyle().br16w400,
+              ),
+            ),
+            Text(controller.deliveryName.value, style: AppTextStyle().br16w600),
+            Gap(6),
+            Text(controller.deliveryGmail.value,
+                style: AppTextStyle().br16w400),
+            Gap(6),
+            Text(controller.deliveryAddress.value,
+                style: AppTextStyle().br16w400),
+            Gap(6),
+            Text(controller.deliveryPincode.value,
+                style: AppTextStyle().br16w400),
+            // Gap(6),
+            // Text('1234', style: TextStyle(color: Colors.grey)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildThirdContainer() {
+    return Obx(
+      () =>  Container(
+        // height: 200,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15)
+        ),
+        child: DeliveryTimeline(
+          steps: controller.deliverySteps,
+          currentStatus: controller.currentStatus.value,
+        ),
       ),
     );
   }

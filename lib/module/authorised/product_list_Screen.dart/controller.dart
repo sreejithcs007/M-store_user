@@ -18,6 +18,9 @@ class ProductListScreenController extends GetxController {
   RxBool isProductLoading = false.obs;
   int? index;
   int? id;
+    RxString imageUrls = ''.obs;
+  RxString email = ''.obs;
+  RxString name = ''.obs;
   ProductListScreenController(this.index, this.id);
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
   final tabs = <String>[
@@ -148,6 +151,8 @@ class ProductListScreenController extends GetxController {
     var response = await ProfileRepo().onProfileFetch();
     if (response != null) {
       imageUrl.value = response.uProfilePic ?? '';
+      name.value = response.uName ?? '';
+      email.value = response.uEmail ?? '';
     }
 
     var categoryResponse = await DashBoardRepo().onCategoryFetch();

@@ -1,24 +1,39 @@
+// To parse this JSON data, do
+//
+//     final orderDetailsModel = orderDetailsModelFromJson(jsonString);
+
+import 'dart:convert';
+
+OrderDetailsModel orderDetailsModelFromJson(String str) => OrderDetailsModel.fromJson(json.decode(str));
+
+String orderDetailsModelToJson(OrderDetailsModel data) => json.encode(data.toJson());
+
 class OrderDetailsModel {
-    OrderDetails? order;
+    Orders? order;
+    UserAddress? userAddress;
 
     OrderDetailsModel({
         this.order,
+        this.userAddress,
     });
 
     factory OrderDetailsModel.fromJson(Map<String, dynamic> json) => OrderDetailsModel(
-        order: json["order"] == null ? null : OrderDetails.fromJson(json["order"]),
+        order: json["order"] == null ? null : Orders.fromJson(json["order"]),
+        userAddress: json["user_address"] == null ? null : UserAddress.fromJson(json["user_address"]),
     );
 
     Map<String, dynamic> toJson() => {
         "order": order?.toJson(),
+        "user_address": userAddress?.toJson(),
     };
 }
 
-class OrderDetails {
+class Orders {
     int? id;
     int? userId;
     String? paymentMethod;
     String? status;
+    dynamic canceledAt;
     dynamic deliveryImage;
     dynamic deliveryRemark;
     dynamic deliveredAt;
@@ -30,13 +45,17 @@ class OrderDetails {
     String? paymentStatus;
     String? deliveryStatus;
     dynamic collectedByDeliveryBoy;
+    dynamic collectedAt;
+    dynamic onGoingAt;
     List<Item>? items;
+    User? user;
 
-    OrderDetails({
+    Orders({
         this.id,
         this.userId,
         this.paymentMethod,
         this.status,
+        this.canceledAt,
         this.deliveryImage,
         this.deliveryRemark,
         this.deliveredAt,
@@ -48,14 +67,18 @@ class OrderDetails {
         this.paymentStatus,
         this.deliveryStatus,
         this.collectedByDeliveryBoy,
+        this.collectedAt,
+        this.onGoingAt,
         this.items,
+        this.user,
     });
 
-    factory OrderDetails.fromJson(Map<String, dynamic> json) => OrderDetails(
+    factory Orders.fromJson(Map<String, dynamic> json) => Orders(
         id: json["id"],
         userId: json["user_id"],
         paymentMethod: json["payment_method"],
         status: json["status"],
+        canceledAt: json["canceled_at"],
         deliveryImage: json["delivery_image"],
         deliveryRemark: json["delivery_remark"],
         deliveredAt: json["delivered_at"],
@@ -67,7 +90,10 @@ class OrderDetails {
         paymentStatus: json["payment_status"],
         deliveryStatus: json["delivery_status"],
         collectedByDeliveryBoy: json["collected_by_delivery_boy"],
+        collectedAt: json["collected_at"],
+        onGoingAt: json["on_going_at"],
         items: json["items"] == null ? [] : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -75,6 +101,7 @@ class OrderDetails {
         "user_id": userId,
         "payment_method": paymentMethod,
         "status": status,
+        "canceled_at": canceledAt,
         "delivery_image": deliveryImage,
         "delivery_remark": deliveryRemark,
         "delivered_at": deliveredAt,
@@ -86,7 +113,10 @@ class OrderDetails {
         "payment_status": paymentStatus,
         "delivery_status": deliveryStatus,
         "collected_by_delivery_boy": collectedByDeliveryBoy,
+        "collected_at": collectedAt,
+        "on_going_at": onGoingAt,
         "items": items == null ? [] : List<dynamic>.from(items!.map((x) => x.toJson())),
+        "user": user?.toJson(),
     };
 }
 
@@ -140,6 +170,7 @@ class Item {
 
 class Product {
     int? id;
+    dynamic itemCode;
     String? name;
     dynamic itemType;
     String? description;
@@ -150,8 +181,8 @@ class Product {
     String? discount;
     int? stock;
     List<String>? images;
-    List<String>? colors;
-    List<String>? sizes;
+    dynamic colors;
+    dynamic sizes;
     String? averageRating;
     int? totalReviews;
     DateTime? createdAt;
@@ -166,6 +197,7 @@ class Product {
 
     Product({
         this.id,
+        this.itemCode,
         this.name,
         this.itemType,
         this.description,
@@ -193,6 +225,7 @@ class Product {
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json["id"],
+        itemCode: json["item_code"],
         name: json["name"],
         itemType: json["item_type"],
         description: json["description"],
@@ -203,8 +236,8 @@ class Product {
         discount: json["discount"],
         stock: json["stock"],
         images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
-        colors: json["colors"] == null ? [] : List<String>.from(json["colors"]!.map((x) => x)),
-        sizes: json["sizes"] == null ? [] : List<String>.from(json["sizes"]!.map((x) => x)),
+        colors: json["colors"],
+        sizes: json["sizes"],
         averageRating: json["average_rating"],
         totalReviews: json["total_reviews"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -220,6 +253,7 @@ class Product {
 
     Map<String, dynamic> toJson() => {
         "id": id,
+        "item_code": itemCode,
         "name": name,
         "item_type": itemType,
         "description": description,
@@ -230,8 +264,8 @@ class Product {
         "discount": discount,
         "stock": stock,
         "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
-        "colors": colors == null ? [] : List<dynamic>.from(colors!.map((x) => x)),
-        "sizes": sizes == null ? [] : List<dynamic>.from(sizes!.map((x) => x)),
+        "colors": colors,
+        "sizes": sizes,
         "average_rating": averageRating,
         "total_reviews": totalReviews,
         "created_at": createdAt?.toIso8601String(),
@@ -243,5 +277,97 @@ class Product {
         "quantity": quantity,
         "quantity_unit": quantityUnit,
         "product_type": productType,
+    };
+}
+
+class User {
+    int? id;
+    String? uName;
+    String? uEmail;
+    String? uPhone;
+    String? uAddress;
+    String? city;
+    dynamic pinCode;
+    String? uStatus;
+    String? uProfilePic;
+    String? uApprovalStatus;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    String? role;
+    int? superCoins;
+
+    User({
+        this.id,
+        this.uName,
+        this.uEmail,
+        this.uPhone,
+        this.uAddress,
+        this.city,
+        this.pinCode,
+        this.uStatus,
+        this.uProfilePic,
+        this.uApprovalStatus,
+        this.createdAt,
+        this.updatedAt,
+        this.role,
+        this.superCoins,
+    });
+
+    factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"],
+        uName: json["u_name"],
+        uEmail: json["u_email"],
+        uPhone: json["u_phone"],
+        uAddress: json["u_address"],
+        city: json["city"],
+        pinCode: json["pin_code"],
+        uStatus: json["u_status"],
+        uProfilePic: json["u_profile_pic"],
+        uApprovalStatus: json["u_approval_status"],
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+        role: json["role"],
+        superCoins: json["super_coins"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "u_name": uName,
+        "u_email": uEmail,
+        "u_phone": uPhone,
+        "u_address": uAddress,
+        "city": city,
+        "pin_code": pinCode,
+        "u_status": uStatus,
+        "u_profile_pic": uProfilePic,
+        "u_approval_status": uApprovalStatus,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
+        "role": role,
+        "super_coins": superCoins,
+    };
+}
+
+class UserAddress {
+    String? address;
+    String? city;
+    dynamic pinCode;
+
+    UserAddress({
+        this.address,
+        this.city,
+        this.pinCode,
+    });
+
+    factory UserAddress.fromJson(Map<String, dynamic> json) => UserAddress(
+        address: json["address"],
+        city: json["city"],
+        pinCode: json["pin_code"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "address": address,
+        "city": city,
+        "pin_code": pinCode,
     };
 }
