@@ -80,8 +80,8 @@ class GroceryPromoScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8)),
               ),
-              onPressed: ()async {
-  await saveOnboardingSeen();
+              onPressed: () async {
+                await saveOnboardingSeen();
 
                 Navigator.push(
                     context,
@@ -97,7 +97,8 @@ class GroceryPromoScreen extends StatelessWidget {
                           .br16w400
                           .copyWith(color: Colors.white)),
                   const SizedBox(width: 8),
-                  const Icon(Icons.arrow_forward, color: Colors.white, size: 16),
+                  const Icon(Icons.arrow_forward,
+                      color: Colors.white, size: 16),
                 ],
               ),
             ),
@@ -108,8 +109,8 @@ class GroceryPromoScreen extends StatelessWidget {
   }
 
   Future<void> saveOnboardingSeen() async {
-  var box = HiveHelper.getOnboardDetailsHiveBox();
-var id = OnBoardScreenHiveModel(isSeen: true);
-await box.put(DbKeys.user1Key, id);
-}
+    var box = HiveHelper.getOnboardDetailsHiveBox();
+    var id = OnBoardScreenHiveModel(isSeen: true);
+    await box.put(DbKeys.user1Key, id);
+  }
 }
