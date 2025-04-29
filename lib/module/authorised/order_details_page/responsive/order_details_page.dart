@@ -40,7 +40,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
             const SizedBox(height: 16),
             _buildSecondDetails(),
             const SizedBox(height: 16),
-            _buildThirdContainer(),
+            Obx(() =>  _buildThirdContainer()),
           ],
         ),
       ),
@@ -211,13 +211,29 @@ class OrderDetailsPageScreen extends StatelessWidget {
   }
 
   Widget _buildThirdContainer() {
+    print(
+        "controller.currentStatus.value == ${controller.currentStatus.value}");
+    if ((controller.currentStatus.value == "Pending") || (controller.currentStatus.value == " ")) {
+      return Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(15)),
+        child: DeliveryTimeline(
+          steps: [
+            TimelineStep(title: "Pending", time: 'yet to dispatch'),
+            TimelineStep(title: "Product collected", time: ''),
+            TimelineStep(title: "On going", time: ''),
+            TimelineStep(title: "Delivered", time: ''),
+
+          ],
+          currentStatus: 'Pending',
+        ),
+      );
+    }
     return Obx(
-      () =>  Container(
+      () => Container(
         // height: 200,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15)
-        ),
+            color: Colors.white, borderRadius: BorderRadius.circular(15)),
         child: DeliveryTimeline(
           steps: controller.deliverySteps,
           currentStatus: controller.currentStatus.value,

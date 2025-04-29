@@ -42,7 +42,7 @@ class DeliveryTimeline extends StatelessWidget {
             indicator: Container(
               decoration: BoxDecoration(
                 color: isCompleted || isCurrent ? Colors.green : Colors.white,
-                border: Border.all(color: Colors.green, width: 2),
+                border: Border.all(color:  isCompleted || isCurrent ? Colors.green : Colors.grey, width: 2),
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -51,7 +51,7 @@ class DeliveryTimeline extends StatelessWidget {
                       ? Icons.check
                       : Icons.circle,
                   size: 14,
-                  color: isCompleted || isCurrent ? Colors.white : Colors.green,
+                  color: isCompleted || isCurrent ? Colors.white : Colors.grey,
                 ),
               ),
             ),

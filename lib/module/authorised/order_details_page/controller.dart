@@ -16,7 +16,7 @@ class OrderDetailsPageController extends GetxController {
   RxString deliveryPincode = ''.obs;
 
   RxList<TimelineStep> deliverySteps = <TimelineStep>[].obs;
-     RxString currentStatus = "".obs;
+  RxString currentStatus = "".obs;
 
   @override
   void onInit() {
@@ -58,11 +58,28 @@ class OrderDetailsPageController extends GetxController {
       deliveryPincode.value = response.order?.user?.pinCode ?? '';
 
       deliverySteps.value = [
-        TimelineStep(title: "Product collected", time: "12/01/2024 | 10.25 Am"),
-        TimelineStep(title: "On going", time: "12/01/2024 | 10.30 Am"),
-        TimelineStep(title: "Delivered", time: "12/01/2024 | 11.30 Am"),
+        TimelineStep(
+            title: "Product collected",
+            time: formatTimestamp(response.order?.collectedAt == null
+                    ? '1'
+                    : (response.order?.collectedAt.toString() ?? '')) ??
+                ''),
+        TimelineStep(
+            title: "On going",
+            time: formatTimestamp(response.order?.onGoingAt == null
+                    ? ''
+                    : (response.order?.onGoingAt.toString() ?? '')) ??
+                ''),
+        TimelineStep(
+            title: "Delivered",
+            time: formatTimestamp(response.order?.deliveredAt == null
+                    ? ''
+                    : (response.order?.deliveredAt.toString() ?? '')) ??
+                ''),
       ];
-      currentStatus.value = "Delivered";
+      currentStatus.value = capitalizeFirst(response.order?.status) ?? 'Pending';
+      print('currentStatus =$currentStatus');
+
     }
 
     devPrintSuccess('orderdeyails length == ${orderedList.value.length} ');

@@ -36,7 +36,7 @@ class Orders {
     dynamic canceledAt;
     dynamic deliveryImage;
     dynamic deliveryRemark;
-    dynamic deliveredAt;
+    DateTime? deliveredAt;
     String? totalAmount;
     dynamic transactionId;
     DateTime? createdAt;
@@ -44,9 +44,9 @@ class Orders {
     dynamic deliveryBoyId;
     String? paymentStatus;
     String? deliveryStatus;
-    dynamic collectedByDeliveryBoy;
-    dynamic collectedAt;
-    dynamic onGoingAt;
+    int? collectedByDeliveryBoy;
+    DateTime? collectedAt;
+    DateTime? onGoingAt;
     List<Item>? items;
     User? user;
 
@@ -81,7 +81,7 @@ class Orders {
         canceledAt: json["canceled_at"],
         deliveryImage: json["delivery_image"],
         deliveryRemark: json["delivery_remark"],
-        deliveredAt: json["delivered_at"],
+        deliveredAt: json["delivered_at"] == null ? null : DateTime.parse(json["delivered_at"]),
         totalAmount: json["total_amount"],
         transactionId: json["transaction_id"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -90,8 +90,8 @@ class Orders {
         paymentStatus: json["payment_status"],
         deliveryStatus: json["delivery_status"],
         collectedByDeliveryBoy: json["collected_by_delivery_boy"],
-        collectedAt: json["collected_at"],
-        onGoingAt: json["on_going_at"],
+        collectedAt: json["collected_at"] == null ? null : DateTime.parse(json["collected_at"]),
+        onGoingAt: json["on_going_at"] == null ? null : DateTime.parse(json["on_going_at"]),
         items: json["items"] == null ? [] : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
         user: json["user"] == null ? null : User.fromJson(json["user"]),
     );
@@ -104,7 +104,7 @@ class Orders {
         "canceled_at": canceledAt,
         "delivery_image": deliveryImage,
         "delivery_remark": deliveryRemark,
-        "delivered_at": deliveredAt,
+        "delivered_at": deliveredAt?.toIso8601String(),
         "total_amount": totalAmount,
         "transaction_id": transactionId,
         "created_at": createdAt?.toIso8601String(),
@@ -113,8 +113,8 @@ class Orders {
         "payment_status": paymentStatus,
         "delivery_status": deliveryStatus,
         "collected_by_delivery_boy": collectedByDeliveryBoy,
-        "collected_at": collectedAt,
-        "on_going_at": onGoingAt,
+        "collected_at": collectedAt?.toIso8601String(),
+        "on_going_at": onGoingAt?.toIso8601String(),
         "items": items == null ? [] : List<dynamic>.from(items!.map((x) => x.toJson())),
         "user": user?.toJson(),
     };
