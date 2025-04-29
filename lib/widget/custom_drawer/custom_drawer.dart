@@ -14,8 +14,8 @@ class MyCustomDrawer extends StatelessWidget {
   final String email;
   final String imageUrl;
 
-  MyCustomDrawer(
-      {required this.name, required this.email, required this.imageUrl});
+  const MyCustomDrawer(
+      {super.key, required this.name, required this.email, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MyCustomDrawer extends StatelessWidget {
         children: <Widget>[
           // Header of the drawer
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: Color(0xFFEE9700)),
+            decoration: const BoxDecoration(color: Color(0xFFEE9700)),
             accountName: Text(name),
             accountEmail: Text(email),
             currentAccountPicture: CircleAvatar(
@@ -46,7 +46,7 @@ class MyCustomDrawer extends StatelessWidget {
           // Drawer items
           ListTile(
             leading: SvgPicture.asset(Assets.images.svg.user),
-            title: Text('Profile'),
+            title: const Text('Profile'),
             onTap: () {
               Navigator.push(
                 context,
@@ -59,7 +59,7 @@ class MyCustomDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: SvgPicture.asset(Assets.images.svg.favorite),
-            title: Text('Favorites'),
+            title: const Text('Favorites'),
             onTap: () {
               Navigator.push(
                   context,
@@ -70,7 +70,7 @@ class MyCustomDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: SvgPicture.asset(Assets.images.svg.shoppingBag),
-            title: Text('Orders'),
+            title: const Text('Orders'),
             onTap: () {
               Navigator.push(
                   context,
@@ -78,10 +78,10 @@ class MyCustomDrawer extends StatelessWidget {
                       builder: (context) => const MyOrdersScreen()));
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: SvgPicture.asset(Assets.images.svg.logOut),
-            title: Text('Logout'),
+            title: const Text('Logout'),
             onTap: () {
               showCustomDialog(
                 context: context,

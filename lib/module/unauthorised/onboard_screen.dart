@@ -5,7 +5,6 @@ import 'package:ecommerce/core/db/model/onboard/onboard.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
 class GroceryPromoScreen extends StatelessWidget {

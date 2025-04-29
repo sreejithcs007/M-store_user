@@ -108,10 +108,10 @@ class ProductListScreenController extends GetxController {
 
     if (productsPerTab.value[index].isFavorite == true) {
       onFavouritePressedToAdd(
-          productId: productsPerTab.value[index].productId!);
+          productId: productsPerTab.value[index].productId);
     } else {
       onFavouritePressedToDelete(
-          productId: productsPerTab.value[index].productId!);
+          productId: productsPerTab.value[index].productId);
     }
     productsPerTab.refresh();
   }

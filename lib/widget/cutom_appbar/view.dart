@@ -1,10 +1,8 @@
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 // class CustomAppBar extends StatelessWidget{
 //   final TextEditingController? controller;
@@ -116,11 +114,6 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 
 
-import 'package:ecommerce/core/functions/image_extract/image_link.dart';
-import 'package:ecommerce/gen/assets.gen.dart';
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget {
   final TextEditingController? controller;

@@ -66,7 +66,7 @@ class ShoppingPage extends StatelessWidget {
                         ),
                       ),
                     )),
-                Gap(10),
+                const Gap(10),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: GestureDetector(
@@ -397,7 +397,7 @@ class ShoppingPage extends StatelessWidget {
                     const SizedBox(height: 8),
 
                     // 📝 Text Info (fixed height)
-                    Container(
+                    SizedBox(
                       height: 70,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

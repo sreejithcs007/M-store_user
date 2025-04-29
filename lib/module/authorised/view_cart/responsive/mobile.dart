@@ -336,7 +336,7 @@ class CartViewMobile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Subtotal (${controller.cartItems.length} items):", style: AppTextStyle().br16w600),
-                  Text("${controller.subtotal.value.toStringAsFixed(2)}", style: AppTextStyle().br24w600),
+                  Text(controller.subtotal.value.toStringAsFixed(2), style: AppTextStyle().br24w600),
                 ],
               ),
             ),
