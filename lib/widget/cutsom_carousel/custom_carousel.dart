@@ -24,7 +24,7 @@ class _SimpleCarouselState extends State<SimpleCarousel> {
           child: CarouselSlider(
             items: widget.bannerImages.map((e) {
               return Container(
-                padding: widget.isPaddingNeed == true? EdgeInsets.all(15) : EdgeInsets.zero,
+                padding: widget.isPaddingNeed == true? const EdgeInsets.all(15) : EdgeInsets.zero,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),

@@ -17,7 +17,7 @@ class OrderRepo {
         return OrderList.map(
           (e) => Order.fromJson(e),
         ).toList();
-            }
+      }
     } catch (e) {
       devPrintError('catch error in order list repo ==$e');
     }
@@ -33,7 +33,7 @@ class OrderRepo {
 
       if (res.status == 200) {
         devPrintWarning('repo == ${res.data}');
-        return OrderDetailsModel.fromJson(res.data) ;
+        return OrderDetailsModel.fromJson(res.data);
       }
     } catch (e) {
       devPrintError('catch error in order list repo ==$e');

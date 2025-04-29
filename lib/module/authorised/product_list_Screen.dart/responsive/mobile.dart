@@ -4,6 +4,7 @@ import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/controller.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,14 +34,33 @@ class ShoppingPage extends StatelessWidget {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.grey[50],
+            drawer: Obx(
+              () => MyCustomDrawer(
+                email: controller.email.value,
+                imageUrl: controller.imageUrl.value,
+                name: controller.name.value,
+              ),
+            ),
             appBar: AppBar(
-              leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: SvgPicture.asset(
-                    Assets.images.svg.arrowLeft,
-                  )),
+              leading: Padding(
+                 padding: const EdgeInsets.only(top: 10),
+                child: CircleAvatar(
+                  // maxRadius: 10,
+                  child: Builder(
+                    builder: (context) => GestureDetector(
+                      onTap: () => Scaffold.of(context).openDrawer(),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: Assets.images.company.companyLogo.image(
+                          fit: BoxFit.cover,
+                          width: 50,
+                          height: 40,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               elevation: 0,
               backgroundColor: Colors.grey[50],
               actions: [
@@ -66,7 +86,7 @@ class ShoppingPage extends StatelessWidget {
                         ),
                       ),
                     )),
-                Gap(10),
+                const Gap(10),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
                   child: GestureDetector(
@@ -397,7 +417,7 @@ class ShoppingPage extends StatelessWidget {
                     const SizedBox(height: 8),
 
                     // 📝 Text Info (fixed height)
-                    Container(
+                    SizedBox(
                       height: 70,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

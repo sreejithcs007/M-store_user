@@ -95,10 +95,10 @@ class WishlistController extends GetxController {
         !wishListItems.value[index].isFavorite;
 
     if (wishListItems.value[index].isFavorite == true) {
-      onFavouritePressedToAdd(productId: wishListItems.value[index].productId!);
+      onFavouritePressedToAdd(productId: wishListItems.value[index].productId);
     } else {
       onFavouritePressedToDelete(
-          productId: wishListItems.value[index].productId!, index: index);
+          productId: wishListItems.value[index].productId, index: index);
     }
     wishListItems.refresh();
   }
@@ -125,7 +125,7 @@ class WishlistController extends GetxController {
     var response = await WishListRepo().onWishListFetch();
 
     if (response != null) {
-      devPrintSuccess('ws = ${response}');
+      devPrintSuccess('ws = $response');
       wishListItems.value = response
               .map(
                 (e) => CartItemCustomModel(

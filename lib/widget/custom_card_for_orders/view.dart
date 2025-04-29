@@ -70,7 +70,10 @@ class MyOrderCard extends StatelessWidget {
             ),
             Text(
               deliveryStatus,
-              style: AppTextStyle().br16w600,
+              style: AppTextStyle().br16w600.copyWith(
+                  color: deliveryStatus == 'delivered'
+                      ? Color(0xFF14AE5C)
+                      : Color(0xFFEE9700)),
             )
           ],
         ),
@@ -130,19 +133,23 @@ class MyOrderCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(currentPrice,
-                style:
-                    AppTextStyle().br14w600.copyWith(color: const Color(0xFFEE9700))),
+                style: AppTextStyle()
+                    .br14w600
+                    .copyWith(color: const Color(0xFFEE9700))),
             const Gap(6),
             Text(
               '/ $quantityInfo',
-              style: AppTextStyle().br14w600.copyWith(color: const Color(0xFFB3B3B3)),
+              style: AppTextStyle()
+                  .br14w600
+                  .copyWith(color: const Color(0xFFB3B3B3)),
             ),
           ],
         ),
         const Gap(6),
         Text(
           paymentType,
-          style: AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
+          style:
+              AppTextStyle().br16w400.copyWith(color: const Color(0xFF14AE5C)),
         ),
         const Gap(6),
         Text(

@@ -162,7 +162,7 @@ class ProductDetailController extends GetxController {
         relatedProducts.value = response
             .map(
               (e) => CartItemCustomModel(
-                  productId: e!.id!,
+                  productId: e.id!,
                   isFavorite: false,
                   name: e.name ?? '',
                   price: e.price ?? '',

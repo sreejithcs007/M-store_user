@@ -105,7 +105,7 @@ class CategoryGridItem extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(
           minHeight: 180,
-          maxHeight: 220, // Adjust this based on your UI space
+          maxHeight: 220,
         ),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class CategoryGridItem extends StatelessWidget {
 
             // Fixed space for text at the bottom
             SizedBox(
-              height: 40,
+              height: 20,
               child: Center(
                 child: Text(
                   title,

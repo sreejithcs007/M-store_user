@@ -51,7 +51,7 @@ class LoginController extends GetxController {
           await LoginRepo().onLogin(email: email, password: password);
 
 
-      devPrintSuccess('response?==${response}');
+      devPrintSuccess('response?==$response');
       devPrintSuccess('response?.status==${response?.status}');
       devPrintSuccess('response?.data==${response?.data}');
       devPrintSuccess('response?.msg==${response?.msg}');

@@ -2,7 +2,6 @@ import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
-import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

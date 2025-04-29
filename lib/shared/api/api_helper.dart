@@ -9,7 +9,7 @@ class ApiHelper {
   static Map<String, String> getApiHeader({String? access, String? dbName}) {
     if (access != null) {
       return {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $access',
       };
     } else if (dbName != null) {
@@ -113,7 +113,7 @@ static Future<ApiResponse?> postDatas({
     var response = await http.post(
       url,
       headers: header,
-      body: json.encode(body),  // Ensure the body is JSON-encoded
+      body: jsonEncode(body),  // Ensure the body is JSON-encoded
     );
 
     if (response.statusCode == 200) {

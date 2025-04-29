@@ -1,7 +1,6 @@
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/unauthorised/authentication/controller.dart';
-import 'package:ecommerce/module/unauthorised/authentication/login/login.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';

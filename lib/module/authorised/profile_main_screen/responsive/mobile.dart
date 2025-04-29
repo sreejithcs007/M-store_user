@@ -55,7 +55,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                       )),
                   Obx(() => Text(controller.nameText.value,
                       style: AppTextStyle().br16w600)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Obx(
                     () => RichText(
                         text: TextSpan(children: [
@@ -65,7 +65,7 @@ class ProfileSectionNavMobile extends StatelessWidget {
                           text: '${controller.superCoin.value} 🪙',
                           style: AppTextStyle()
                               .br14w400
-                              .copyWith(color: Color(0xFFEE9700))),
+                              .copyWith(color: const Color(0xFFEE9700))),
                     ])),
                   )
                 ],

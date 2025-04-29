@@ -1,7 +1,5 @@
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
-import 'package:ecommerce/module/authorised/dashboard/view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class PurchaseSuccessScreen extends StatefulWidget {

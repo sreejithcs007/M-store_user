@@ -22,9 +22,9 @@ class CartViewController extends GetxController {
     cartItems.value[index].isFavorite = !cartItems.value[index].isFavorite;
 
     if (cartItems.value[index].isFavorite == true) {
-      onFavouritePressedToAdd(productId: cartItems.value[index].productId!);
+      onFavouritePressedToAdd(productId: cartItems.value[index].productId);
     } else {
-      onFavouritePressedToDelete(productId: cartItems.value[index].productId!);
+      onFavouritePressedToDelete(productId: cartItems.value[index].productId);
     }
     cartItems.refresh();
   }
