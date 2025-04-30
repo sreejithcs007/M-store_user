@@ -119,19 +119,19 @@ class ProductDetailsRepo {
     // Make the API call
    var response = await ApiHelper.postDatas(
   endPoint: '/orders/cod',
-  body: 
-    {
-    "user_id": GetHiveHelper.getUserDetailsHive()?.id,
-    "payment_method": "cod",
-    "items": [
-        {
-            "product_id": productId,
-            "quantity": quantity,
-            "price": price
-        }
-    ]
+  body: body!,
+  //   {
+  //   "user_id": GetHiveHelper.getUserDetailsHive()?.id,
+  //   "payment_method": "cod",
+  //   "items": [
+  //       {
+  //           "product_id": productId,
+  //           "quantity": quantity,
+  //           "price": price
+  //       }
+  //   ]
 
-  },
+  // },
   header: ApiHelper.getApiHeader(
     access: GetHiveHelper.getUserDetailsHive()?.accessToken,
     // contentType: "application/json",
