@@ -1,9 +1,6 @@
 import 'dart:async';
 
-import 'package:ecommerce/core/constants/text_style.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 // class AutocompleteWidget<T extends Object> extends StatefulWidget {
 //   AutocompleteWidget({
@@ -338,8 +335,6 @@ import 'package:gap/gap.dart';
 //   }
 // }
 
-import 'dart:async';
-import 'package:flutter/material.dart';
 
 class AutocompleteWidget<T extends Object> extends StatefulWidget {
   AutocompleteWidget({

@@ -71,7 +71,7 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
               ),
             ),
           ),
-          Text('Payment method : Cash on delivery'),
+          const Text('Payment method : Cash on delivery'),
         ],
       ),
     );

@@ -9,7 +9,6 @@ import 'package:ecommerce/module/authorised/profile_module/wishlist/screens.dart
 import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
-import 'package:ecommerce/widget/custom_cart_view/custom_cart_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';

@@ -13,10 +13,10 @@ class DeliveryTimeline extends StatelessWidget {
   final String currentStatus;
 
   const DeliveryTimeline({
-    Key? key,
+    super.key,
     required this.steps,
     required this.currentStatus,
-  }) : super(key: key);
+  });
 
   int getCurrentIndex() {
     return steps.indexWhere((step) => step.title == currentStatus);
@@ -69,7 +69,7 @@ class DeliveryTimeline extends StatelessWidget {
             child: ListTile(
               title: Text(
                 steps[index].title,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(steps[index].time),
             ),

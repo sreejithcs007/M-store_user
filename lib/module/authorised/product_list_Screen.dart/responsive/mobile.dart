@@ -141,10 +141,8 @@ class ShoppingPage extends StatelessWidget {
 
                         // ✅ Proper context here
                         final tabController = DefaultTabController.of(context);
-                        if (tabController != null) {
-                          tabController.animateTo(index);
-                        }
-
+                        tabController.animateTo(index);
+                      
                         controller.onTap(
                           index: index,
                           id: controller.categories[index].id ?? 1,

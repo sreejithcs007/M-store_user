@@ -129,7 +129,7 @@ class CustomAppBar<T> extends StatelessWidget {
 //     final Widget Function(T value) selectedBuilder;
 //     final Function(T)? onSelect;
 
-  CustomAppBar({
+  const CustomAppBar({
     super.key,
     required this.controller,
     this.hintText = "Search",
