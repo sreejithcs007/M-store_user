@@ -1,7 +1,10 @@
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
+import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
+import 'package:ecommerce/module/authorised/payment_screen/ui.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
+import 'package:ecommerce/shared/repo/authorised/product_details_repo.dart/details_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/view_cart/view_cart_repo.dart';
 import 'package:ecommerce/shared/repo/authorised/wishlist_list_repo/wishlist_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
@@ -61,6 +64,43 @@ class CartViewController extends GetxController {
       cartItems.value = [];
     }
     calculateSubTotal(cartItems);
+  }
+
+  Future<void> proceedToBuy() async {
+    var response = await ProductDetailsRepo().onBuyNow(
+      productId: 1,
+      quantity: 1,
+      price: 1,
+      body: {
+        "user_id": GetHiveHelper.getUserDetailsHive()?.id,
+        "payment_method": "cod",
+        "items": cartItems.map((element) {
+          return {
+            "product_id": element.productId,
+            "quantity": element.quantity,
+            "price": (double.tryParse(element.price ?? '0')?.toInt()),
+          };
+        }).toList(),
+      },
+    );
+
+    if ((response != null) && (response.status == 201)) {
+      Navigator.push(
+          knNavGlobalKey.currentContext!,
+          MaterialPageRoute(
+            builder: (context) => const PurchaseSuccessScreen(),
+          ));
+      for (int i = 0; i < cartItems.length; i++) {
+        var element = cartItems[i];
+        deleteFromCart(cartId: element.id, index: i);
+      }
+    } else {
+      Navigator.push(
+          knNavGlobalKey.currentContext!,
+          MaterialPageRoute(
+            builder: (context) => const PurchaseSuccessScreen(),
+          ));
+    }
   }
 
   Future<void> deleteFromCart({required int index, required int cartId}) async {

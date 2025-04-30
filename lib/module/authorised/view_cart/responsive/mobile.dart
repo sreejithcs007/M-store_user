@@ -260,7 +260,6 @@
 //   }
 // }
 
-
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/view_cart/controller.dart';
@@ -299,7 +298,8 @@ class CartViewMobile extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 100),
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 8),
                       child: InkWell(
                         onTap: () => controller.onProductContainerTap(
                           id: controller.cartItems[index].productId,
@@ -335,8 +335,10 @@ class CartViewMobile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Subtotal (${controller.cartItems.length} items):", style: AppTextStyle().br16w600),
-                  Text(controller.subtotal.value.toStringAsFixed(2), style: AppTextStyle().br24w600),
+                  Text("Subtotal (${controller.cartItems.length} items):",
+                      style: AppTextStyle().br16w600),
+                  Text(controller.subtotal.value.toStringAsFixed(2),
+                      style: AppTextStyle().br24w600),
                 ],
               ),
             ),
@@ -348,10 +350,13 @@ class CartViewMobile extends StatelessWidget {
               height: 48,
               child: ElevatedButton.icon(
                 iconAlignment: IconAlignment.end,
-                onPressed: () {},
+                onPressed: () {
+                  controller.proceedToBuy();
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
                 ),
                 icon: const Icon(Icons.shopping_bag, color: Colors.white),
                 label: Text(
@@ -431,133 +436,95 @@ class CartViewMobile extends StatelessWidget {
           children: [
             Text(
               controller.cartItems[index].price,
-              style: AppTextStyle().br16w600.copyWith(color: const Color(0xFFEE9700)),
+              style: AppTextStyle()
+                  .br16w600
+                  .copyWith(color: const Color(0xFFEE9700)),
             ),
             Flexible(
               child: Text(
                 " / 1 ${controller.cartItems[index].unit}",
-                style: AppTextStyle().br16w600.copyWith(color: const Color(0xFFB3B3B3)),
+                style: AppTextStyle()
+                    .br16w600
+                    .copyWith(color: const Color(0xFFB3B3B3)),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
-        // Row(
-        //   children: [
-        //     Flexible(
-        //       child: GestureDetector(
-        //         onTap: () => controller.deleteFromCart(
-        //           index: index,
-        //           cartId: controller.cartItems[index].id,
-        //         ),
-        //         child: Container(
-        //           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        //           decoration: BoxDecoration(
-        //             color: const Color(0xFFEE9700).withOpacity(0.1),
-        //             borderRadius: BorderRadius.circular(10),
-        //           ),
-        //           child: Row(
-        //             mainAxisSize: MainAxisSize.min,
-        //             children: [
-        //               Text(
-        //                 "Remove",
-        //                 style: AppTextStyle().br16w400.copyWith(color: const Color(0xFFEE9700)),
-        //                 overflow: TextOverflow.ellipsis,
-        //               ),
-        //               const Gap(8),
-        //               SvgPicture.asset(Assets.images.svg.delete),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     const Gap(16),
-        //     IconButton(
-        //       icon: SvgPicture.asset(
-        //         Assets.images.svg.minusSquare,
-        //         color: const Color(0xFFEE9700),
-        //       ),
-        //       onPressed: () => controller.decreaseQuantity(index: index),
-        //     ),
-        //     Obx(() => Text(
-        //           '${controller.cartItems[index].quantity}',
-        //           style: AppTextStyle().br16w600.copyWith(color: const Color(0xFF757575)),
-        //         )),
-        //     IconButton(
-        //       icon: SvgPicture.asset(
-        //         Assets.images.svg.add,
-        //         color: const Color(0xFFEE9700),
-        //       ),
-        //       onPressed: () => controller.increaseQuantity(index: index),
-        //     ),
-        //   ],
-        // ),
-
         Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    // Remove button on the left
-    Flexible(
-      child: GestureDetector(
-        onTap: () => controller.deleteFromCart(
-          index: index,
-          cartId: controller.cartItems[index].id,
-        ),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            color: const Color(0xFFEE9700).withOpacity(0.1),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  "Remove",
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTextStyle().br16w400.copyWith(color: const Color(0xFFEE9700)),
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Remove button on the left
+            Flexible(
+              child: GestureDetector(
+                onTap: () => controller.deleteFromCart(
+                  index: index,
+                  cartId: controller.cartItems[index].id,
+                ),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFEE9700).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "Remove",
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTextStyle()
+                              .br16w400
+                              .copyWith(color: const Color(0xFFEE9700)),
+                        ),
+                      ),
+                      const Gap(6),
+                      SvgPicture.asset(Assets.images.svg.delete),
+                    ],
+                  ),
                 ),
               ),
-              const Gap(6),
-              SvgPicture.asset(Assets.images.svg.delete),
-            ],
-          ),
-        ),
-      ),
-    ),
+            ),
 
-    // Spacer
-    const Gap(12),
+            // Spacer
+            const Gap(12),
 
-    // Quantity control to the right end
-    Row(
-      children: [
-        IconButton(
-          icon: SvgPicture.asset(
-            Assets.images.svg.minusSquare,
-            color: const Color(0xFFEE9700),
-          ),
-          onPressed: () => controller.decreaseQuantity(index: index),
+            // Quantity control to the right end
+            Row(
+              children: [
+                IconButton(
+                  icon: SvgPicture.asset(
+                    Assets.images.svg.minusSquare,
+                    color: const Color(0xFFEE9700),
+                  ),
+                  onPressed: () => controller.decreaseQuantity(index: index),
+                ),
+                Obx(() => Text(
+                      '${controller.cartItems[index].quantity}',
+                      style: AppTextStyle()
+                          .br16w600
+                          .copyWith(color: const Color(0xFF757575)),
+                    )),
+                IconButton(
+                  icon: SvgPicture.asset(
+                    Assets.images.svg.add,
+                    color: const Color(0xFFEE9700),
+                  ),
+                  onPressed: () => controller.increaseQuantity(
+                      index: index,
+                      stockQty: int.tryParse(controller
+                              .cartItems[index].stockQty
+                              .toString()) ??
+                          1),
+                ),
+              ],
+            ),
+          ],
         ),
-        Obx(() => Text(
-              '${controller.cartItems[index].quantity}',
-              style: AppTextStyle().br16w600.copyWith(color: const Color(0xFF757575)),
-            )),
-        IconButton(
-          icon: SvgPicture.asset(
-            Assets.images.svg.add,
-            color: const Color(0xFFEE9700),
-          ),
-          onPressed: () => controller.increaseQuantity(index: index,stockQty: int.tryParse(controller.cartItems[index].stockQty.toString()) ?? 1 ),
-        ),
-      ],
-    ),
-  ],
-),
-
       ],
     );
   }
