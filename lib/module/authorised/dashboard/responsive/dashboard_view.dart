@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/dashboard/controller.dart';
