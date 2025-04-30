@@ -54,6 +54,7 @@ class ViewCartRepo {
       var res = await ApiHelper.delete(
           endPoint: '/cart/remove/$cartId',
           header: ApiHelper.getApiHeader(
+            
               access: GetHiveHelper.getUserDetailsHive()?.accessToken));
 
       if (res.status == 200) {

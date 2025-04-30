@@ -145,6 +145,7 @@
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
+import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
@@ -299,12 +300,21 @@ class DashboardController extends GetxController {
   }
 
   void onCategoryContainerTap({required int index, required int id}) {
+    // Navigator.push(
+    //   knNavGlobalKey.currentContext!,
+    //   MaterialPageRoute(
+    //     builder: (_) => ProductListScreen(index: index, id: id),
+    //   ),
+    // );
     Navigator.push(
-      knNavGlobalKey.currentContext!,
-      MaterialPageRoute(
-        builder: (_) => ProductListScreen(index: index, id: id),
-      ),
-    );
+        knNavGlobalKey.currentContext!,
+        MaterialPageRoute(
+          builder: (context) => NavScreen(
+            index: 1,
+            id: id,
+            tabIndex: index,
+          ),
+        ));
   }
 
   void todaysOfferOnTap(BuildContext context, {required int id}) {
