@@ -35,6 +35,8 @@ class DashboardScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
+                controller: controller,
+                hintText: 'search category',
                 imageUrl: controller.imageUrl,
                 onCartTap: () => controller.onCartTap(context),
                 onClearSearch: controller.onClearSearch,

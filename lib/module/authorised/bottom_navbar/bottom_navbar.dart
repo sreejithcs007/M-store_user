@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavScreen extends StatefulWidget {
-   NavScreen({super.key, this.index = 0});
-   int index;
+  NavScreen({super.key, this.index = 0, this.id, this.tabIndex});
+  int index;
+  int? id;
+  int? tabIndex;
 
   @override
   State<NavScreen> createState() => _NavScreenState();
@@ -20,7 +22,7 @@ class _NavScreenState extends State<NavScreen> {
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       const DashboardView(),
-      const ProductListScreen(),
+       ProductListScreen(id: widget.id,index: widget.tabIndex,),
       const ProfileNavScreens(),
     ];
 
@@ -29,7 +31,7 @@ class _NavScreenState extends State<NavScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: (tapIndex) {
           setState(() {
-           widget.index = tapIndex;
+            widget.index = tapIndex;
           });
         },
         currentIndex: widget.index,

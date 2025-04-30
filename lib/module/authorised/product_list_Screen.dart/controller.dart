@@ -18,7 +18,7 @@ class ProductListScreenController extends GetxController {
   RxBool isProductLoading = false.obs;
   int? index;
   int? id;
-    RxString imageUrls = ''.obs;
+  RxString imageUrls = ''.obs;
   RxString email = ''.obs;
   RxString name = ''.obs;
   ProductListScreenController(this.index, this.id);
@@ -28,6 +28,9 @@ class ProductListScreenController extends GetxController {
     'Fruits',
     'Stationery',
   ];
+
+  final minCostController = TextEditingController();
+  final maxCostController = TextEditingController();
 
   RxString imageUrl = ''.obs;
 
@@ -110,8 +113,7 @@ class ProductListScreenController extends GetxController {
         !productsPerTab.value[index].isFavorite;
 
     if (productsPerTab.value[index].isFavorite == true) {
-      onFavouritePressedToAdd(
-          productId: productsPerTab.value[index].productId);
+      onFavouritePressedToAdd(productId: productsPerTab.value[index].productId);
     } else {
       onFavouritePressedToDelete(
           productId: productsPerTab.value[index].productId);

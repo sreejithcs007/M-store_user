@@ -1,11 +1,15 @@
+import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/controller.dart';
 import 'package:ecommerce/shared/model/cart_item/cart_item_model.dart';
+import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
+import 'package:ecommerce/widget/cutom_auto_complete/custom_autocomplete.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
+import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -43,7 +47,7 @@ class ShoppingPage extends StatelessWidget {
             ),
             appBar: AppBar(
               leading: Padding(
-                 padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 10),
                 child: CircleAvatar(
                   // maxRadius: 10,
                   child: Builder(
@@ -110,21 +114,88 @@ class ShoppingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 🔍 Search Bar
+                // Padding(
+                //     padding: const EdgeInsets.symmetric(
+                //         horizontal: 16.0, vertical: 8),
+                //     child:
+
+                //         AutocompleteWidget(
+                //       autoCompleteTileBuilder: (CategoryModel option) =>
+                //           Text(option.categoryName),
+                //       displayStringForOption: (CategoryModel option) =>
+                //           option.categoryName,
+                //       // controller: controller.bundleCreateModel[index].bcodeCont,
+                //       initialvalue: '',
+                //       hintText: 'Search category',
+                //       optionsBuilder: (String value) async {
+                //         if (value.isEmpty) return controller.categories;
+
+                //         final input = value.toLowerCase();
+
+                //         return controller.categories.where(
+                //           (cat) =>
+                //               cat.categoryName.toLowerCase().contains(input),
+                //         );
+                //       },
+
+                //       // maxWidth: 500,
+                //       onSelect: (value) {
+                //         int index = controller.categories.indexOf(value);
+                //         controller.index = index;
+
+                //         print('    controller.index  == ${controller.index}');
+                //         final tabController = DefaultTabController.of(
+                //             knNavGlobalKey.currentContext!);
+                //         if (tabController != null) {
+                //           tabController
+                //               .animateTo(index); // Switch to the selected tab
+                //         }
+                //         controller.onTap(
+                //             index: index,
+                //             id: controller.categories[index].id ?? 1);
+                //       },
+                //       selectedBuilder: (CategoryModel selected) =>
+                //           Text(selected.categoryName),
+                //     )),
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-                  child: TextField(
-                    onChanged: (value) {},
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      prefixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.white,
-                      contentPadding: const EdgeInsets.all(0),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
+                  child: Builder(
+                    builder: (context) => AutocompleteWidget(
+                      autoCompleteTileBuilder: (CategoryModel option) =>
+                          Text(option.categoryName),
+                      displayStringForOption: (CategoryModel option) =>
+                          option.categoryName,
+                      initialvalue: '',
+                      hintText: 'Search category',
+                      optionsBuilder: (String value) async {
+                        if (value.isEmpty) return controller.categories;
+
+                        final input = value.toLowerCase();
+
+                        return controller.categories.where(
+                          (cat) =>
+                              cat.categoryName.toLowerCase().contains(input),
+                        );
+                      },
+                      onSelect: (value) {
+                        int index = controller.categories.indexOf(value);
+                        controller.index = index;
+
+                        // ✅ Proper context here
+                        final tabController = DefaultTabController.of(context);
+                        if (tabController != null) {
+                          tabController.animateTo(index);
+                        }
+
+                        controller.onTap(
+                          index: index,
+                          id: controller.categories[index].id ?? 1,
+                        );
+                      },
+                      selectedBuilder: (CategoryModel selected) =>
+                          Text(selected.categoryName),
                     ),
                   ),
                 ),
@@ -139,9 +210,6 @@ class ShoppingPage extends StatelessWidget {
                       Flexible(
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            final minCostController = TextEditingController();
-                            final maxCostController = TextEditingController();
-
                             showDialog(
                               context: context,
                               builder: (context) {
@@ -150,30 +218,47 @@ class ShoppingPage extends StatelessWidget {
                                   content: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      TextField(
-                                        controller: minCostController,
+                                      LabeledTextField(
+                                        hintText: 'Minimum Cost',
+                                        label: 'Minimum Cost',
+                                        controller:
+                                            controller.minCostController,
                                         keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                          labelText: 'Minimum Cost',
-                                          prefixIcon: Icon(Icons.money),
-                                        ),
+                                        // decoration: const InputDecoration(
+                                        //   labelText: 'Minimum Cost',
+                                        //   prefixIcon: Icon(Icons.money),
+                                        // ),
                                       ),
                                       const SizedBox(height: 12),
-                                      TextField(
-                                        controller: maxCostController,
+                                      LabeledTextField(
+                                        hintText: 'Maximum Cost',
+                                        label: 'Maximum Cost',
+                                        controller:
+                                            controller.maxCostController,
                                         keyboardType: TextInputType.number,
-                                        decoration: const InputDecoration(
-                                          labelText: 'Maximum Cost',
-                                          prefixIcon:
-                                              Icon(Icons.money_outlined),
-                                        ),
+                                        // decoration: const InputDecoration(
+                                        //   labelText: 'Maximum Cost',
+                                        //   prefixIcon:
+                                        //       Icon(Icons.money_outlined),
+                                        // ),
                                       ),
                                     ],
                                   ),
                                   actions: [
                                     TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text('Cancel'),
+                                      onPressed: () {
+                                        // Clear values
+                                        controller.minCostController.clear();
+                                        controller.maxCostController.clear();
+                                        controller.onTap(
+                                            index: controller.index ?? 0,
+                                            id: controller.id ?? 1);
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Clear',
+                                        style: AppTextStyle().br14w600,
+                                      ),
                                     ),
                                     TextButton(
                                       onPressed: () {
@@ -181,24 +266,27 @@ class ShoppingPage extends StatelessWidget {
                                             'ind = ${controller.index}');
                                         devPrintError(
                                             'onpresse ${controller.categories.value[controller.index ?? 0].id}');
-                                        final min = double.tryParse(
-                                                minCostController.text) ??
+                                        final min = double.tryParse(controller
+                                                .minCostController.text) ??
                                             0;
-                                        final max = double.tryParse(
-                                                maxCostController.text) ??
+                                        final max = double.tryParse(controller
+                                                .maxCostController.text) ??
                                             double.infinity;
-                                        // controller.onFilterApply(
-                                        //     ids: controller
-                                        //             .categories
-                                        //             .value[
-                                        //                 controller.index ?? 0]
-                                        //             .id ??
-                                        //         1,
-                                        //     min: min.toString(),
-                                        //     max: max.toString());
+                                        controller.onFilterApply(
+                                            ids: controller
+                                                    .categories
+                                                    .value[
+                                                        controller.index ?? 0]
+                                                    .id ??
+                                                1,
+                                            min: min.toString(),
+                                            max: max.toString());
                                         Navigator.pop(context);
                                       },
-                                      child: const Text('Apply'),
+                                      child: Text(
+                                        'Apply',
+                                        style: AppTextStyle().br14w600,
+                                      ),
                                     ),
                                   ],
                                 );
@@ -225,28 +313,28 @@ class ShoppingPage extends StatelessWidget {
                       const SizedBox(width: 8), // Space between buttons
 
                       // Sort Button
-                      Flexible(
-                        child: ElevatedButton.icon(
-                          iconAlignment: IconAlignment.end,
-                          onPressed: () {
-                            // TODO: Sort logic
-                          },
-                          icon: SvgPicture.asset(Assets.images.svg.sort),
-                          label: Text(
-                            'Sort by',
-                            style: AppTextStyle()
-                                .br16w400
-                                .copyWith(color: const Color(0xFFEE9700)),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.black,
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Flexible(
+                      //   child: ElevatedButton.icon(
+                      //     iconAlignment: IconAlignment.end,
+                      //     onPressed: () {
+                      //       // TODO: Sort logic
+                      //     },
+                      //     icon: SvgPicture.asset(Assets.images.svg.sort),
+                      //     label: Text(
+                      //       'Sort by',
+                      //       style: AppTextStyle()
+                      //           .br16w400
+                      //           .copyWith(color: const Color(0xFFEE9700)),
+                      //     ),
+                      //     style: ElevatedButton.styleFrom(
+                      //       foregroundColor: Colors.black,
+                      //       backgroundColor: Colors.white,
+                      //       shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(10),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       const SizedBox(width: 8), // Space between buttons
 
                       // Grid View Icon Button
