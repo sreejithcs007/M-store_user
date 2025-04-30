@@ -57,7 +57,7 @@ class ShoppingPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(40),
                         child: Assets.images.company.companyLogo.image(
                           fit: BoxFit.cover,
-                          width: 50,
+                          width: 40,
                           height: 40,
                         ),
                       ),
@@ -114,50 +114,6 @@ class ShoppingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 🔍 Search Bar
-                // Padding(
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 16.0, vertical: 8),
-                //     child:
-
-                //         AutocompleteWidget(
-                //       autoCompleteTileBuilder: (CategoryModel option) =>
-                //           Text(option.categoryName),
-                //       displayStringForOption: (CategoryModel option) =>
-                //           option.categoryName,
-                //       // controller: controller.bundleCreateModel[index].bcodeCont,
-                //       initialvalue: '',
-                //       hintText: 'Search category',
-                //       optionsBuilder: (String value) async {
-                //         if (value.isEmpty) return controller.categories;
-
-                //         final input = value.toLowerCase();
-
-                //         return controller.categories.where(
-                //           (cat) =>
-                //               cat.categoryName.toLowerCase().contains(input),
-                //         );
-                //       },
-
-                //       // maxWidth: 500,
-                //       onSelect: (value) {
-                //         int index = controller.categories.indexOf(value);
-                //         controller.index = index;
-
-                //         print('    controller.index  == ${controller.index}');
-                //         final tabController = DefaultTabController.of(
-                //             knNavGlobalKey.currentContext!);
-                //         if (tabController != null) {
-                //           tabController
-                //               .animateTo(index); // Switch to the selected tab
-                //         }
-                //         controller.onTap(
-                //             index: index,
-                //             id: controller.categories[index].id ?? 1);
-                //       },
-                //       selectedBuilder: (CategoryModel selected) =>
-                //           Text(selected.categoryName),
-                //     )),
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),

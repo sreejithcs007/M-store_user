@@ -30,7 +30,9 @@ class GroceryPromoScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Assets.images.company.companyLogo.image(fit: BoxFit.cover),
+                SizedBox(
+                  height: 40,
+                  child: Assets.images.company.companyLogo.image(fit: BoxFit.cover)),
                 const Gap(70),
                 RichText(
                   text: TextSpan(
