@@ -60,7 +60,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.nameController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(5),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'Address',
@@ -68,7 +68,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.addressController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(5),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'Phone No',
@@ -76,7 +76,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.phoneNoController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(5),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'Email',
@@ -84,7 +84,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.emailController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(5),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'State',
@@ -92,7 +92,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.stateController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(5),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'City',
@@ -100,7 +100,7 @@ class ProfileCreateMobile extends StatelessWidget {
                 controller: controller.cityController,
                 fillColor: Colors.white,
               ),
-              const Gap(15),
+              const Gap(10),
               LabeledTextField(
                 isBorderNeed: true,
                 hintText: 'Pincode',
