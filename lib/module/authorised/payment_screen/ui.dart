@@ -40,7 +40,7 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>  NavScreen(),
+            builder: (context) => NavScreen(),
           ));
     });
   }
@@ -55,19 +55,24 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: SlideTransition(
-          position: _slideAnimation,
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: Lottie.asset(
-              'assets/animation/Anime2.json',
-              width: 200,
-              height: 200,
-              fit: BoxFit.contain,
+      body: Column(
+        children: [
+          Center(
+            child: SlideTransition(
+              position: _slideAnimation,
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: Lottie.asset(
+                  'assets/animation/Anime2.json',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
           ),
-        ),
+          Text('Payment method : Cash on delivery'),
+        ],
       ),
     );
   }
