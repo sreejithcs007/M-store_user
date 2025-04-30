@@ -137,51 +137,102 @@ static Future<ApiResponse?> postDatas({
 
   
   
+  // static Future<ApiResponse> delete({
+  //   required String endPoint,
+  //   Map<String, String>? header,
+  //   Map<String, dynamic>? body,
+  // }) async {
+  //   log("Api-helper -> delete()");
+  //   log("$body");
+
+  //   final url = Uri.parse(AppConfig.baseurl + endPoint);
+  //   log("header=$header");
+  //   log("final url -> $url");
+
+  //   // Convert body safely to Map<String, String>
+  //   final safeBody = <String, String>{};
+  //   body?.forEach((key, value) {
+  //     if (value != null) {
+  //       safeBody[key] = value.toString();
+  //     }
+  //   });
+
+  //   try {
+  //     var response = await http.delete(url, body: safeBody, headers: header);
+  //     log("ApiHelper -> Api Called -> status code=${response.statusCode}");
+
+  //     var decodedData = jsonDecode(response.body);
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       return ApiResponse(
+  //         status: response.statusCode,
+  //         msg: "Success",
+  //         data: decodedData,
+  //       );
+  //     } else {
+  //       log("Else Condition -> Api failed");
+  //       return ApiResponse(
+  //         status: response.statusCode,
+  //         msg: "Failed",
+  //         data: decodedData,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     log("catch error api helper : $e");
+  //     rethrow;
+  //   }
+  // }
+
   static Future<ApiResponse> delete({
-    required String endPoint,
-    Map<String, String>? header,
-    Map<String, dynamic>? body,
-  }) async {
-    log("Api-helper -> delete()");
-    log("$body");
+  required String endPoint,
+  Map<String, String>? header,
+  Map<String, dynamic>? body,
+}) async {
+  log("Api-helper -> delete()");
+  log("$body");
 
-    final url = Uri.parse(AppConfig.baseurl + endPoint);
-    log("header=$header");
-    log("final url -> $url");
+  final url = Uri.parse(AppConfig.baseurl + endPoint);
+  log("header=$header");
+  log("final url -> $url");
 
-    // Convert body safely to Map<String, String>
-    final safeBody = <String, String>{};
-    body?.forEach((key, value) {
-      if (value != null) {
-        safeBody[key] = value.toString();
-      }
-    });
+  try {
+    final defaultHeaders = {
+      'Content-Type': 'application/json',
+      if (header != null) ...header,
+    };
 
-    try {
-      var response = await http.delete(url, body: safeBody, headers: header);
-      log("ApiHelper -> Api Called -> status code=${response.statusCode}");
+    final encodedBody = body != null ? jsonEncode(body) : null;
 
-      var decodedData = jsonDecode(response.body);
+    var response = await http.delete(
+      url,
+      headers: defaultHeaders,
+      body: encodedBody,
+    );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return ApiResponse(
-          status: response.statusCode,
-          msg: "Success",
-          data: decodedData,
-        );
-      } else {
-        log("Else Condition -> Api failed");
-        return ApiResponse(
-          status: response.statusCode,
-          msg: "Failed",
-          data: decodedData,
-        );
-      }
-    } catch (e) {
-      log("catch error api helper : $e");
-      rethrow;
+    log("ApiHelper -> Api Called -> status code=${response.statusCode}");
+
+    var decodedData = jsonDecode(response.body);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ApiResponse(
+        status: response.statusCode,
+        msg: "Success",
+        data: decodedData,
+      );
+    } else {
+      log("Else Condition -> Api failed");
+      return ApiResponse(
+        status: response.statusCode,
+        msg: "Failed",
+        data: decodedData,
+      );
     }
+  } catch (e) {
+    log("catch error api helper : $e");
+    rethrow;
   }
+}
+
 
   static Future<ApiResponse> postMultipartData({
     required String endPoint,

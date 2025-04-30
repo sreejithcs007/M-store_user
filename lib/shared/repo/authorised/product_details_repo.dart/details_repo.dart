@@ -52,7 +52,7 @@ class ProductDetailsRepo {
       devPrintWarning('Userid = ${GetHiveHelper.getUserDetailsHive()?.id}');
       devPrintWarning('productId = $productId');
       devPrintWarning('quantity = $quantity');
-      var response = ApiHelper.postData(
+      var response = ApiHelper.postDatas(
           endPoint: '/cart/add',
           body: {
             "user_id": GetHiveHelper.getUserDetailsHive()?.id,
