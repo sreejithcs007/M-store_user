@@ -147,7 +147,6 @@ import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
-import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
 import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
 import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';

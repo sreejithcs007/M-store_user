@@ -129,7 +129,7 @@ class CustomAppBar<T> extends StatelessWidget {
 //     final Widget Function(T value) selectedBuilder;
 //     final Function(T)? onSelect;
 
-  CustomAppBar({
+  const CustomAppBar({
     super.key,
     required this.controller,
     this.hintText = "Search",
@@ -165,25 +165,25 @@ class CustomAppBar<T> extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Obx(() => CircleAvatar(
-                    maxRadius: 20,
-                    backgroundColor: const Color.fromARGB(255, 166, 164, 164),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Image.network(
-                        formatImageUrl(imageUrl?.value),
-                        fit: BoxFit.cover,
-                        width: 80,
-                        height: 80,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(
-                          Icons.image,
-                          size: 20,
-                          color: Color.fromARGB(255, 78, 77, 77),
-                        ),
-                      ),
-                    ),
-                  )),
+              // Obx(() => CircleAvatar(
+              //       maxRadius: 20,
+              //       backgroundColor: const Color.fromARGB(255, 166, 164, 164),
+              //       child: ClipRRect(
+              //         borderRadius: BorderRadius.circular(40),
+              //         child: Image.network(
+              //           formatImageUrl(imageUrl?.value),
+              //           fit: BoxFit.cover,
+              //           width: 80,
+              //           height: 80,
+              //           errorBuilder: (context, error, stackTrace) =>
+              //               const Icon(
+              //             Icons.image,
+              //             size: 20,
+              //             color: Color.fromARGB(255, 78, 77, 77),
+              //           ),
+              //         ),
+              //       ),
+              //     )),
               const Gap(10),
               GestureDetector(
                 onTap: onCartTap,

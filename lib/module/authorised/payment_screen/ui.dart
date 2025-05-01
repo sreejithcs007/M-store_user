@@ -56,6 +56,7 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: SlideTransition(
@@ -71,7 +72,7 @@ class _PurchaseSuccessScreenState extends State<PurchaseSuccessScreen>
               ),
             ),
           ),
-          Text('Payment method : Cash on delivery'),
+          const Text('Payment method : Cash on delivery'),
         ],
       ),
     );

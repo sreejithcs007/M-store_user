@@ -72,8 +72,8 @@ class MyOrderCard extends StatelessWidget {
               deliveryStatus,
               style: AppTextStyle().br16w600.copyWith(
                   color: deliveryStatus == 'delivered'
-                      ? Color(0xFF14AE5C)
-                      : Color(0xFFEE9700)),
+                      ? const Color(0xFF14AE5C)
+                      : const Color(0xFFEE9700)),
             )
           ],
         ),

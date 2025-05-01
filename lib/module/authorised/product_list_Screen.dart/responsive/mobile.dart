@@ -68,28 +68,28 @@ class ShoppingPage extends StatelessWidget {
               elevation: 0,
               backgroundColor: Colors.grey[50],
               actions: [
-                Obx(() => Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: CircleAvatar(
-                        maxRadius: 20, // Adjust radius as needed
-                        backgroundColor: Colors.grey[100],
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40),
-                          child: Image.network(
-                            formatImageUrl(controller.imageUrl.value),
-                            fit: BoxFit.cover,
-                            width: 80, // match the maxRadius * 2
-                            height: 80,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(
-                              Icons.image,
-                              size: 20,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )),
+                // Obx(() => Padding(
+                //       padding: const EdgeInsets.only(top: 10),
+                //       child: CircleAvatar(
+                //         maxRadius: 20, // Adjust radius as needed
+                //         backgroundColor: Colors.grey[100],
+                //         child: ClipRRect(
+                //           borderRadius: BorderRadius.circular(40),
+                //           child: Image.network(
+                //             formatImageUrl(controller.imageUrl.value),
+                //             fit: BoxFit.cover,
+                //             width: 80, // match the maxRadius * 2
+                //             height: 80,
+                //             errorBuilder: (context, error, stackTrace) =>
+                //                 const Icon(
+                //               Icons.image,
+                //               size: 20,
+                //               color: Colors.grey,
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     )),
                 const Gap(10),
                 Padding(
                   padding: const EdgeInsets.only(top: 5.0),
@@ -141,10 +141,8 @@ class ShoppingPage extends StatelessWidget {
 
                         // ✅ Proper context here
                         final tabController = DefaultTabController.of(context);
-                        if (tabController != null) {
-                          tabController.animateTo(index);
-                        }
-
+                        tabController.animateTo(index);
+                      
                         controller.onTap(
                           index: index,
                           id: controller.categories[index].id ?? 1,
