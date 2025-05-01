@@ -20,13 +20,14 @@ class ProfileMobileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F5F5),
         foregroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: SvgPicture.asset(
-              Assets.images.svg.arrowLeft,
-            )),
+        leading: Text(''),
+        //  IconButton(
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //     icon: SvgPicture.asset(
+        //       Assets.images.svg.arrowLeft,
+        //     )),
         title: const Text(
           'Profile',
           style: TextStyle(color: Colors.black),
@@ -48,44 +49,46 @@ class ProfileMobileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Obx(
-          () =>  Column(
+          () => Column(
             children: [
-               CircleAvatar(
+              CircleAvatar(
                 maxRadius: 80,
-                backgroundColor: Colors.red,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(80),
+                child: ClipOval(
+                  // borderRadius: BorderRadius.circular(80),
                   child: Image.network(
-                                    formatImageUrl(controller.imageUrl.value),
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        const Icon(
-                                      Icons.image,
-                                      size: 36,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
+                    formatImageUrl(controller.imageUrl.value),
+                    width: 160, // Same as diameter (2 * radius)
+                    height: 160,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.image,
+                      size: 36,
+                      color: Colors.grey,
+                    ),
+                  ),
                 ),
               ),
-              const Gap(15),
+              const Gap(40),
               ConstrainedBox(
                 constraints: const BoxConstraints(
                     // maxWidth: 700,
                     minWidth: 300),
                 child: Obx(
-                  () =>  GridView.builder(
+                  () => GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 100,
-                        crossAxisSpacing: 50,
-                        childAspectRatio: 1,
-                        crossAxisCount: 2),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisExtent: 70,
+                            crossAxisSpacing: 50,
+                            childAspectRatio: 1,
+                            crossAxisCount: 2),
                     itemCount: controller.profileHeaders.value.length,
                     itemBuilder: (context, index) {
                       return HeaderWithSubhead(
                         headerName: controller.profileHeaders[index].headerName,
-                        subHeaderName: controller.profileHeaders[index].value,
+                        subHeaderName:
+                            controller.profileHeaders[index].value ?? '-',
                       );
                     },
                   ),

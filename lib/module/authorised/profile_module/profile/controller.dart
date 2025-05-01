@@ -20,13 +20,13 @@ class ProfileController extends GetxController {
       imageUrl.value = response.uProfilePic ?? '' ;
       
       profileHeaders.value = [
-        ProfileModel(headerName: 'Name', value: response.uName ?? ''),
-        ProfileModel(headerName: 'Email', value: response.uEmail ?? ''),
-        ProfileModel(headerName: 'Address', value: response.uAddress ?? ''),
-        ProfileModel(headerName: 'Phone No.', value: response.uPhone ?? ''),
+        ProfileModel(headerName: 'Name', value: response.uName ?? '-'),
+        ProfileModel(headerName: 'Email', value: response.uEmail ?? '-'),
+        ProfileModel(headerName: 'Address', value: response.uAddress ?? '-'),
+        ProfileModel(headerName: 'Phone No.', value: response.uPhone ?? '-'),
         // ProfileModel(headerName: 'State', value:  response.``),
-        ProfileModel(headerName: 'City', value: response.city ?? ''),
-        ProfileModel(headerName: 'Pincode', value: response.pinCode ?? ''),
+        ProfileModel(headerName: 'City', value: response.city ?? '-'),
+        ProfileModel(headerName: 'Pincode', value: response.pinCode ?? '-'),
       ];
     }
   }

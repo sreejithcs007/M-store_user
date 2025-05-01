@@ -12,11 +12,13 @@ class CustomTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+
       length: tabCount, // 👈 update this if more tabs needed
       child: Column(
         children: [
           TabBar(
-
+            tabAlignment: TabAlignment.start,
+              isScrollable: true,
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
             indicatorColor: const Color(0xFFEE9700),
