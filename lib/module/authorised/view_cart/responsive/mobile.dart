@@ -292,7 +292,7 @@ class CartViewMobile extends StatelessWidget {
       body: SafeArea(
         child: Obx(
           () => controller.cartItems.value.isEmpty
-              ? Center(child: Lottie.asset('assets/animation/Anime1.json'))
+              ? Center(child: Lottie.asset('assets/animation/emptyAnime.json'))
               : ListView.builder(
                   itemCount: controller.cartItems.value.length,
                   padding: const EdgeInsets.only(bottom: 100),

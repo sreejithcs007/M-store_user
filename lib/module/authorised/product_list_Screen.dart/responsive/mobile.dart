@@ -142,7 +142,7 @@ class ShoppingPage extends StatelessWidget {
                         // ✅ Proper context here
                         final tabController = DefaultTabController.of(context);
                         tabController.animateTo(index);
-                      
+
                         controller.onTap(
                           index: index,
                           id: controller.categories[index].id ?? 1,
@@ -169,34 +169,55 @@ class ShoppingPage extends StatelessWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text('Filter by Cost'),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      LabeledTextField(
-                                        hintText: 'Minimum Cost',
-                                        label: 'Minimum Cost',
-                                        controller:
-                                            controller.minCostController,
-                                        keyboardType: TextInputType.number,
-                                        // decoration: const InputDecoration(
-                                        //   labelText: 'Minimum Cost',
-                                        //   prefixIcon: Icon(Icons.money),
-                                        // ),
-                                      ),
-                                      const SizedBox(height: 12),
-                                      LabeledTextField(
-                                        hintText: 'Maximum Cost',
-                                        label: 'Maximum Cost',
-                                        controller:
-                                            controller.maxCostController,
-                                        keyboardType: TextInputType.number,
-                                        // decoration: const InputDecoration(
-                                        //   labelText: 'Maximum Cost',
-                                        //   prefixIcon:
-                                        //       Icon(Icons.money_outlined),
-                                        // ),
-                                      ),
-                                    ],
+                                  content: Form(
+                                    key: controller.formkey,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        LabeledTextField(
+                                          hintText: 'Minimum Cost',
+                                          label: 'Minimum Cost',
+                                          controller:
+                                              controller.minCostController,
+                                          keyboardType: TextInputType.number,
+                                          validator: (p0) {
+                                            if ((p0 == '') || (p0 == null)) {
+                                              return 'please add minimum cost';
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          // decoration: const InputDecoration(
+                                          //   labelText: 'Minimum Cost',
+                                          //   prefixIcon: Icon(Icons.money),
+                                          // ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        LabeledTextField(
+                                          hintText: 'Maximum Cost',
+                                          label: 'Maximum Cost',
+                                          controller:
+                                              controller.maxCostController,
+                                          keyboardType: TextInputType.number,
+                                          validator: (p0) {
+                                            if ((p0 == '') || (p0 == null)) {
+                                              return 'please add a maximum cost';
+                                            } else if (p0 ==
+                                                controller
+                                                    .minCostController.text) {
+                                              return '''max and min cost can't be same ''';
+                                            } else {
+                                              return null;
+                                            }
+                                          },
+                                          // decoration: const InputDecoration(
+                                          //   labelText: 'Maximum Cost',
+                                          //   prefixIcon:
+                                          //       Icon(Icons.money_outlined),
+                                          // ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   actions: [
                                     TextButton(
@@ -235,7 +256,7 @@ class ShoppingPage extends StatelessWidget {
                                                 1,
                                             min: min.toString(),
                                             max: max.toString());
-                                        Navigator.pop(context);
+                                        
                                       },
                                       child: Text(
                                         'Apply',

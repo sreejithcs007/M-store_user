@@ -29,6 +29,8 @@ class ProductListScreenController extends GetxController {
     'Stationery',
   ];
 
+  final formkey = GlobalKey<FormState>();
+
   final minCostController = TextEditingController();
   final maxCostController = TextEditingController();
 
@@ -86,25 +88,32 @@ class ProductListScreenController extends GetxController {
   Future<void> onFilterApply(
       {required int ids, required String min, required String max}) async {
     devPrintError('ca $id');
-    productsPerTab.value = [];
-    var response = await ProductCategoryRepo().onProductFilter(
-        id: ids, max: int.tryParse(max) ?? 0, min: int.tryParse(min) ?? 0);
 
-    if ((response != null) && (response.isNotEmpty)) {
-      productsPerTab.value = response
-          .map(
-            (e) => CartItemCustomModel(
-                stockQty: e.stock,
-                productId: e.id!,
-                isFavorite: e.isFavorited ?? false,
-                name: e.name ?? '',
-                price: e.price ?? '',
-                quantity: e.quantity ?? 0,
-                unit: e.quantityUnit ?? 'KG',
-                id: e.id!,
-                imageUrl: e.images),
-          )
-          .toList();
+    if (formkey.currentState!.validate()) {
+      productsPerTab.value = [];
+      var response = await ProductCategoryRepo().onProductFilter(
+          id: ids, max: int.tryParse(max) ?? 0, min: int.tryParse(min) ?? 0);
+
+      if ((response != null) && (response.isNotEmpty)) {
+        productsPerTab.value = response
+            .map(
+              (e) => CartItemCustomModel(
+                  stockQty: e.stock,
+                  productId: e.id!,
+                  isFavorite: e.isFavorited ?? false,
+                  name: e.name ?? '',
+                  price: e.price ?? '',
+                  quantity: e.quantity ?? 0,
+                  unit: e.quantityUnit ?? 'KG',
+                  id: e.id!,
+                  imageUrl: e.images),
+            )
+            .toList();
+Navigator.pop(knNavGlobalKey.currentContext!);
+        fnShowSnackBarSucess('successfully filtered');
+      }
+    } else {
+      fnShowSnackBarWarning('please check your inputs');
     }
   }
 
