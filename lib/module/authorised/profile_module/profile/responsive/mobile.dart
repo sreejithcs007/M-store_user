@@ -20,7 +20,7 @@ class ProfileMobileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F5F5),
         foregroundColor: Colors.white,
-        leading: Text(''),
+        leading: const Text(''),
         //  IconButton(
         //     onPressed: () {
         //       Navigator.pop(context);

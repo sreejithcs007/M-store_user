@@ -1,7 +1,6 @@
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/dashboard/view.dart';
 import 'package:ecommerce/module/authorised/product_list_Screen.dart/screen.dart';
-import 'package:ecommerce/module/authorised/profile_main_screen/screen.dart';
 import 'package:ecommerce/module/authorised/profile_module/profile/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

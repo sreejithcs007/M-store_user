@@ -1,17 +1,12 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
-import 'package:ecommerce/module/authorised/profile_module/profile/view.dart';
 import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';

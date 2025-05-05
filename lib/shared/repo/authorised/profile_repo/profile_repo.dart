@@ -3,8 +3,6 @@ import 'package:ecommerce/core/db/hive_helper.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/shared/api/api_helper.dart';
 import 'package:ecommerce/shared/model/authorised/profile_fetch_model/profile_fetch.dart';
-import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
-import 'package:http/http.dart';
 
 import 'package:http/http.dart' as http;
 
