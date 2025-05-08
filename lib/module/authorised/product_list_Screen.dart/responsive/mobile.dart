@@ -43,6 +43,7 @@ class ShoppingPage extends StatelessWidget {
                 email: controller.email.value,
                 imageUrl: controller.imageUrl.value,
                 name: controller.name.value,
+                superCoin: controller.superCoin.value,
               ),
             ),
             appBar: AppBar(

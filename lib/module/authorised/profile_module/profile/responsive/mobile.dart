@@ -2,6 +2,7 @@ import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/profile_module/profile/controller.dart';
 import 'package:ecommerce/module/authorised/profile_module/profile/create/screen.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/custom_header_subhead/header_subhead.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,14 +21,25 @@ class ProfileMobileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFFF5F5F5),
         foregroundColor: Colors.white,
-        leading: Text(''),
-        //  IconButton(
-        //     onPressed: () {
-        //       Navigator.pop(context);
-        //     },
-        //     icon: SvgPicture.asset(
-        //       Assets.images.svg.arrowLeft,
-        //     )),
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: CircleAvatar(
+            // maxRadius: 10,
+            child: Builder(
+              builder: (context) => GestureDetector(
+                onTap: () => Scaffold.of(context).openDrawer(),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Assets.images.company.companyLogo.image(
+                    fit: BoxFit.cover,
+                    width: 40,
+                    height: 40,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         title: const Text(
           'Profile',
           style: TextStyle(color: Colors.black),
@@ -46,6 +58,14 @@ class ProfileMobileScreen extends StatelessWidget {
                 icon: SvgPicture.asset(Assets.images.svg.edit8)),
           )
         ],
+      ),
+      drawer: Obx(
+        () => MyCustomDrawer(
+          email: controller.email.value,
+          imageUrl: controller.imageUrl.value,
+          name: controller.name.value,
+          superCoin: controller.superCoin.value,
+        ),
       ),
       body: SingleChildScrollView(
         child: Obx(
