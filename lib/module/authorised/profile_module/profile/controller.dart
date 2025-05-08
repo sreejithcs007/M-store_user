@@ -13,7 +13,21 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
+  RxString email = ''.obs;
+  RxString name = ''.obs;
+
   Future<void> _initial() async {
+
+        var responses = await ProfileRepo().onProfileFetch();
+    if (responses != null) {
+      imageUrl.value = responses.uProfilePic ?? '';
+      name.value = responses.uName ?? '';
+      email.value = responses.uEmail ?? '';
+    }
+
+
+
+
     var response = await ProfileRepo().onProfileFetch();
 
     if (response != null) {

@@ -2,6 +2,7 @@ import 'package:ecommerce/core/db/hive_box_helper.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
+import 'package:ecommerce/module/authorised/notification/view.dart';
 import 'package:ecommerce/module/authorised/profile_module/my_orders/screens.dart';
 import 'package:ecommerce/module/authorised/profile_module/wishlist/screens.dart';
 import 'package:ecommerce/module/unauthorised/authentication/view.dart';
@@ -94,6 +95,21 @@ class MyCustomDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const MyOrdersScreen(),
+                ),
+              );
+            },
+          ),
+
+          // Notification
+          ListTile(
+            leading: Icon(Icons.notifications_none_outlined),
+            title: const Text('Notofication'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationPage(),
                 ),
               );
             },
