@@ -23,11 +23,8 @@ class ProductListScreenController extends GetxController {
   RxString name = ''.obs;
   ProductListScreenController(this.index, this.id);
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
-  final tabs = <String>[
-    'Vegetables',
-    'Fruits',
-    'Stationery',
-  ];
+
+  RxInt superCoin = 0.obs;
 
   final formkey = GlobalKey<FormState>();
 
@@ -109,7 +106,7 @@ class ProductListScreenController extends GetxController {
                   imageUrl: e.images),
             )
             .toList();
-Navigator.pop(knNavGlobalKey.currentContext!);
+        Navigator.pop(knNavGlobalKey.currentContext!);
         fnShowSnackBarSucess('successfully filtered');
       }
     } else {
@@ -164,6 +161,7 @@ Navigator.pop(knNavGlobalKey.currentContext!);
       imageUrl.value = response.uProfilePic ?? '';
       name.value = response.uName ?? '';
       email.value = response.uEmail ?? '';
+      superCoin.value = response.superCoins ?? 0;
     }
 
     var categoryResponse = await DashBoardRepo().onCategoryFetch();

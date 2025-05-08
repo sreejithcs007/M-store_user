@@ -64,6 +64,7 @@ class ProfileMobileScreen extends StatelessWidget {
           email: controller.email.value,
           imageUrl: controller.imageUrl.value,
           name: controller.name.value,
+          superCoin: controller.superCoin.value,
         ),
       ),
       body: SingleChildScrollView(

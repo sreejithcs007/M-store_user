@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/db/hive_box_helper.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
@@ -14,17 +15,18 @@ class MyCustomDrawer extends StatelessWidget {
   final String name;
   final String email;
   final String imageUrl;
+  final int superCoin;
 
-  const MyCustomDrawer({
-    super.key,
-    required this.name,
-    required this.email,
-    required this.imageUrl,
-  });
+  const MyCustomDrawer(
+      {super.key,
+      required this.name,
+      required this.email,
+      required this.imageUrl,
+      required this.superCoin});
 
   @override
   Widget build(BuildContext context) {
-    return Drawer( 
+    return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
@@ -34,22 +36,28 @@ class MyCustomDrawer extends StatelessWidget {
             decoration: const BoxDecoration(color: Colors.white),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 CircleAvatar(
-                  radius: 32,
+                  radius: 30,
                   backgroundColor: Colors.grey[200],
                   backgroundImage: NetworkImage(formatImageUrl(imageUrl)),
                   onBackgroundImageError: (_, __) {},
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 5),
                 Text(
                   name,
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: AppTextStyle().br16w600,
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   email,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                  style: AppTextStyle().br14w400,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  'Super Coin : $superCoin 🪙',
+                  style: AppTextStyle().br14w400.copyWith(color: Color(0xFFD4AF37)),
                 ),
               ],
             ),
