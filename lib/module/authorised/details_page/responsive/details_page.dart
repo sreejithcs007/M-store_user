@@ -83,7 +83,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 controller.totalStock.value == 0
-                    ? SizedBox.shrink()
+                    ? const SizedBox.shrink()
                     : Row(
                         children: [
                           IconButton(

@@ -8,7 +8,6 @@ import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutom_auto_complete/custom_autocomplete.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
-import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
