@@ -6,6 +6,7 @@ class ProfileController extends GetxController {
   RxList<ProfileModel> profileHeaders = <ProfileModel>[].obs;
 
   RxString imageUrl = ''.obs;
+  RxInt superCoin = 0.obs;
 
   @override
   void onInit() {
@@ -13,12 +14,23 @@ class ProfileController extends GetxController {
     super.onInit();
   }
 
+  RxString email = ''.obs;
+  RxString name = ''.obs;
+
   Future<void> _initial() async {
+    var responses = await ProfileRepo().onProfileFetch();
+    if (responses != null) {
+      imageUrl.value = responses.uProfilePic ?? '';
+      name.value = responses.uName ?? '';
+      email.value = responses.uEmail ?? '';
+      superCoin.value = responses.superCoins ?? 0;
+    }
+
     var response = await ProfileRepo().onProfileFetch();
 
     if (response != null) {
-      imageUrl.value = response.uProfilePic ?? '' ;
-      
+      imageUrl.value = response.uProfilePic ?? '';
+
       profileHeaders.value = [
         ProfileModel(headerName: 'Name', value: response.uName ?? '-'),
         ProfileModel(headerName: 'Email', value: response.uEmail ?? '-'),

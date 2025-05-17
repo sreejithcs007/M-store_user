@@ -40,7 +40,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
             const SizedBox(height: 16),
             _buildSecondDetails(),
             const SizedBox(height: 16),
-            Obx(() =>  _buildThirdContainer()),
+            Obx(() => _buildThirdContainer()),
           ],
         ),
       ),
@@ -95,6 +95,7 @@ class OrderDetailsPageScreen extends StatelessWidget {
                   child: Image.network(
                     formatImageUrl(
                         controller.orderedList[index].imageUrl.first),
+                    fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) => const Icon(
                       Icons.image,
                       size: 36,
@@ -213,7 +214,8 @@ class OrderDetailsPageScreen extends StatelessWidget {
   Widget _buildThirdContainer() {
     print(
         "controller.currentStatus.value == ${controller.currentStatus.value}");
-    if ((controller.currentStatus.value == "Pending") || (controller.currentStatus.value == " ")) {
+    if ((controller.currentStatus.value == "Pending") ||
+        (controller.currentStatus.value == " ")) {
       return Container(
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(15)),
@@ -223,7 +225,6 @@ class OrderDetailsPageScreen extends StatelessWidget {
             TimelineStep(title: "Product collected", time: ''),
             TimelineStep(title: "On going", time: ''),
             TimelineStep(title: "Delivered", time: ''),
-
           ],
           currentStatus: 'Pending',
         ),

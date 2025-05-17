@@ -172,6 +172,7 @@ class DashboardController extends GetxController {
   RxString imageUrl = ''.obs;
   RxString email = ''.obs;
   RxString name = ''.obs;
+  RxInt superCoin = 0.obs;
 
   @override
   void onInit() {
@@ -185,6 +186,7 @@ class DashboardController extends GetxController {
       imageUrl.value = response.uProfilePic ?? '';
       name.value = response.uName ?? '';
       email.value = response.uEmail ?? '';
+      superCoin.value = response.superCoins ?? 0;
     }
     await fetchCategories();
     await fetchBanners();

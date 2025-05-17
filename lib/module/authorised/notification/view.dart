@@ -1,4 +1,6 @@
 
+import 'package:ecommerce/core/constants/text_style.dart';
+import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -41,14 +43,14 @@ class NotificationPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         
-        title: const Text('Notifications'),
+        title: Text('Notifications', style: AppTextStyle().br16w400),
         
-        // leading: IconButton(
-        //   icon: SvgPicture.asset(.arrowLeft1),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back,color: Colors.orange,),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         // actions: [
         //   TextButton.icon(
         //     onPressed: () {},

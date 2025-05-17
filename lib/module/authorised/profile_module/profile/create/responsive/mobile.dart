@@ -30,7 +30,7 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
       if (bytes != null) {
         setState(() {
           _imageBytes = bytes;
-            widget.controller.imageBytes = bytes;
+          widget.controller.imageBytes = bytes;
 
           print(
               ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
@@ -200,16 +200,18 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
                     fillColor: Colors.white,
                   ),
                   CustomSaveCancel(
-                    cancelOnPress: () {},
+                    cancelOnPress: () {
+                      Navigator.pop(context);
+                    },
                     saveOnPress: () {
                       widget.controller.onSave(
-                          address: widget.controller.addressController.text,
-                          city: widget.controller.cityController.text,
-                          email: widget.controller.emailController.text,
-                          name: widget.controller.nameController.text,
-                          phone: widget.controller.phoneNoController.text,
-                          pinCode: widget.controller.pinCodeController.text,
-                       );
+                        address: widget.controller.addressController.text,
+                        city: widget.controller.cityController.text,
+                        email: widget.controller.emailController.text,
+                        name: widget.controller.nameController.text,
+                        phone: widget.controller.phoneNoController.text,
+                        pinCode: widget.controller.pinCodeController.text,
+                      );
                     },
                   )
                 ],
