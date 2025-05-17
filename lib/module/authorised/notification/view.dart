@@ -41,7 +41,7 @@ class NotificationPage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         
-        title: Text('Notifications'),
+        title: const Text('Notifications'),
         
         // leading: IconButton(
         //   icon: SvgPicture.asset(.arrowLeft1),
@@ -77,6 +77,7 @@ class NotificationPage extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.transparent,
+                foregroundColor: item['color'] as Color,
                 child: CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
@@ -88,13 +89,12 @@ class NotificationPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                foregroundColor: item['color'] as Color,
               ),
               title: Text(
-                item['title'].toString()!,
+                item['title'].toString(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(item['subtitle'].toString()!),
+              subtitle: Text(item['subtitle'].toString()),
             ),
           );
         },

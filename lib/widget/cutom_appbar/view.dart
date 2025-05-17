@@ -52,21 +52,16 @@ class CustomAppBar<T> extends StatelessWidget {
 
               const Gap(10),
               GestureDetector(
-                onTap: onNotificationTap,
-                child: Container(
-                  width: 70,
-                  height: 70,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.circle_notifications_outlined,
-                    color: Colors.orange,
-                    size: 30, // Increase this as needed
-                  ),
-                ),
-              ),
+                  onTap: onNotificationTap,
+                  child: const CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.orange,
+                    child: Icon(
+                      Icons.notifications_none_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  )),
             ],
           ),
 
