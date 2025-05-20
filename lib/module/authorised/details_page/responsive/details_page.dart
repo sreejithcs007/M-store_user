@@ -3,6 +3,7 @@ import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
 import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
+import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -81,26 +82,29 @@ class ProductDetailScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove, color: Colors.orange),
-                      onPressed: () => controller.decreaseQuantity(),
-                    ),
-                    Text(
-                      '${controller.quantity.value} ${controller.unit.value}',
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add, color: Colors.orange),
-                      onPressed: () => controller.increaseQuantity(
-                          stockQty: controller.totalStock.value),
-                    ),
-                  ],
-                ),
+                controller.totalStock.value == 0
+                    ? SizedBox.shrink()
+                    : Row(
+                        children: [
+                          IconButton(
+                            icon:
+                                const Icon(Icons.remove, color: Colors.orange),
+                            onPressed: () => controller.decreaseQuantity(),
+                          ),
+                          Text(
+                            '${controller.quantity.value} ${controller.unit.value}',
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.add, color: Colors.orange),
+                            onPressed: () => controller.increaseQuantity(
+                                stockQty: controller.totalStock.value),
+                          ),
+                        ],
+                      ),
                 const SizedBox(height: 16),
                 Text("Description",
                     style: AppTextStyle()
@@ -118,9 +122,16 @@ class ProductDetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     OutlinedButton.icon(
-                      onPressed: () => controller.onAddToCartTap(context,
-                          productId: controller.id,
-                          quantity: controller.quantity.value),
+                      onPressed: controller.totalStock.value == 0
+                          ? () {
+                              // Show Snackbar if stock is 0
+                              fnShowSnackBarWarning("Out of Stock");
+                            }
+                          : () => controller.onAddToCartTap(
+                                context,
+                                productId: controller.id,
+                                quantity: controller.quantity.value,
+                              ),
                       icon: const Icon(Icons.shopping_cart_outlined,
                           color: Colors.orange),
                       label: Text("Add to Cart",
@@ -135,17 +146,38 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     ElevatedButton(
-                      onPressed: () {
-
-                        devPrint(' int.tryPars  ${ int.tryParse(controller.price.value ?? '0') ?? 0}');
-                        devPrint(' int  ${ controller.price.value ?? '0'}');
-                        controller.onBuyNowTap(context,
-                            price:
-                               (double.tryParse(controller.price.value ?? '0')?.toInt()) ??
-                                    0,
-                            productId: controller.id,
-                            quantity: controller.quantity.value);
-                      },
+                      onPressed:
+                          // () {
+                          //   devPrint(
+                          //       ' int.tryPars  ${int.tryParse(controller.price.value ?? '0') ?? 0}');
+                          //   devPrint(' int  ${controller.price.value ?? '0'}');
+                          //   controller.onBuyNowTap(context,
+                          //       price:
+                          //           (double.tryParse(controller.price.value ?? '0')
+                          //                   ?.toInt()) ??
+                          //               0,
+                          //       productId: controller.id,
+                          //       quantity: controller.quantity.value);
+                          // },
+                          controller.totalStock.value == 0
+                              ? () {
+                                  fnShowSnackBarWarning("Out of Stock");
+                                }
+                              : () {
+                                  devPrint(
+                                      'int.tryParse ${int.tryParse(controller.price.value ?? '0') ?? 0}');
+                                  devPrint(
+                                      'int ${controller.price.value ?? '0'}');
+                                  controller.onBuyNowTap(
+                                    context,
+                                    price: (double.tryParse(
+                                                controller.price.value ?? '0')
+                                            ?.toInt()) ??
+                                        0,
+                                    productId: controller.id,
+                                    quantity: controller.quantity.value,
+                                  );
+                                },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFEE9700),
                         shape: RoundedRectangleBorder(

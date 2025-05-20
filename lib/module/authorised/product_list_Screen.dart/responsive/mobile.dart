@@ -9,6 +9,7 @@ import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutom_auto_complete/custom_autocomplete.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
+import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -257,7 +258,8 @@ class ShoppingPage extends StatelessWidget {
                                                 1,
                                             min: min.toString(),
                                             max: max.toString());
-                                        
+
+                                        Navigator.pop(context);
                                       },
                                       child: Text(
                                         'Apply',
@@ -365,10 +367,16 @@ class ShoppingPage extends StatelessWidget {
                 // 🔽 Tab content
                 controller.isProductLoading.value
                     ? const SizedBox(
-                        child: Center(
-                            child: CircularProgressIndicator(
-                        color: Color(0xFFEE9700),
-                      )))
+                        child: 
+                      //   Center(
+                      //       child: CircularProgressIndicator(
+                      //   color: Color(0xFFEE9700),
+                      // ))
+
+                        LinearProgressIndicator(
+                          color: Color(0xFFEE9700) ,
+                        )
+                        )
                     : Expanded(
                         child: TabBarView(
                           children: List.generate(controller.categories.length,
@@ -409,6 +417,7 @@ class ShoppingPage extends StatelessWidget {
           ),
           itemBuilder: (_, index) {
             final item = items[index];
+            print('index == $index');
 
             return GestureDetector(
               onTap: () =>
@@ -514,6 +523,7 @@ class ShoppingPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                  
                   ],
                 ),
               ),

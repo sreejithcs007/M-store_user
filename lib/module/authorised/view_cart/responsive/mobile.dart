@@ -263,6 +263,7 @@
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/view_cart/controller.dart';
+import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -348,20 +349,29 @@ class CartViewMobile extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: 48,
-              child: ElevatedButton.icon(
-                iconAlignment: IconAlignment.end,
-                onPressed: () {
-                  controller.proceedToBuy();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-                icon: const Icon(Icons.shopping_bag, color: Colors.white),
-                label: Text(
-                  "Proceed to Buy",
-                  style: AppTextStyle().br16w400.copyWith(color: Colors.white),
+              child: Obx(
+                () =>  ElevatedButton.icon(
+                  iconAlignment: IconAlignment.end,
+                  onPressed: controller.cartItems.any(
+                    (element) => element.stockQty == 0,
+                  )
+                      ? () {
+                          fnShowSnackBarWarning(
+                              'Some of the product is out of stock');
+                        }
+                      : () {
+                          controller.proceedToBuy();
+                        },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
+                  icon: const Icon(Icons.shopping_bag, color: Colors.white),
+                  label: Text(
+                    "Proceed to Buy",
+                    style: AppTextStyle().br16w400.copyWith(color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -449,6 +459,14 @@ class CartViewMobile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+            controller.cartItems[index].stockQty == 0
+                ? Text(
+                    '(out of stock)',
+                    style: AppTextStyle()
+                        .br16w600
+                        .copyWith(color: const Color(0xFFB3B3B3)),
+                  )
+                : const SizedBox.shrink(),
           ],
         ),
         const SizedBox(height: 8),
@@ -494,35 +512,38 @@ class CartViewMobile extends StatelessWidget {
             const Gap(12),
 
             // Quantity control to the right end
-            Row(
-              children: [
-                IconButton(
-                  icon: SvgPicture.asset(
-                    Assets.images.svg.minusSquare,
-                    color: const Color(0xFFEE9700),
+            controller.cartItems[index].stockQty == 0
+                ? const SizedBox.shrink()
+                : Row(
+                    children: [
+                      IconButton(
+                        icon: SvgPicture.asset(
+                          Assets.images.svg.minusSquare,
+                          color: const Color(0xFFEE9700),
+                        ),
+                        onPressed: () =>
+                            controller.decreaseQuantity(index: index),
+                      ),
+                      Obx(() => Text(
+                            '${controller.cartItems[index].quantity}',
+                            style: AppTextStyle()
+                                .br16w600
+                                .copyWith(color: const Color(0xFF757575)),
+                          )),
+                      IconButton(
+                        icon: SvgPicture.asset(
+                          Assets.images.svg.add,
+                          color: const Color(0xFFEE9700),
+                        ),
+                        onPressed: () => controller.increaseQuantity(
+                            index: index,
+                            stockQty: int.tryParse(controller
+                                    .cartItems[index].stockQty
+                                    .toString()) ??
+                                1),
+                      ),
+                    ],
                   ),
-                  onPressed: () => controller.decreaseQuantity(index: index),
-                ),
-                Obx(() => Text(
-                      '${controller.cartItems[index].quantity}',
-                      style: AppTextStyle()
-                          .br16w600
-                          .copyWith(color: const Color(0xFF757575)),
-                    )),
-                IconButton(
-                  icon: SvgPicture.asset(
-                    Assets.images.svg.add,
-                    color: const Color(0xFFEE9700),
-                  ),
-                  onPressed: () => controller.increaseQuantity(
-                      index: index,
-                      stockQty: int.tryParse(controller
-                              .cartItems[index].stockQty
-                              .toString()) ??
-                          1),
-                ),
-              ],
-            ),
           ],
         ),
       ],

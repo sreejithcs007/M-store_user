@@ -14,11 +14,11 @@ extension SnackBarExtension on SnackbarType {
 Map<SnackbarType, Color> _bgColor(context) => {
       SnackbarType.error: const Color.fromARGB(255, 225, 106, 97),
       SnackbarType.success: const Color.fromARGB(255, 146, 237, 149),
-      SnackbarType.warning: const Color.fromARGB(255, 169, 136, 17),
+      SnackbarType.warning: const Color.fromARGB(255, 244, 164, 46),
     };
 
 Map<SnackbarType, Color> _textColor(context) => {
       SnackbarType.error: const Color.fromARGB(255, 225, 106, 97),
       SnackbarType.success: const Color.fromARGB(255, 146, 237, 149),
-      SnackbarType.warning: const Color.fromARGB(255, 169, 136, 17),
+      SnackbarType.warning: const Color.fromARGB(255, 244, 164, 46),
     };

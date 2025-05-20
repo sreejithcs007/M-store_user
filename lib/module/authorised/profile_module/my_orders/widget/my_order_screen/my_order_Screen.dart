@@ -37,6 +37,7 @@ class MyOrderViewScreen extends StatelessWidget {
                     image: Image.network(
                       formatImageUrl(
                           controller.orderedList[index].imageUrl.first),
+                      fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => const Icon(
                         Icons.image,
                         size: 36,
