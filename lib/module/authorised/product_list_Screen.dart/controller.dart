@@ -84,7 +84,7 @@ class ProductListScreenController extends GetxController {
 
   Future<void> onFilterApply(
       {required int ids, required String min, required String max}) async {
-    devPrintError('ca $id');
+    devPrintError('ca $ids');
 
     if (formkey.currentState!.validate()) {
       productsPerTab.value = [];
@@ -106,7 +106,7 @@ class ProductListScreenController extends GetxController {
                   imageUrl: e.images),
             )
             .toList();
-        Navigator.pop(knNavGlobalKey.currentContext!);
+        
         fnShowSnackBarSucess('successfully filtered');
       }
     } else {

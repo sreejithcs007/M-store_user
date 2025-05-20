@@ -111,7 +111,7 @@ class MyCustomDrawer extends StatelessWidget {
           // Notification
           ListTile(
             leading: Icon(Icons.notifications_none_outlined),
-            title: const Text('Notofication'),
+            title: const Text('Notification'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(

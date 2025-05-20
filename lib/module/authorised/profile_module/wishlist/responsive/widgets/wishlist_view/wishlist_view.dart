@@ -41,6 +41,7 @@ class WishlistViewScreen extends StatelessWidget {
                       image: Image.network(
                         formatImageUrl(
                             controller.wishListItems[index].imageUrl?.first),
+                        fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             const Icon(
                           Icons.image,

@@ -50,14 +50,14 @@ class _CustomSnakbarWidgetState extends State<CustomSnakbarWidget>
   @override
   void initState() {
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+        vsync: this, duration: const Duration(milliseconds: 100));
     colorController = AnimationController(
         lowerBound: 0,
         upperBound: 1,
         animationBehavior: AnimationBehavior.normal,
         value: 1,
         vsync: this,
-        duration: const Duration(milliseconds: 1200));
+        duration: const Duration(milliseconds: 600));
     colorController.forward();
     Future.delayed(const Duration(seconds: 3), () {
       onClose();
@@ -93,7 +93,7 @@ class _CustomSnakbarWidgetState extends State<CustomSnakbarWidget>
                   elevation: 0,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 27, vertical: 20),
+                        horizontal: 27, vertical: 15),
                     child: SizedBox(
                       width: 300,
                       child: Row(
@@ -104,7 +104,7 @@ class _CustomSnakbarWidgetState extends State<CustomSnakbarWidget>
                               ? Assets.images.svg.checkCircle
                               : widget.type == SnackbarType.error
                                   ? Assets.images.svg.xCircle
-                                  : Assets.images.svg.alertCircle),
+                                  : Assets.images.svg.warning,height: 30,width: 30,),
                           const Gap(20),
                           Expanded(
                             child: Text(
