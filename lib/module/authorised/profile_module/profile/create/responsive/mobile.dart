@@ -166,6 +166,9 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
                     label: 'Phone No',
                     controller: widget.controller.phoneNoController,
                     fillColor: Colors.white,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   ),
                   const Gap(5),
                   LabeledTextField(
@@ -198,6 +201,9 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
                     label: 'Pincode',
                     controller: widget.controller.pinCodeController,
                     fillColor: Colors.white,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                   ),
                   CustomSaveCancel(
                     cancelOnPress: () {
