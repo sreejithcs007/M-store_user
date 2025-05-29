@@ -57,7 +57,7 @@ class MyCustomDrawer extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   'Super Coin : $superCoin 🪙',
-                  style: AppTextStyle().br14w400.copyWith(color: Color(0xFFD4AF37)),
+                  style: AppTextStyle().br14w400.copyWith(color: const Color(0xFFD4AF37)),
                 ),
               ],
             ),
@@ -110,7 +110,7 @@ class MyCustomDrawer extends StatelessWidget {
 
           // Notification
           ListTile(
-            leading: Icon(Icons.notifications_none_outlined),
+            leading: const Icon(Icons.notifications_none_outlined),
             title: const Text('Notification'),
             onTap: () {
               Navigator.pop(context);

@@ -147,6 +147,7 @@ import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/bottom_navbar/bottom_navbar.dart';
 import 'package:ecommerce/module/authorised/details_page/screen.dart';
+import 'package:ecommerce/module/authorised/notification/view.dart';
 import 'package:ecommerce/module/authorised/view_all_category/screen.dart';
 import 'package:ecommerce/module/authorised/view_cart/screen.dart';
 import 'package:ecommerce/shared/model/categories/model.dart';
@@ -253,6 +254,10 @@ class DashboardController extends GetxController {
   void onCartTap(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const CartView()));
+  }
+  void onNotificationTap(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const NotificationPage()));
   }
 
   void onViewAllTap(BuildContext context) {

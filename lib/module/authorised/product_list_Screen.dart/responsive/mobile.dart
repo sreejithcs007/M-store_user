@@ -1,4 +1,3 @@
-import 'package:ecommerce/core/constants/global_keys.dart/keys.dart';
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
@@ -9,7 +8,6 @@ import 'package:ecommerce/shared/model/categories/model.dart';
 import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutom_auto_complete/custom_autocomplete.dart';
 import 'package:ecommerce/widget/cutom_card/view.dart';
-import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

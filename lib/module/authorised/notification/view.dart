@@ -43,7 +43,7 @@ class _NotificationPageState extends State<NotificationPage> {
         title: Text('Notifications', style: AppTextStyle().br16w400),
 
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.orange,
           ),
@@ -78,24 +78,24 @@ class _NotificationPageState extends State<NotificationPage> {
               leading: CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.transparent,
+                foregroundColor: item['color'] as Color,
                 child: CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
                   child: Text(
-                    item['iconText'].toString()!,
+                    item['iconText'].toString(),
                     style: TextStyle(
                       color: item['color'] as Color,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                foregroundColor: item['color'] as Color,
               ),
               title: Text(
-                item['title'].toString()!,
+                item['title'].toString(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(item['subtitle'].toString()!),
+              subtitle: Text(item['subtitle'].toString()),
             ),
           );
         },

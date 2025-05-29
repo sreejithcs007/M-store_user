@@ -38,7 +38,7 @@ class DashboardScreen extends StatelessWidget {
                 controller: controller,
                 hintText: 'search category',
                 imageUrl: controller.imageUrl,
-                onCartTap: () => controller.onCartTap(context),
+                onNotificationTap: () => controller.onNotificationTap(context),
                 onClearSearch: controller.onClearSearch,
               ),
               Padding(
