@@ -12,6 +12,7 @@ import 'package:ecommerce/widget/cutom_card/view.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -193,6 +194,10 @@ class ShoppingPage extends StatelessWidget {
                                           //   labelText: 'Minimum Cost',
                                           //   prefixIcon: Icon(Icons.money),
                                           // ),
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                          ],
                                         ),
                                         const SizedBox(height: 12),
                                         LabeledTextField(
@@ -212,6 +217,10 @@ class ShoppingPage extends StatelessWidget {
                                               return null;
                                             }
                                           },
+                                          inputFormatters: <TextInputFormatter>[
+                                            FilteringTextInputFormatter
+                                                .digitsOnly,
+                                          ],
                                           // decoration: const InputDecoration(
                                           //   labelText: 'Maximum Cost',
                                           //   prefixIcon:
@@ -367,16 +376,15 @@ class ShoppingPage extends StatelessWidget {
                 // 🔽 Tab content
                 controller.isProductLoading.value
                     ? const SizedBox(
-                        child: 
-                      //   Center(
-                      //       child: CircularProgressIndicator(
-                      //   color: Color(0xFFEE9700),
-                      // ))
+                        child:
+                            //   Center(
+                            //       child: CircularProgressIndicator(
+                            //   color: Color(0xFFEE9700),
+                            // ))
 
-                        LinearProgressIndicator(
-                          color: Color(0xFFEE9700) ,
-                        )
-                        )
+                            LinearProgressIndicator(
+                        color: Color(0xFFEE9700),
+                      ))
                     : Expanded(
                         child: TabBarView(
                           children: List.generate(controller.categories.length,
@@ -523,7 +531,6 @@ class ShoppingPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  
                   ],
                 ),
               ),
