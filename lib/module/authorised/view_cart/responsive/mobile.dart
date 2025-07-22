@@ -263,6 +263,7 @@
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/view_cart/controller.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce/gen/assets.gen.dart';
@@ -360,7 +361,16 @@ class CartViewMobile extends StatelessWidget {
                               'Some of the product is out of stock');
                         }
                       : () {
-                          controller.proceedToBuy();
+                             showCustomDialog(
+                                    context: context,
+                                    title: '',
+                                    content: 'Are you sure you want to buy?',
+                                    onPressed: () async {
+                                      Navigator.pop(context); // Close dialog
+                                      controller.proceedToBuy();
+                                    },
+                                  );
+                         
                         },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,

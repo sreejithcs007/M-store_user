@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/constants/gap.dart';
 import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/db/hive_box_helper.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
@@ -10,6 +11,7 @@ import 'package:ecommerce/module/unauthorised/authentication/view.dart';
 import 'package:ecommerce/shared/repo/authorised/profile_repo/profile_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gap/gap.dart';
 
 class MyCustomDrawer extends StatelessWidget {
   final String name;
@@ -130,7 +132,7 @@ class MyCustomDrawer extends StatelessWidget {
             leading: SvgPicture.asset(Assets.images.svg.logOut),
             title: const Text('Logout'),
             onTap: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
               showCustomDialog(
                 context: context,
                 title: 'Confirmation Dialogue',
@@ -168,9 +170,9 @@ void showCustomDialog({
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(Assets.images.svg.alertCircle),
-              const SizedBox(height: 8),
-              Text(title, textAlign: TextAlign.center),
+              SvgPicture.asset(Assets.images.svg.alertCircle,height: 40,width: 20,),
+              // const SizedBox(height: 8),
+              // Text(title, textAlign: TextAlign.center),
             ],
           ),
         ),
@@ -192,6 +194,28 @@ void showCustomDialog({
             onPressed: onPressed,
             child: const Text(
               'Yes',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+
+           ElevatedButton(
+            style: ButtonStyle(
+              padding: WidgetStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 20),
+              ),
+              backgroundColor: WidgetStateProperty.all(Colors.grey),
+              shape: WidgetStateProperty.all(
+                BeveledRectangleBorder(
+                  borderRadius: BorderRadius.circular(2),
+                  side: const BorderSide(color: Colors.grey),
+                ),
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: const Text(
+              'No',
               style: TextStyle(color: Colors.white),
             ),
           ),

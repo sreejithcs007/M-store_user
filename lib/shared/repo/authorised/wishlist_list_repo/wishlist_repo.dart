@@ -26,11 +26,11 @@ class WishListRepo {
 
   Future<ApiResponse?> onWishListPostAdd({required int productId}) async {
     try {
-      var res = await ApiHelper.postData(
+      var res = await ApiHelper.postDatas(
           endPoint: '/favorite/add',
           body: {
             "user_id": GetHiveHelper.getUserDetailsHive()?.accessToken,
-            " product_id": productId
+            "product_id": productId
           },
           header: ApiHelper.getApiHeader(
               access: GetHiveHelper.getUserDetailsHive()?.accessToken));

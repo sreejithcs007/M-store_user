@@ -69,13 +69,13 @@ class ViewCartRepo {
   Future<ApiResponse?> onQuantutyUpdateCartItem(
       {required int cartId, required int quantity}) async {
     try {
-      var res = await ApiHelper.postData(
+      var res = await ApiHelper.postDatas(
           endPoint: '/cart/update',
           body: {'cart_id': cartId, 'quantity': quantity},
           header: ApiHelper.getApiHeader(
               access: GetHiveHelper.getUserDetailsHive()?.accessToken));
 
-      if (res.status == 200) {
+      if (res?.status == 200) {
         return res;
       }
     } catch (e) {

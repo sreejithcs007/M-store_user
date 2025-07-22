@@ -2,6 +2,7 @@ import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
@@ -164,18 +165,23 @@ class ProductDetailScreen extends StatelessWidget {
                                   fnShowSnackBarWarning("Out of Stock");
                                 }
                               : () {
-                                  devPrint(
-                                      'int.tryParse ${int.tryParse(controller.price.value ?? '0') ?? 0}');
-                                  devPrint(
-                                      'int ${controller.price.value ?? '0'}');
-                                  controller.onBuyNowTap(
-                                    context,
-                                    price: (double.tryParse(
-                                                controller.price.value ?? '0')
-                                            ?.toInt()) ??
-                                        0,
-                                    productId: controller.id,
-                                    quantity: controller.quantity.value,
+                                  showCustomDialog(
+                                    context: context,
+                                    title: '',
+                                    content: 'Are you sure you want to buy?',
+                                    onPressed: () async {
+                                      Navigator.pop(context); // Close dialog
+                                      controller.onBuyNowTap(
+                                        context,
+                                        price: (double.tryParse(
+                                                    controller.price.value ??
+                                                        '0')
+                                                ?.toInt()) ??
+                                            0,
+                                        productId: controller.id,
+                                        quantity: controller.quantity.value,
+                                      );
+                                    },
                                   );
                                 },
                       style: ElevatedButton.styleFrom(
