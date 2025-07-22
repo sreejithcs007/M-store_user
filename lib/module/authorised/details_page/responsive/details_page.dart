@@ -2,6 +2,7 @@ import 'package:ecommerce/core/constants/text_style.dart';
 import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/module/authorised/view_cart/controller.dart';
 import 'package:ecommerce/module/authorised/view_cart/responsive/mobile.dart';
 import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
@@ -118,123 +119,157 @@ class ProductDetailScreen extends StatelessWidget {
                             },
                           ),
                         ],
-                      )),
-
-              const SizedBox(height: 16),
-              Text("Description",
+                      ),
+                const SizedBox(height: 16),
+                Text("Description",
+                    style: AppTextStyle()
+                        .br14w600
+                        .copyWith(color: const Color(0xFF5A5A5A))),
+                const SizedBox(height: 6),
+                Text(
+                  controller.description.value,
                   style: AppTextStyle()
-                      .br14w600
-                      .copyWith(color: const Color(0xFF5A5A5A))),
-              const SizedBox(height: 6),
-              Text(
-                controller.description.value,
-                style: AppTextStyle()
-                    .br14w400
-                    .copyWith(color: const Color(0xFF5A5A5A)),
-              ),
-              const SizedBox(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  OutlinedButton.icon(
-                    onPressed: controller.totalStock.value == 0
-                        ? null
-                        : () => controller.onAddToCartTap(
-                              context,
-                              productId: controller.id,
-                              quantity: controller.quantity.value,
-                            ),
-                    icon: Icon(
-                      Icons.shopping_cart_outlined,
-                      color: controller.totalStock.value == 0
-                          ? Colors.grey
-                          : Colors.orange,
-                    ),
-                    label: Text(
-                      "Add to Cart",
-                      style: AppTextStyle().br16w400.copyWith(
-                            color: controller.totalStock.value == 0
-                                ? Colors.grey
-                                : const Color(0xFFEE9700),
-                          ),
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                        color: controller.totalStock.value == 0
-                            ? Colors.grey
-                            : Colors.orange,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                      .br14w400
+                      .copyWith(color: const Color(0xFF5A5A5A)),
+                ),
+                const SizedBox(height: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    OutlinedButton.icon(
+                      onPressed: controller.totalStock.value == 0
+                          ? () {
+                              // Show Snackbar if stock is 0
+                              fnShowSnackBarWarning("Out of Stock");
+                            }
+                          : () => controller.onAddToCartTap(
+                                context,
+                                productId: controller.id,
+                                quantity: controller.quantity.value,
+                              ),
+                      icon: const Icon(Icons.shopping_cart_outlined,
+                          color: Colors.orange),
+                      label: Text("Add to Cart",
+                          style: AppTextStyle()
+                              .br16w400
+                              .copyWith(color: const Color(0xFFEE9700))),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.orange),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                 ElevatedButton(
-  onPressed: () {
-    final cartController = Get.find<CartViewController>();
-    Get.to(() => CartViewMobile(controller: cartController));
-  },
-  style: ElevatedButton.styleFrom(
-    backgroundColor: controller.totalStock.value == 0
-        ? Colors.grey
-        : const Color(0xFFEE9700),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30),
-    ),
-  ),
-  child: Text(
-    "Buy Now",
-    style: AppTextStyle().br16w400.copyWith(color: Colors.white),
-  ),
-),
-
-                ],
-              ),
-
-              const SizedBox(height: 30),
-              controller.isNeed.value
-                  ? Text("Related Products", style: AppTextStyle().br16w400)
-                  : const SizedBox.shrink(),
-              const SizedBox(height: 12),
-              controller.isNeed.value
-                  ? GridView.builder(
-                      itemCount: controller.relatedProducts.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(bottom: 24),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 3 / 3.5,
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed:
+                          // () {
+                          //   devPrint(
+                          //       ' int.tryPars  ${int.tryParse(controller.price.value ?? '0') ?? 0}');
+                          //   devPrint(' int  ${controller.price.value ?? '0'}');
+                          //   controller.onBuyNowTap(context,
+                          //       price:
+                          //           (double.tryParse(controller.price.value ?? '0')
+                          //                   ?.toInt()) ??
+                          //               0,
+                          //       productId: controller.id,
+                          //       quantity: controller.quantity.value);
+                          // },
+                          controller.totalStock.value == 0
+                              ? () {
+                                  fnShowSnackBarWarning("Out of Stock");
+                                }
+                              : () {
+                                  showCustomDialog(
+                                    context: context,
+                                    title: '',
+                                    content: 'Are you sure you want to buy?',
+                                    onPressed: () async {
+                                      Navigator.pop(context); // Close dialog
+                                      controller.onBuyNowTap(
+                                        context,
+                                        price: (double.tryParse(
+                                                    controller.price.value ??
+                                                        '0')
+                                                ?.toInt()) ??
+                                            0,
+                                        productId: controller.id,
+                                        quantity: controller.quantity.value,
+                                      );
+                                    },
+                                  );
+                                },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFEE9700),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
                       ),
-                      itemBuilder: (context, index) {
-                        final item = controller.relatedProducts[index];
-                        return GestureDetector(
-                          onTap: () => controller.onProductContainerTap(
-                              index: index, id: item.id),
-                          child: Container(
-                            width: 120,
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 4,
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Stack(
-                                  children: [
+                      child: Text(
+                        "Buy Now",
+                        style: AppTextStyle()
+                            .br16w400
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                controller.isNeed.value
+                    ? Text("Related Products", style: AppTextStyle().br16w400)
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 12),
+                controller.isNeed.value
+                    ? GridView.builder(
+                        itemCount: controller.relatedProducts.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(bottom: 24),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 3 / 3.5,
+                        ),
+                        itemBuilder: (context, index) {
+                          final item = controller.relatedProducts[index];
+                          // return
+                          // GestureDetector(
+                          //   onTap: () => null,
+                          //   child: ProductCard(
+                          //     isListingPage: true,
+                          //     productName: item.productName,
+                          //     currentPrice: item.currentPrice,
+                          //     oldPrice: '',
+                          //     quantityInfo: "/ ${item.quantityInfo}",
+                          //     isFavorite: false,
+                          //     enableActions: true,
+                          //     onAddToCart: controller.onAddToCartFromCard,
+                          //     onFavoriteToggle: controller.onFavoriteToggle,
+                          //   ),
+                          // );
+                          return GestureDetector(
+                            onTap: () => controller.onProductContainerTap(
+                                index: index, id: item.id),
+                            child: Container(
+                              width: 120,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 4,
+                                    offset: Offset(0, 2),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // Product Image
+                                  Stack(children: [
                                     Container(
                                       color: Colors.grey[350],
                                       height: 100,

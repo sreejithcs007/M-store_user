@@ -16,8 +16,10 @@ class ProductDetailController extends GetxController {
   bool isRelatedProductNeed;
   bool isTodaysOffer;
   ProductDetailController(
-      {required this.id, required this.isRelatedProductNeed,required this.isTodaysOffer});
-  RxInt quantity = 1.obs;
+      {required this.id,
+      required this.isRelatedProductNeed,
+      required this.isTodaysOffer});
+  RxInt quantity = 0.obs;
   RxBool isAddToCart = false.obs;
 
   final RxString productName = ''.obs;
@@ -130,9 +132,11 @@ RxInt currentQuantity = 1.obs; // 👈 New observable for current count
       var data = ProductDetailsModel.fromJson(response.data);
       productName.value = data.product?.name ?? '';
       description.value = data.product?.description ?? '';
-      price.value = isTodaysOffer == true ? (data.product?.discount ?? '0') :  data.product?.price ?? '0';
-      quantity.value =
-           1;
+      price.value = isTodaysOffer == true
+          ? (data.product?.discount ?? '0')
+          : data.product?.price ?? '0';
+      quantity.value = 1;
+      // (data.product?.quantity != 0 ? data.product?.quantity : 1) ?? 1;
       categoryName.value = data.product?.category?.name ?? '';
       unit.value = 'KG'; //data.product?.
       image.value = data.product?.images

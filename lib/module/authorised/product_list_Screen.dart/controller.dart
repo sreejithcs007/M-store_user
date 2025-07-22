@@ -106,7 +106,7 @@ class ProductListScreenController extends GetxController {
                   imageUrl: e.images),
             )
             .toList();
-        
+
         fnShowSnackBarSucess('successfully filtered');
       }
     } else {
@@ -117,7 +117,7 @@ class ProductListScreenController extends GetxController {
   void onFavoriteToggle({required int index}) {
     productsPerTab.value[index].isFavorite =
         !productsPerTab.value[index].isFavorite;
-
+    print('here');
     if (productsPerTab.value[index].isFavorite == true) {
       onFavouritePressedToAdd(productId: productsPerTab.value[index].productId);
     } else {
