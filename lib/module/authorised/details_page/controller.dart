@@ -17,7 +17,7 @@ class ProductDetailController extends GetxController {
   bool isTodaysOffer;
   ProductDetailController(
       {required this.id, required this.isRelatedProductNeed,required this.isTodaysOffer});
-  RxInt quantity = 0.obs;
+  RxInt quantity = 1.obs;
   RxBool isAddToCart = false.obs;
 
   final RxString productName = ''.obs;
@@ -28,6 +28,7 @@ class ProductDetailController extends GetxController {
   final RxList<Widget> image = <Widget>[].obs;
   final RxDouble totalStock = 0.0.obs;
   final RxBool isNeed = true.obs;
+RxInt currentQuantity = 1.obs; // 👈 New observable for current count
 
   RxList<CartItemCustomModel> relatedProducts = <CartItemCustomModel>[].obs;
 
@@ -131,7 +132,7 @@ class ProductDetailController extends GetxController {
       description.value = data.product?.description ?? '';
       price.value = isTodaysOffer == true ? (data.product?.discount ?? '0') :  data.product?.price ?? '0';
       quantity.value =
-          (data.product?.quantity != 0 ? data.product?.quantity : 1) ?? 1;
+           1;
       categoryName.value = data.product?.category?.name ?? '';
       unit.value = 'KG'; //data.product?.
       image.value = data.product?.images

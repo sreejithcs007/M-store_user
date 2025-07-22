@@ -10,7 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 
 class ProfileCreateMobile extends StatefulWidget {
   const ProfileCreateMobile({super.key, required this.controller});
@@ -24,34 +24,18 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
   Uint8List? _imageBytes;
 
   Future<void> _pickImage() async {
-    if (kIsWeb) {
-      // Web platform
-      final bytes = await ImagePickerWeb.getImageAsBytes();
-      if (bytes != null) {
-        setState(() {
-          _imageBytes = bytes;
-          widget.controller.imageBytes = bytes;
+  final picker = ImagePicker();
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  if (pickedFile != null) {
+    final bytes = await pickedFile.readAsBytes();
+    setState(() {
+      _imageBytes = bytes;
+      widget.controller.imageBytes = bytes;
 
-          print(
-              ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
-        });
-      }
-    } else {
-      // Mobile platforms
-      final picker = ImagePicker();
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        final bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _imageBytes = bytes;
-          widget.controller.imageBytes = bytes;
-
-          print(
-              ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
-        });
-      }
-    }
+      print('widget.controller.imageBytes -- ${widget.controller.imageBytes}');
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {

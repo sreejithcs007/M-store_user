@@ -1,0 +1,2 @@
+C:/Users/sneha/Downloads/user/android/app/.cxx/Debug/374a255s/x86/CMakeFiles/edit_cache.dir
+C:/Users/sneha/Downloads/user/android/app/.cxx/Debug/374a255s/x86/CMakeFiles/rebuild_cache.dir

@@ -129,24 +129,36 @@ class MyCustomDrawer extends StatelessWidget {
           ListTile(
             leading: SvgPicture.asset(Assets.images.svg.logOut),
             title: const Text('Logout'),
-            onTap: () {
-              Navigator.pop(context);
-              showCustomDialog(
-                context: context,
-                title: 'Confirmation Dialogue',
-                content: 'Are you sure you want to logout?',
-                onPressed: () async {
-                  Navigator.pop(context); // Close dialog
-                  await ProfileRepo().onLogOut();
-                  await HiveHelper.getUserDetailsHiveBox().clear();
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginView()),
-                    (route) => false,
-                  );
-                },
-              );
-            },
+           onTap: () {
+  Navigator.pop(context);
+  showCustomDialog(
+    context: context,
+    title: 'Confirmation Dialogue',
+    content: 'Are you sure you want to logout?',
+    onPressed: () async {
+      // Navigator.pop(context); // Close dialog
+
+      final result = await ProfileRepo().onLogOut();
+
+      if (result != null && result.status == 200) {
+        await HiveHelper.getUserDetailsHiveBox().clear(); // Clear user data
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginView()),
+          (route) => false,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Logout failed. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    },
+  );
+},
+
           ),
         ],
       ),

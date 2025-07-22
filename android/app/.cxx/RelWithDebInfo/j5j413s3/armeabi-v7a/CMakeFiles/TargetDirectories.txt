@@ -1,0 +1,2 @@
+C:/Users/sneha/Downloads/user/android/app/.cxx/RelWithDebInfo/j5j413s3/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/sneha/Downloads/user/android/app/.cxx/RelWithDebInfo/j5j413s3/armeabi-v7a/CMakeFiles/rebuild_cache.dir
