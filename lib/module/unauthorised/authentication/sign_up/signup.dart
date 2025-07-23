@@ -52,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
                           },
                         ),
                         LabeledTextField(
-                          label: "Mail Id",
+                          label: "Mail ID",
                           hintText: "sampleemail@email.com",
                           controller: controller.signUpEmailController,
                           validator: (p0) {

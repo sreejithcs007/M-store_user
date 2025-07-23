@@ -1,10 +1,9 @@
 import 'package:ecommerce/core/constants/text_style.dart';
-import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 import 'package:ecommerce/core/functions/image_extract/image_link.dart';
 import 'package:ecommerce/module/authorised/details_page/controller.dart';
-import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/module/authorised/view_cart/controller.dart';
 import 'package:ecommerce/module/authorised/view_cart/responsive/mobile.dart';
+import 'package:ecommerce/widget/custom_drawer/custom_drawer.dart';
 import 'package:ecommerce/widget/cutsom_carousel/custom_carousel.dart';
 import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +12,7 @@ import 'package:get/get.dart';
 class ProductDetailScreen extends StatelessWidget {
   final ProductDetailController controller;
 
-  const ProductDetailScreen({
-    super.key,
-    required this.controller,
-  });
+  const ProductDetailScreen({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +31,9 @@ class ProductDetailScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 12),
-              Obx(
-                () => SimpleCarousel(
-                  isPaddingNeed: false,
-                  bannerImages: controller.image.value,
-                ),
+              SimpleCarousel(
+                isPaddingNeed: false,
+                bannerImages: controller.image.value,
               ),
               const SizedBox(height: 16),
               Row(
@@ -84,44 +78,43 @@ class ProductDetailScreen extends StatelessWidget {
               const SizedBox(height: 12),
               controller.totalStock.value == 0
                   ? const SizedBox.shrink()
-                  : Obx(() => Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon:
-                                const Icon(Icons.remove, color: Colors.orange),
-                            onPressed: () {
-                              if (controller.quantity.value > 1) {
-                                controller.quantity.value--;
-                              } else {
-                                fnShowSnackBarWarning('Minimum quantity is 1');
-                              }
-                            },
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon:
+                              const Icon(Icons.remove, color: Colors.orange),
+                          onPressed: () {
+                            if (controller.quantity.value > 1) {
+                              controller.quantity.value--;
+                            } else {
+                              fnShowSnackBarWarning('Minimum quantity is 1');
+                            }
+                          },
+                        ),
+                        Text(
+                          '${controller.quantity.value} ${controller.unit.value}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
                           ),
-                          Text(
-                            '${controller.quantity.value} ${controller.unit.value}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add, color: Colors.orange),
-                            onPressed: () {
-                              if (controller.quantity.value <
-                                  controller.totalStock.value) {
-                                controller.quantity.value++;
-                              } else {
-                                fnShowSnackBarWarning(
-                                    'Maximum stock limit reached');
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                const SizedBox(height: 16),
-                Text("Description",
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add, color: Colors.orange),
+                          onPressed: () {
+                            if (controller.quantity.value <
+                                controller.totalStock.value) {
+                              controller.quantity.value++;
+                            } else {
+                              fnShowSnackBarWarning('Stock limit reached');
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+              const SizedBox(height: 16),
+              Text("Description",
                     style: AppTextStyle()
                         .br14w600
                         .copyWith(color: const Color(0xFF5A5A5A))),

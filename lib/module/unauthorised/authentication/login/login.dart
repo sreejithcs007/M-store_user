@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
 
                 // Email Field
                 LabeledTextField(
-                  label: "Mail Id",
+                  label: "Mail ID",
                   hintText: "sampleemail@email.com",
                   controller: controller.loginEmailController,
                   validator: (p0) {

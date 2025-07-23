@@ -173,29 +173,29 @@ class ProductCard extends StatelessWidget {
         const SizedBox(height: 8),
 
         // Add to cart
-        if (isListingPage == false)
-          GestureDetector(
-            onTap:  onAddToCart ,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-              decoration: BoxDecoration(
-                color: const Color(0xFFEE9700).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Add to cart",
-                    style: AppTextStyle().br16w400,
-                  ),
-                  const SizedBox(width: 6),
-                  const Icon(Icons.shopping_cart,
-                      color: Color(0xFFEE9700), size: 18),
-                ],
-              ),
-            ),
-          ),
+        // if (isListingPage == false)
+        //   GestureDetector(
+        //     onTap:  onAddToCart ,
+        //     child: Container(
+        //       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        //       decoration: BoxDecoration(
+        //         color: const Color(0xFFEE9700).withOpacity(0.1),
+        //         borderRadius: BorderRadius.circular(10),
+        //       ),
+        //       child: Row(
+        //         mainAxisSize: MainAxisSize.min,
+        //         children: [
+        //           Text(
+        //             "Add to cartsss",
+        //             style: AppTextStyle().br16w400,
+        //           ),
+        //           const SizedBox(width: 6),
+        //           const Icon(Icons.shopping_cart,
+        //               color: Color(0xFFEE9700), size: 18),
+        //         ],
+        //       ),
+        //     ),
+        //   ),
       ],
     );
   }

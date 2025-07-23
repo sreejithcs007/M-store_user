@@ -91,25 +91,25 @@ class CartViewMobile extends StatelessWidget {
               child: Obx(
                 () =>  ElevatedButton.icon(
                   iconAlignment: IconAlignment.end,
-                  onPressed: controller.cartItems.any(
-                    (element) => element.stockQty == 0,
-                  )
-                      ? () {
-                          fnShowSnackBarWarning(
-                              'Some of the product is out of stock');
-                        }
-                      : () {
-                             showCustomDialog(
-                                    context: context,
-                                    title: '',
-                                    content: 'Are you sure you want to buy?',
-                                    onPressed: () async {
-                                      Navigator.pop(context); // Close dialog
-                                      controller.proceedToBuy();
-                                    },
-                                  );
-                         
-                        },
+                  onPressed: controller.cartItems.isEmpty
+    ? null
+    : controller.cartItems.any((element) => element.stockQty == 0)
+        ? () {
+            fnShowSnackBarWarning(
+                'Some of the product is out of stock');
+          }
+        : () {
+            showCustomDialog(
+              context: context,
+              title: '',
+              content: 'Are you sure you want to buy?',
+              onPressed: () async {
+                Navigator.pop(context); // Close dialog
+                controller.proceedToBuy();
+              },
+            );
+          },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     shape: RoundedRectangleBorder(

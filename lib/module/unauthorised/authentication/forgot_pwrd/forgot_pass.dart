@@ -27,7 +27,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 28),
               LabeledTextField(
-                label: "Mail Id",
+                label: "Mail ID",
                 hintText: "sampleemail@email.com",
                 controller: emailController,
               ),
