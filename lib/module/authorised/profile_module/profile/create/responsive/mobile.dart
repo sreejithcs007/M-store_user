@@ -24,19 +24,19 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
   Uint8List? _imageBytes;
 
   Future<void> _pickImage() async {
-    if (kIsWeb) {
-      // Web platform
-      final bytes = await ImagePickerWeb.getImageAsBytes();
-      if (bytes != null) {
-        setState(() {
-          _imageBytes = bytes;
-          widget.controller.imageBytes = bytes;
+    // if (kIsWeb) {
+    //   // Web platform
+    //   final bytes = await ImagePickerWeb.getImageAsBytes();
+    //   if (bytes != null) {
+    //     setState(() {
+    //       _imageBytes = bytes;
+    //       widget.controller.imageBytes = bytes;
 
-          // print(
-          //     ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
-        });
-      }
-    } else {
+    //       // print(
+    //       //     ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
+    //     });
+    //   }
+    // } else {
       // Mobile platforms
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -46,10 +46,12 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
           _imageBytes = bytes;
           widget.controller.imageBytes = bytes;
 
-      print('widget.controller.imageBytes -- ${widget.controller.imageBytes}');
-    });
+          print(
+              ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
+        });
+      // }
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
