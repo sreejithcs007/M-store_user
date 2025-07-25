@@ -11,7 +11,7 @@ class LoginRepo {
 
       return response;
     } catch (e) {
-      devPrintError('catchs = $e');
+      // devPrintError('catchs = $e');
       return ApiResponse(status: 500, msg: 'failed', data: null);
     }
     return null;

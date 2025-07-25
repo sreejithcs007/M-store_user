@@ -56,7 +56,7 @@ RxInt currentQuantity = 1.obs; // 👈 New observable for current count
     var response = await ProductDetailsRepo()
         .onAddToCart(productId: productId, quantity: quantity);
 
-    devPrintSuccess('api reponse == $response');
+    // devPrintSuccess('api reponse == $response');
 
     if ((response != null) && (response.status == 201)) {
       fnShowSnackBarSucess('Product added to cart successfully');
@@ -67,7 +67,7 @@ RxInt currentQuantity = 1.obs; // 👈 New observable for current count
       {required int productId,
       required int quantity,
       required int price}) async {
-    devPrintError('price == $price');
+    // devPrintError('price == $price');
 
     var response = await ProductDetailsRepo().onBuyNow(
         productId: productId,
@@ -106,15 +106,15 @@ RxInt currentQuantity = 1.obs; // 👈 New observable for current count
   }
 
   void onAddToCartFromCard() {
-    print("Add to cart from card");
+    // print("Add to cart from card");
   }
 
   void onFavoriteToggle() {
-    print("Toggle fav");
+    // print("Toggle fav");
   }
 
   void onProductContainerTap({required int index, required int id}) {
-    devPrintError('pushed');
+    // devPrintError('pushed');
     Navigator.push(
       knNavGlobalKey.currentContext!,
       MaterialPageRoute(

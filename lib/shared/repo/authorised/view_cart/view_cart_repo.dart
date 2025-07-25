@@ -34,7 +34,7 @@ class ViewCartRepo {
         ),
       );
 
-      devPrintSuccess('datasss == ${res.data}');
+      // devPrintSuccess('datasss == ${res.data}');
 
       if (res.status == 200) {
         final cartItemsJson = res.data['cart_items'] as List<dynamic>?;

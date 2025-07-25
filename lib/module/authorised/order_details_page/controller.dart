@@ -28,7 +28,7 @@ class OrderDetailsPageController extends GetxController {
   Future<void> _initial() async {
     var response = await OrderRepo().onOrderFetchWithId(id: id!);
 
-    devPrintError('response=== $response');
+    // devPrintError('response=== $response');
 
     if ((response != null)) {
       orderedList.value = response.order?.items
@@ -78,10 +78,10 @@ class OrderDetailsPageController extends GetxController {
                 ''),
       ];
       currentStatus.value = capitalizeFirst(response.order?.status) ?? 'Pending';
-      print('currentStatus =$currentStatus');
+      // print('currentStatus =$currentStatus');
 
     }
 
-    devPrintSuccess('orderdeyails length == ${orderedList.value.length} ');
+    // devPrintSuccess('orderdeyails length == ${orderedList.value.length} ');
   }
 }

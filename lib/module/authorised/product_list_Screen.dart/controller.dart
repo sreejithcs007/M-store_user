@@ -81,12 +81,10 @@ class ProductListScreenController extends GetxController {
       fnShowSnackBarSucess('Product added to cart successfully');
     }
   }
-Future<void> onFilterApply({
-  required int ids,
-  required String min,
-  required String max,
-}) async {
-  devPrintError('ca $ids');
+
+  Future<void> onFilterApply(
+      {required int ids, required String min, required String max}) async {
+    // devPrintError('ca $ids');
 
   if (formkey.currentState!.validate()) {
     productsPerTab.value = [];
@@ -148,7 +146,7 @@ Future<void> onFilterApply({
   void onFavoriteToggle({required int index}) {
     productsPerTab.value[index].isFavorite =
         !productsPerTab.value[index].isFavorite;
-    print('here');
+    // print('here');
     if (productsPerTab.value[index].isFavorite == true) {
       onFavouritePressedToAdd(productId: productsPerTab.value[index].productId);
     } else {
@@ -168,7 +166,7 @@ Future<void> onFilterApply({
   }
 
   void onProductContainerTap({required int index, required int id}) {
-    devPrintError('pushed');
+    // devPrintError('pushed');
     Navigator.push(
       knNavGlobalKey.currentContext!,
       MaterialPageRoute(

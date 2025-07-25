@@ -32,8 +32,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    devPrintError(
-        'GetHiveHelper.getOnBoardDetailsHive()?.isSeen==${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
+    // devPrintError(
+    //     'GetHiveHelper.getOnBoardDetailsHive()?.isSeen==${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
     return LoginScreen(controller: controller);
   }
 }

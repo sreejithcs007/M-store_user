@@ -43,18 +43,18 @@ class LoginController extends GetxController {
 
   Future<void> onSignInPressed(BuildContext context,
       {required String email, required String password}) async {
-    devPrintError(
-        'formKey.currentState!.validate() ==${loginFormKey.currentState!.validate()}');
+    // devPrintError(
+    //     'formKey.currentState!.validate() ==${loginFormKey.currentState!.validate()}');
     isSignInLoading.value = true;
     if (loginFormKey.currentState!.validate()) {
       var response =
           await LoginRepo().onLogin(email: email, password: password);
 
 
-      devPrintSuccess('response?==$response');
-      devPrintSuccess('response?.status==${response?.status}');
-      devPrintSuccess('response?.data==${response?.data}');
-      devPrintSuccess('response?.msg==${response?.msg}');
+      // devPrintSuccess('response?==$response');
+      // devPrintSuccess('response?.status==${response?.status}');
+      // devPrintSuccess('response?.data==${response?.data}');
+      // devPrintSuccess('response?.msg==${response?.msg}');
       if (response?.status == 200) {
         var data = LoginModel.fromJson(response?.data);
 
@@ -116,8 +116,8 @@ Future<void> setDataToLocal(LoginModel data) async {
 
       box.put(DbKeys.userKey, Id);
 
-      devPrintSuccess(
-          'GetHiveHelper= ${GetHiveHelper.getUserDetailsHive()!.accessToken}');
+      // devPrintSuccess(
+      //     'GetHiveHelper= ${GetHiveHelper.getUserDetailsHive()!.accessToken}');
     }
   } catch (e) {
     devPrintError('set data to local catch error == $e');
@@ -137,8 +137,8 @@ Future<void> setDataToLocalOboard(OnBoardScreenHiveModel data) async {
     var Id = OnBoardScreenHiveModel(isSeen: true);
     box.put(DbKeys.user1Key, Id);
 
-    devPrintSuccess(
-        'GetHiveHelper= ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
+    // devPrintSuccess(
+    //     'GetHiveHelper= ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
   } catch (e) {
     devPrintError('set data to local catch error == $e');
   }

@@ -248,10 +248,10 @@ class ShoppingPage extends StatelessWidget {
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        devPrintError(
-                                            'ind = ${controller.index}');
-                                        devPrintError(
-                                            'onpresse ${controller.categories.value[controller.index ?? 0].id}');
+                                        // devPrintError(
+                                        //     'ind = ${controller.index}');
+                                        // devPrintError(
+                                        //     'onpresse ${controller.categories.value[controller.index ?? 0].id}');
                                         final min = double.tryParse(controller
                                                 .minCostController.text) ??
                                             0;
@@ -425,7 +425,7 @@ class ShoppingPage extends StatelessWidget {
           ),
           itemBuilder: (_, index) {
             final item = items[index];
-            print('index == $index');
+            // print('index == $index');
 
             return GestureDetector(
               onTap: () =>
