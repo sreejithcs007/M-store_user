@@ -34,7 +34,7 @@ class ProductCategoryRepo {
       // https://mstoremart.de/api/products/filter-by-price?min_price=100&max_price=500 
       var response = await ApiHelper.getData(
           // endPoint: '/products/filter-by-multiple-criteria?category_id=$id&min_price=$min&max_price=$max',
-          endPoint: '/products/filter-by-price?min_price=$min&max_price=$max',
+          endPoint: '/products/filter-by-price?min_price=${min.toString()}&max_price=${max.toString()}',
           header: ApiHelper.getApiHeader(
               access: GetHiveHelper.getUserDetailsHive()!.accessToken));
 
