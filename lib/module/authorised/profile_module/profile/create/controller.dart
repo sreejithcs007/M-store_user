@@ -7,6 +7,8 @@ import 'package:ecommerce/widget/snack_bar/view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
