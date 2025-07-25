@@ -40,18 +40,27 @@ class WishListRepo {
 
     return null;
   }
+Future<ApiResponse?> onWishListPostDelete({required int productId}) async {
+  try {
+    final accessToken = GetHiveHelper.getUserDetailsHive()?.accessToken;
 
-  Future<ApiResponse?> onWishListPostDelete({required int productId}) async {
-    try {
-      var res = await ApiHelper.delete(
-          endPoint: '/remove',
-          body: {" product_id": productId},
-          header: ApiHelper.getApiHeader(
-              access: GetHiveHelper.getUserDetailsHive()?.accessToken));
-    } catch (e) {
-      devPrintError('catch Error in wishlist post  == $e');
+    var res = await ApiHelper.delete(
+      endPoint: '/favorite/remove',
+      header: ApiHelper.getApiHeader(access: accessToken),
+      body: {"product_id": productId}, // ✅ Correct body
+    );
+
+    if (res.status == 200) {
+      return res;
+    } else {
+      devPrintError('Failed to remove wishlist item. Status: ${res.status}');
     }
-
-    return null;
+  } catch (e) {
+    devPrintError('Catch Error in wishlist post == $e');
   }
+
+  return null;
+}
+
+
 }

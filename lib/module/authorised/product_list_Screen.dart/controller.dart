@@ -81,38 +81,69 @@ class ProductListScreenController extends GetxController {
       fnShowSnackBarSucess('Product added to cart successfully');
     }
   }
+Future<void> onFilterApply({
+  required int ids,
+  required String min,
+  required String max,
+}) async {
+  devPrintError('ca $ids');
 
-  Future<void> onFilterApply(
-      {required int ids, required String min, required String max}) async {
-    devPrintError('ca $ids');
+  if (formkey.currentState!.validate()) {
+    productsPerTab.value = [];
 
-    if (formkey.currentState!.validate()) {
-      productsPerTab.value = [];
-      var response = await ProductCategoryRepo().onProductFilter(
-          id: ids, max: int.tryParse(max) ?? 0, min: int.tryParse(min) ?? 0);
+    // Trim and validate inputs
+    String minTrimmed = min.trim();
+    String maxTrimmed = max.trim();
 
-      if ((response != null) && (response.isNotEmpty)) {
-        productsPerTab.value = response
-            .map(
-              (e) => CartItemCustomModel(
-                  stockQty: e.stock,
-                  productId: e.id!,
-                  isFavorite: e.isFavorited ?? false,
-                  name: e.name ?? '',
-                  price: e.price ?? '',
-                  quantity: e.quantity ?? 0,
-                  unit: e.quantityUnit ?? 'KG',
-                  id: e.id!,
-                  imageUrl: e.images),
-            )
-            .toList();
-
-        fnShowSnackBarSucess('successfully filtered');
-      }
-    } else {
-      fnShowSnackBarWarning('please check your inputs');
+    if (minTrimmed.isEmpty || maxTrimmed.isEmpty) {
+      fnShowSnackBarWarning('Price fields cannot be empty');
+      return;
     }
+
+    int? minValue = int.tryParse(minTrimmed);
+    int? maxValue = int.tryParse(maxTrimmed);
+
+    if (minValue == null || maxValue == null) {
+      fnShowSnackBarWarning('Enter valid numbers for price');
+      return;
+    }
+
+    if (minValue > maxValue) {
+      fnShowSnackBarWarning('Min price cannot be greater than max price');
+      return;
+    }
+
+    var response = await ProductCategoryRepo().onProductFilter(
+      id: ids,
+      min: minValue,
+      max: maxValue,
+    );
+
+    if ((response != null) && (response.isNotEmpty)) {
+      productsPerTab.value = response
+          .map(
+            (e) => CartItemCustomModel(
+              stockQty: e.stock,
+              productId: e.id!,
+              isFavorite: e.isFavorited ?? false,
+              name: e.name ?? '',
+              price: e.price ?? '',
+              quantity: e.quantity ?? 0,
+              unit: e.quantityUnit ?? 'KG',
+              id: e.id!,
+              imageUrl: e.images,
+            ),
+          )
+          .toList();
+
+      fnShowSnackBarSucess('Successfully filtered');
+    } else {
+      fnShowSnackBarWarning('No products found in this price range');
+    }
+  } else {
+    fnShowSnackBarWarning('Please check your inputs');
   }
+}
 
   void onFavoriteToggle({required int index}) {
     productsPerTab.value[index].isFavorite =

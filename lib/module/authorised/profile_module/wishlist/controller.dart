@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 
 class WishlistController extends GetxController {
   RxList<CartItemCustomModel> wishListItems = <CartItemCustomModel>[].obs;
+  final isLoading = true.obs;
+
   RxList<ProductCardModel> viewdWishListItems = <ProductCardModel>[
     ProductCardModel(
         itemCost: 29,
@@ -138,7 +140,6 @@ class WishlistController extends GetxController {
                   unit: e.quantityUnit ?? 'KG',
                   imageUrl: e.images,
                   productId: e.id!,
-                  
                 ),
               )
               .toList() ??
