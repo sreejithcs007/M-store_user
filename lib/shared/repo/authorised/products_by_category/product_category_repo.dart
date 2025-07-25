@@ -30,8 +30,11 @@ class ProductCategoryRepo {
   Future<List<ProductCategoryModel>?> onProductFilter(
       {required int id,required int min, required int max}) async {
     try {
+
+      // https://mstoremart.de/api/products/filter-by-price?min_price=100&max_price=500 
       var response = await ApiHelper.getData(
-          endPoint: '/products/filter-by-multiple-criteria?category_id=$id&min_price=$min&max_price=$max',
+          // endPoint: '/products/filter-by-multiple-criteria?category_id=$id&min_price=$min&max_price=$max',
+          endPoint: '/products/filter-by-price?min_price=$min&max_price=$max',
           header: ApiHelper.getApiHeader(
               access: GetHiveHelper.getUserDetailsHive()!.accessToken));
 

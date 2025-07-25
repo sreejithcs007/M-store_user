@@ -127,7 +127,7 @@ class CartViewController extends GetxController {
 
       if (res?.status == 200) {
         calculateSubTotal(cartItems);
-        devPrintSuccess('updated');
+        // devPrintSuccess('updated');
       }
     } else {
       fnShowSnackBarWarning('Minimum 1 quantity required');
@@ -144,7 +144,7 @@ class CartViewController extends GetxController {
           quantity: cartItems[index].quantity ?? 1);
       if (res?.status == 200) {
         calculateSubTotal(cartItems);
-        devPrintSuccess('updated');
+        // devPrintSuccess('updated');
       }
     } else {
       fnShowSnackBarWarning('Maximum available stock reached');
@@ -152,7 +152,7 @@ class CartViewController extends GetxController {
   }
 
   void onProductContainerTap({required int index, required int id}) {
-    devPrintError('pushed');
+    // devPrintError('pushed');
     Navigator.push(
       knNavGlobalKey.currentContext!,
       MaterialPageRoute(
@@ -168,11 +168,11 @@ class CartViewController extends GetxController {
 
     for (var item in cartItems) {
       final double price = double.tryParse(item.price) ?? 0.0;
-      devPrintSuccess('price== $price');
+      // devPrintSuccess('price== $price');
       final double qty = double.tryParse(item.quantity.toString()) ?? 0.0;
-      devPrintSuccess(' qty== $qty');
+      // devPrintSuccess(' qty== $qty');
       total += price * qty;
-      devPrintSuccess(' tot== $total');
+      // devPrintSuccess(' tot== $total');
     }
     subtotal.value = total;
   }

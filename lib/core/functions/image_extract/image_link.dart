@@ -25,11 +25,11 @@ String formatImageUrl(String? originalUrl) {
   final storageIndex = originalUrl.indexOf('/storage/');
   if (storageIndex != -1) {
     final pathAfterStorage = originalUrl.substring(storageIndex + 9);
-    devPrintSuccess('Formatted with /storage/: $newBaseUrl$pathAfterStorage');
+    // devPrintSuccess('Formatted with /storage/: $newBaseUrl$pathAfterStorage');
     return '$newBaseUrl$pathAfterStorage';
   }
 
   // If no /storage/ exists, just add the whole path after the base URL
-  devPrintSuccess('Formatted without /storage/: $newBaseUrl$originalUrl');
+  // devPrintSuccess('Formatted without /storage/: $newBaseUrl$originalUrl');
   return '$newBaseUrl$originalUrl';
 }

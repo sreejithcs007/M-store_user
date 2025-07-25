@@ -26,8 +26,8 @@ class GroceryApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    devPrintError(
-        'GetHiveHelper.getOnBoardDetailsHive()?.isSeen == ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
+    // devPrintError(
+    //     'GetHiveHelper.getOnBoardDetailsHive()?.isSeen == ${GetHiveHelper.getOnBoardDetailsHive()?.isSeen}');
     return MaterialApp(
       // theme: ThemeData(
       //   textTheme: GoogleFonts.(), // Set Poppins as default

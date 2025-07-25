@@ -49,9 +49,9 @@ class ProductDetailsRepo {
   Future<ApiResponse?> onAddToCart(
       {required int productId, required int quantity}) async {
     try {
-      devPrintWarning('Userid = ${GetHiveHelper.getUserDetailsHive()?.id}');
-      devPrintWarning('productId = $productId');
-      devPrintWarning('quantity = $quantity');
+      // devPrintWarning('Userid = ${GetHiveHelper.getUserDetailsHive()?.id}');
+      // devPrintWarning('productId = $productId');
+      // devPrintWarning('quantity = $quantity');
       var response = ApiHelper.postDatas(
           endPoint: '/cart/add',
           body: {
@@ -114,7 +114,7 @@ class ProductDetailsRepo {
     };
 
     // Log the request body for debugging
-    devPrintError('Request Body: ${json.encode(requestBody)}');
+    // devPrintError('Request Body: ${json.encode(requestBody)}');
 
     // Make the API call
    var response = await ApiHelper.postDatas(

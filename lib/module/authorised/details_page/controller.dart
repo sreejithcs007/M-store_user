@@ -55,7 +55,7 @@ class ProductDetailController extends GetxController {
     var response = await ProductDetailsRepo()
         .onAddToCart(productId: productId, quantity: quantity);
 
-    devPrintSuccess('api reponse == $response');
+    // devPrintSuccess('api reponse == $response');
 
     if ((response != null) && (response.status == 201)) {
       fnShowSnackBarSucess('Product added to cart successfully');
@@ -66,7 +66,7 @@ class ProductDetailController extends GetxController {
       {required int productId,
       required int quantity,
       required int price}) async {
-    devPrintError('price == $price');
+    // devPrintError('price == $price');
 
     var response = await ProductDetailsRepo().onBuyNow(
         productId: productId,
@@ -105,15 +105,15 @@ class ProductDetailController extends GetxController {
   }
 
   void onAddToCartFromCard() {
-    print("Add to cart from card");
+    // print("Add to cart from card");
   }
 
   void onFavoriteToggle() {
-    print("Toggle fav");
+    // print("Toggle fav");
   }
 
   void onProductContainerTap({required int index, required int id}) {
-    devPrintError('pushed');
+    // devPrintError('pushed');
     Navigator.push(
       knNavGlobalKey.currentContext!,
       MaterialPageRoute(

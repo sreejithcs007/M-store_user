@@ -71,7 +71,7 @@ class WishlistController extends GetxController {
     var response = await ProductDetailsRepo()
         .onAddToCart(productId: productId, quantity: quantity);
 
-    devPrintSuccess('api reponse == $response');
+    // devPrintSuccess('api reponse == $response');
 
     if ((response != null) && (response.status == 201)) {
       fnShowSnackBarSucess('Product added to cart successfully');
@@ -125,7 +125,7 @@ class WishlistController extends GetxController {
     var response = await WishListRepo().onWishListFetch();
 
     if (response != null) {
-      devPrintSuccess('ws = $response');
+      // devPrintSuccess('ws = $response');
       wishListItems.value = response
               .map(
                 (e) => CartItemCustomModel(

@@ -59,7 +59,7 @@ class ApiHelper {
     Map<String, dynamic>? body,
   }) async {
     log("Api-helper -> postData");
-    devPrintError("$body");
+    // devPrintError("$body");
 
     final url = Uri.parse(AppConfig.baseurl + endPoint);
     log("header=$header");
@@ -73,7 +73,7 @@ class ApiHelper {
       }
     });
 
-    devPrintSuccess('safeBody \n $safeBody'); 
+    // devPrintSuccess('safeBody \n $safeBody'); 
 
     try {
       var response = await http.post(url, body: safeBody, headers: header);
@@ -87,7 +87,7 @@ class ApiHelper {
           data: decodedData,
         );
       } else {
-        print("Else Condition -> Api failed  ");
+        // print("Else Condition -> Api failed  ");
         return ApiResponse(
           status: response.statusCode,
           msg: "Failed",
@@ -241,8 +241,8 @@ static Future<ApiResponse?> postDatas({
     List<http.MultipartFile>? files,
   }) async {
     final uri = Uri.parse(AppConfig.baseurl + endPoint);
-    log("📤 Posting to: $uri");
-    print("📦 Fields: $fields");
+    // log("📤 Posting to: $uri");
+    // print("📦 Fields: $fields");
 
     var request = http.MultipartRequest('POST', uri);
 

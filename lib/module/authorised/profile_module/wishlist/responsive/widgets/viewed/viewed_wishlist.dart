@@ -31,14 +31,14 @@ class ViewedWishListScreen extends StatelessWidget {
                   controller.viewdWishListItems[index].wishList =
                       !controller.viewdWishListItems[index].wishList;
 
-                  print(
-                      "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                  print(
-                      "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                  print(
-                      'wishlist$index =======${controller.viewdWishListItems[index].wishList}');
-                  print(
-                      "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                  // print(
+                  //     "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                  // print(
+                  //     "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                  // print(
+                  //     'wishlist$index =======${controller.viewdWishListItems[index].wishList}');
+                  // print(
+                  //     "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                 },
                 // image: Image.asset('', fit: BoxFit.cover),
                 oldPriceNeeded: false),

@@ -261,7 +261,7 @@ class DashboardController extends GetxController {
   }
 
   void onClearSearch() {
-    print("Clear search");
+    // print("Clear search");
   }
 
   Future<void> onAddToCart(
@@ -270,7 +270,7 @@ class DashboardController extends GetxController {
     var response = await ProductDetailsRepo()
         .onAddToCart(productId: productId, quantity: quantity);
 
-    devPrintSuccess('api reponse == $response');
+    // devPrintSuccess('api reponse == $response');
 
     if ((response != null) && (response.status == 201)) {
       fnShowSnackBarSucess('Product added to cart successfully');

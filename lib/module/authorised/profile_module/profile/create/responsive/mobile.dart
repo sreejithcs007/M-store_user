@@ -32,8 +32,8 @@ class _ProfileCreateMobileState extends State<ProfileCreateMobile> {
           _imageBytes = bytes;
           widget.controller.imageBytes = bytes;
 
-          print(
-              ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
+          // print(
+          //     ' widget.controller.imageBytes -- ${widget.controller.imageBytes}');
         });
       }
     } else {
