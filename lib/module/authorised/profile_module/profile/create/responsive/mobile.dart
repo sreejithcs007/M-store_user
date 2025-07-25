@@ -3,14 +3,13 @@ import 'package:ecommerce/gen/assets.gen.dart';
 import 'package:ecommerce/module/authorised/profile_module/profile/create/controller.dart';
 import 'package:ecommerce/widget/custom_save_cancel_button/save_cancel_button.dart';
 import 'package:ecommerce/widget/textfields/custom_textfield.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+// import 'package:image_picker_web/image_picker_web.dart';
 
 class ProfileCreateMobile extends StatefulWidget {
   const ProfileCreateMobile({super.key, required this.controller});
