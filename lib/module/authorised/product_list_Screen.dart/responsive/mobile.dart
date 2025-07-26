@@ -171,112 +171,86 @@ class ShoppingPage extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: const Text('Filter by Cost'),
-                                  content: Form(
-                                    key: controller.formkey,
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        LabeledTextField(
-                                          hintText: 'Minimum Cost',
-                                          label: 'Minimum Cost',
-                                          controller:
-                                              controller.minCostController,
-                                          keyboardType: TextInputType.number,
-                                          validator: (p0) {
-                                            if ((p0 == '') || (p0 == null)) {
-                                              return 'please add minimum cost';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          // decoration: const InputDecoration(
-                                          //   labelText: 'Minimum Cost',
-                                          //   prefixIcon: Icon(Icons.money),
-                                          // ),
-                                          inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                          ],
-                                        ),
-                                        const SizedBox(height: 12),
-                                        LabeledTextField(
-                                          hintText: 'Maximum Cost',
-                                          label: 'Maximum Cost',
-                                          controller:
-                                              controller.maxCostController,
-                                          keyboardType: TextInputType.number,
-                                          validator: (p0) {
-                                            if ((p0 == '') || (p0 == null)) {
-                                              return 'please add a maximum cost';
-                                            } else if (p0 ==
-                                                controller
-                                                    .minCostController.text) {
-                                              return '''max and min cost can't be same ''';
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          inputFormatters: <TextInputFormatter>[
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                          ],
-                                          // decoration: const InputDecoration(
-                                          //   labelText: 'Maximum Cost',
-                                          //   prefixIcon:
-                                          //       Icon(Icons.money_outlined),
-                                          // ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        // Clear values
-                                        controller.minCostController.clear();
-                                        controller.maxCostController.clear();
-                                        controller.onTap(
-                                            index: controller.index ?? 0,
-                                            id: controller.id ?? 1);
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        'Clear',
-                                        style: AppTextStyle().br14w600,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        // devPrintError(
-                                        //     'ind = ${controller.index}');
-                                        // devPrintError(
-                                        //     'onpresse ${controller.categories.value[controller.index ?? 0].id}');
-                                        final min = double.tryParse(controller
-                                                .minCostController.text) ??
-                                            0;
-                                        final max = double.tryParse(controller
-                                                .maxCostController.text) ??
-                                            double.infinity;
-                                        controller.onFilterApply(
-                                            ids: controller
-                                                    .categories
-                                                    .value[
-                                                        controller.index ?? 0]
-                                                    .id ??
-                                                1,
-                                            min: min.toString(),
-                                            max: max.toString());
+  title: const Text('Filter by Cost'),
+  content: Form(
+    key: controller.formkey,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        LabeledTextField(
+          hintText: 'Minimum Cost',
+          label: 'Minimum Cost',
+          controller: controller.minCostController,
+          keyboardType: TextInputType.number,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please add minimum cost';
+            }
+            return null;
+          },
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+        ),
+        const SizedBox(height: 12),
+        LabeledTextField(
+          hintText: 'Maximum Cost',
+          label: 'Maximum Cost',
+          controller: controller.maxCostController,
+          keyboardType: TextInputType.number,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please add maximum cost';
+            } else if (value == controller.minCostController.text) {
+              return 'Max and Min cost can\'t be same';
+            }
+            return null;
+          },
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+        ),
+      ],
+    ),
+  ),
+  actions: [
+    TextButton(
+      onPressed: () {
+        controller.minCostController.clear();
+        controller.maxCostController.clear();
+        controller.onTap(
+          index: controller.index ?? 0,
+          id: controller.id ?? 1,
+        );
+        Navigator.pop(context);
+      },
+      child: Text(
+        'Clear',
+        style: AppTextStyle().br14w600,
+      ),
+    ),
+    TextButton(
+      onPressed: () {
+        if (controller.formkey.currentState!.validate()) {
+          final min = int.tryParse(controller.minCostController.text) ?? 0;
+          final max = int.tryParse(controller.maxCostController.text) ?? 0;
 
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        'Apply',
-                                        style: AppTextStyle().br14w600,
-                                      ),
-                                    ),
-                                  ],
-                                );
+          controller.onFilterApply(
+            ids: controller.categories.value[controller.index ?? 0].id ?? 1,
+            min: min,
+            max: max,
+          );
+          Navigator.pop(context);
+        }
+      },
+      child: Text(
+        'Apply',
+        style: AppTextStyle().br14w600,
+      ),
+    ),
+  ],
+);
+
                               },
                             );
                           },
