@@ -17,7 +17,7 @@ import 'package:ecommerce/core/dev_tools/dev_tools.dart';
 
 
 String formatImageUrl(String? originalUrl) {
-  const newBaseUrl = 'https://mstoremart.de/storage/app/public/';
+  const newBaseUrl = 'https://mstoremart.in/storage/app/public/';
 
   if (originalUrl == null || originalUrl.isEmpty) return '';
 
